@@ -5,3 +5,12 @@
 <h3>@ViewBag.Message</h3>
 
 <p>Use this area to provide additional information.</p>
+@using (Html.BeginForm("sendMailNow", "email"))
+{
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="test" class="btn btn-default" />
+        </div>
+    </div>
+}
