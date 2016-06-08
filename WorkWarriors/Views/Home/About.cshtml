@@ -10,7 +10,17 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="test" class="btn btn-default" />
+            <input type="submit" value="sendMailNow" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("sendContractorMail", "email"))
+{
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="contractor test" class="btn btn-default" />
         </div>
     </div>
 }

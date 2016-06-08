@@ -32,5 +32,7 @@ namespace WorkWarriors.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<WorkWarriors.Models.Contractor> Contractors { get; set; }
     }
 }

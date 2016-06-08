@@ -127,15 +127,16 @@ namespace WorkWarriors.Controllers
             db = new ApplicationDbContext();
             var myMessage = new SendGrid.SendGridMessage();
 
-            List<String> recipients = new List<String>
-            {
+            List<String> recipients = new List<String> { };
+            //{
                 //@"Changa Chimp <changachimp@yahoo.com>",
                 //@"Penny Wise <wisepenny79@gmail.com>",
                 //@"E. Matts <erickmattson@msn.com>",
-            };
+            //};
             
-                foreach (var i in db.Homeowners)
+            foreach (var i in db.Homeowners)
                 {
+
                 recipients.Add(i.email);
 
                 };
@@ -145,6 +146,33 @@ namespace WorkWarriors.Controllers
             myMessage.Subject = "Sending with SendGrid is Fun";
             //myMessage.Html = "<p>Hello World!</p>";
             myMessage.Text = "Welcome to Work Warriors";
+            var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
+            var transportWeb = new SendGrid.Web(credentials);
+            transportWeb.DeliverAsync(myMessage);
+
+            return RedirectToAction("About", "Home");
+
+        }
+
+        public ActionResult sendContractorMail()
+        {
+
+            db = new ApplicationDbContext();
+            var myMessage = new SendGrid.SendGridMessage();
+
+            List<String> recipients = new List<String> { };
+
+            foreach (var i in db.Contractors)
+            {
+
+                recipients.Add(i.email);
+
+            };
+
+            myMessage.AddTo(recipients);
+            myMessage.From = new MailAddress("monsymonster@msn.com", "Joe Johnson");
+            myMessage.Subject = "New Service Request Posting!!";
+            myMessage.Text = "Service request:";
             var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
             var transportWeb = new SendGrid.Web(credentials);
             transportWeb.DeliverAsync(myMessage);

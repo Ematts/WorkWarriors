@@ -221,6 +221,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ContractorsController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeownersController.cs" />
@@ -234,9 +235,14 @@
     <Compile Include="Migrations\201606062340005_updateDatabase.Designer.cs">
       <DependentUpon>201606062340005_updateDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606081910514_contractor.cs" />
+    <Compile Include="Migrations\201606081910514_contractor.Designer.cs">
+      <DependentUpon>201606081910514_contractor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Configuration.cs" />
+    <Compile Include="Models\Contractor.cs" />
     <Compile Include="Models\Homeowner.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -339,6 +345,11 @@
     <Content Include="Views\Email\Details.cshtml" />
     <Content Include="Views\Email\Edit.cshtml" />
     <Content Include="Views\Email\Index.cshtml" />
+    <Content Include="Views\Contractors\Create.cshtml" />
+    <Content Include="Views\Contractors\Delete.cshtml" />
+    <Content Include="Views\Contractors\Details.cshtml" />
+    <Content Include="Views\Contractors\Edit.cshtml" />
+    <Content Include="Views\Contractors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -357,6 +368,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201606062340005_updateDatabase.resx">
       <DependentUpon>201606062340005_updateDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606081910514_contractor.resx">
+      <DependentUpon>201606081910514_contractor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
