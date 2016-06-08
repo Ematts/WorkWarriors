@@ -228,6 +228,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MapsController.cs" />
     <Compile Include="Controllers\PaypalController.cs" />
+    <Compile Include="Controllers\ServiceRequestsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -239,6 +240,38 @@
     <Compile Include="Migrations\201606081910514_contractor.Designer.cs">
       <DependentUpon>201606081910514_contractor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606082043045_ServiceRequest.cs" />
+    <Compile Include="Migrations\201606082043045_ServiceRequest.Designer.cs">
+      <DependentUpon>201606082043045_ServiceRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606082049288_ServiceRequestAdded.cs" />
+    <Compile Include="Migrations\201606082049288_ServiceRequestAdded.Designer.cs">
+      <DependentUpon>201606082049288_ServiceRequestAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606082210242_service.cs" />
+    <Compile Include="Migrations\201606082210242_service.Designer.cs">
+      <DependentUpon>201606082210242_service.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606082222513_service1.cs" />
+    <Compile Include="Migrations\201606082222513_service1.Designer.cs">
+      <DependentUpon>201606082222513_service1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606082231339_update.cs" />
+    <Compile Include="Migrations\201606082231339_update.Designer.cs">
+      <DependentUpon>201606082231339_update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606082243069_test.cs" />
+    <Compile Include="Migrations\201606082243069_test.Designer.cs">
+      <DependentUpon>201606082243069_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606082246592_test2.cs" />
+    <Compile Include="Migrations\201606082246592_test2.Designer.cs">
+      <DependentUpon>201606082246592_test2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606082308030_test3.cs" />
+    <Compile Include="Migrations\201606082308030_test3.Designer.cs">
+      <DependentUpon>201606082308030_test3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Configuration.cs" />
@@ -246,6 +279,7 @@
     <Compile Include="Models\Homeowner.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ServiceRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -350,6 +384,11 @@
     <Content Include="Views\Contractors\Details.cshtml" />
     <Content Include="Views\Contractors\Edit.cshtml" />
     <Content Include="Views\Contractors\Index.cshtml" />
+    <Content Include="Views\ServiceRequests\Create.cshtml" />
+    <Content Include="Views\ServiceRequests\Delete.cshtml" />
+    <Content Include="Views\ServiceRequests\Details.cshtml" />
+    <Content Include="Views\ServiceRequests\Edit.cshtml" />
+    <Content Include="Views\ServiceRequests\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -371,6 +410,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606081910514_contractor.resx">
       <DependentUpon>201606081910514_contractor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606082043045_ServiceRequest.resx">
+      <DependentUpon>201606082043045_ServiceRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606082049288_ServiceRequestAdded.resx">
+      <DependentUpon>201606082049288_ServiceRequestAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606082210242_service.resx">
+      <DependentUpon>201606082210242_service.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606082222513_service1.resx">
+      <DependentUpon>201606082222513_service1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606082231339_update.resx">
+      <DependentUpon>201606082231339_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606082243069_test.resx">
+      <DependentUpon>201606082243069_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606082246592_test2.resx">
+      <DependentUpon>201606082246592_test2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606082308030_test3.resx">
+      <DependentUpon>201606082308030_test3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

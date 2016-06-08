@@ -34,5 +34,7 @@ namespace WorkWarriors.Models
         }
 
         public System.Data.Entity.DbSet<WorkWarriors.Models.Contractor> Contractors { get; set; }
+
+        public System.Data.Entity.DbSet<WorkWarriors.Models.ServiceRequest> ServiceRequests { get; set; }
     }
 }
