@@ -14,6 +14,7 @@ using SendGrid;
 
 
 
+
 namespace WorkWarriors.Controllers
 {
     public class EmailController : Controller
@@ -211,6 +212,37 @@ namespace WorkWarriors.Controllers
                     var transportWeb = new SendGrid.Web(credentials);
                     transportWeb.DeliverAsync(myMessage);
                     
+                }
+                i.posted = true;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("About", "Home");
+        }
+
+        public ActionResult acceptanceConfirmation(int id)
+        {
+
+            
+            var myMessage = new SendGrid.SendGridMessage();
+            var servicerequests = db.ServiceRequests.ToList();
+
+
+            foreach (var i in servicerequests)
+            {
+                if (id == i.ID)
+                {
+                    myMessage.AddTo("wisepenny79@gmail.com");
+                    myMessage.From = new MailAddress("monsymonster@msn.com", "Joe Johnson");
+                    myMessage.Subject = "New Service Request Posting!!";
+                    string url = "http://localhost:14703/ServiceRequests/ContractorAcceptance/" + i.ID;
+                    //string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href =" + url + "> Click Here </a>";
+                    String message = "Accepted" + i.Description;
+                    myMessage.Html = message;
+                    var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
+                    var transportWeb = new SendGrid.Web(credentials);
+                    transportWeb.DeliverAsync(myMessage);
+
                 }
                 i.posted = true;
                 db.SaveChanges();
