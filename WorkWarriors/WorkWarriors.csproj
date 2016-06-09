@@ -221,6 +221,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BidAcceptancesController.cs" />
     <Compile Include="Controllers\ContractorsController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -280,8 +281,17 @@
     <Compile Include="Migrations\201606091426306_bool2.Designer.cs">
       <DependentUpon>201606091426306_bool2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606091621538_acceptance.cs" />
+    <Compile Include="Migrations\201606091621538_acceptance.Designer.cs">
+      <DependentUpon>201606091621538_acceptance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606091642514_c.cs" />
+    <Compile Include="Migrations\201606091642514_c.Designer.cs">
+      <DependentUpon>201606091642514_c.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BidAcceptance.cs" />
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\Contractor.cs" />
     <Compile Include="Models\Homeowner.cs" />
@@ -397,6 +407,12 @@
     <Content Include="Views\ServiceRequests\Details.cshtml" />
     <Content Include="Views\ServiceRequests\Edit.cshtml" />
     <Content Include="Views\ServiceRequests\Index.cshtml" />
+    <Content Include="Views\BidAcceptances\Create.cshtml" />
+    <Content Include="Views\BidAcceptances\Delete.cshtml" />
+    <Content Include="Views\BidAcceptances\Details.cshtml" />
+    <Content Include="Views\BidAcceptances\Edit.cshtml" />
+    <Content Include="Views\BidAcceptances\Index.cshtml" />
+    <Content Include="Views\ServiceRequests\ContractorAcceptance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -448,6 +464,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606091426306_bool2.resx">
       <DependentUpon>201606091426306_bool2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606091621538_acceptance.resx">
+      <DependentUpon>201606091621538_acceptance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606091642514_c.resx">
+      <DependentUpon>201606091642514_c.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -10,107 +10,107 @@ using WorkWarriors.Models;
 
 namespace WorkWarriors.Controllers
 {
-    public class ServiceRequestsController : Controller
+    public class BidAcceptancesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: ServiceRequests
+        // GET: BidAcceptances
         public ActionResult Index()
         {
-            return View(db.ServiceRequests.ToList());
+            return View(db.BidAcceptances.ToList());
         }
 
-        // GET: ServiceRequests/Details/5
+        // GET: BidAcceptances/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ServiceRequest serviceRequest = db.ServiceRequests.Find(id);
-            if (serviceRequest == null)
+            BidAcceptance bidAcceptance = db.BidAcceptances.Find(id);
+            if (bidAcceptance == null)
             {
                 return HttpNotFound();
             }
-            return View(serviceRequest);
+            return View(bidAcceptance);
         }
 
-        // GET: ServiceRequests/Create
+        // GET: BidAcceptances/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ServiceRequests/Create
+        // POST: BidAcceptances/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Username,FirstName,LastName,Address,City,State,Zip,email,PostedDate,Bid,CompletionDeadline,Description,posted")] ServiceRequest serviceRequest)
+        public ActionResult Create([Bind(Include = "ID,Address,City,State,Zip,PostedDate,Bid,CompletionDeadline,Description")] BidAcceptance bidAcceptance)
         {
             if (ModelState.IsValid)
             {
-                db.ServiceRequests.Add(serviceRequest);
+                db.BidAcceptances.Add(bidAcceptance);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(serviceRequest);
+            return View(bidAcceptance);
         }
 
-        // GET: ServiceRequests/Edit/5
+        // GET: BidAcceptances/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ServiceRequest serviceRequest = db.ServiceRequests.Find(id);
-            if (serviceRequest == null)
+            BidAcceptance bidAcceptance = db.BidAcceptances.Find(id);
+            if (bidAcceptance == null)
             {
                 return HttpNotFound();
             }
-            return View(serviceRequest);
+            return View(bidAcceptance);
         }
 
-        // POST: ServiceRequests/Edit/5
+        // POST: BidAcceptances/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Username,FirstName,LastName,Address,City,State,Zip,email,PostedDate,Bid,CompletionDeadline,Description,posted")] ServiceRequest serviceRequest)
+        public ActionResult Edit([Bind(Include = "ID,Address,City,State,Zip,PostedDate,Bid,CompletionDeadline,Description")] BidAcceptance bidAcceptance)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(serviceRequest).State = EntityState.Modified;
+                db.Entry(bidAcceptance).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(serviceRequest);
+            return View(bidAcceptance);
         }
 
-        // GET: ServiceRequests/Delete/5
+        // GET: BidAcceptances/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ServiceRequest serviceRequest = db.ServiceRequests.Find(id);
-            if (serviceRequest == null)
+            BidAcceptance bidAcceptance = db.BidAcceptances.Find(id);
+            if (bidAcceptance == null)
             {
                 return HttpNotFound();
             }
-            return View(serviceRequest);
+            return View(bidAcceptance);
         }
 
-        // POST: ServiceRequests/Delete/5
+        // POST: BidAcceptances/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ServiceRequest serviceRequest = db.ServiceRequests.Find(id);
-            db.ServiceRequests.Remove(serviceRequest);
+            BidAcceptance bidAcceptance = db.BidAcceptances.Find(id);
+            db.BidAcceptances.Remove(bidAcceptance);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -122,20 +122,6 @@ namespace WorkWarriors.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public ActionResult ContractorAcceptance(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ServiceRequest serviceRequest = db.ServiceRequests.Find(id);
-            if (serviceRequest == null)
-            {
-                return HttpNotFound();
-            }
-            return View(serviceRequest);
         }
     }
 }
