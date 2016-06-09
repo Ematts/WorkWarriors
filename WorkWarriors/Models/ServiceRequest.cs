@@ -42,5 +42,8 @@ namespace WorkWarriors.Models
         [StringLength(100, MinimumLength = 6)]
         [Required]
         public string Description { get; set; }
+        [Required]
+        public bool posted { get; set; }
+        
     }
 }

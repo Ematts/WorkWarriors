@@ -181,6 +181,42 @@ namespace WorkWarriors.Controllers
 
         }
 
+        public ActionResult postServiceRequest()
+        {
+            
+            var myMessage = new SendGrid.SendGridMessage();
+            var contractors = db.Contractors.ToList();
+            var servicerequests = db.ServiceRequests.ToList();
+
+            List<String> recipients = new List<String> { };
+
+            foreach (var i in contractors)
+            {
+
+                recipients.Add(i.email);
+
+            };
+
+            foreach (var i in servicerequests)
+            {
+                if(i.posted == false)
+                {
+                    myMessage.AddTo(recipients);
+                    myMessage.From = new MailAddress("monsymonster@msn.com", "Joe Johnson");
+                    myMessage.Subject = "New Service Request Posting!!";
+                    myMessage.Text = "Job Location: \n" + i.Address + "\n" + i.City + "\n" + i.State + "\n" + i.Zip + "\n" + "\n" + "Job Description: \n" + i.Description + "\n" + "\n" + "Bid price: \n$" + i.Bid +  "\n" + "\n" + "Must be completed by: \n" + i.CompletionDeadline + "\n" + "\n" + "Date Posted: \n" + i.PostedDate;
+                    var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
+                    var transportWeb = new SendGrid.Web(credentials);
+                    transportWeb.DeliverAsync(myMessage);
+                    
+                }
+                i.posted = true;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("About", "Home");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
