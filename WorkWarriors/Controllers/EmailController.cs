@@ -230,6 +230,7 @@ namespace WorkWarriors.Controllers
             string email1 = "";
             string username1 = "";
             var myMessage = new SendGrid.SendGridMessage();
+            var contractors = db.Contractors.ToList();
             var servicerequests = db.ServiceRequests.ToList();
             string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
             var person = db.Contractors.Where(x => x.UserId == identity).SingleOrDefault();
@@ -238,14 +239,14 @@ namespace WorkWarriors.Controllers
                 if (user.Id == identity)
                 {
                     email1 = user.Email;
-                    username1 = user.UserName;
-                    //foreach (var person in db.Contractors)
-                    //{
-                    //    if (person.email == email1)
-                    //    {
-                    //        person.
-                    //    }
-                    //}
+                    //username1 = user.UserName;
+                    foreach (var con in contractors)
+                    {
+                        if (con.email == email1)
+                        {
+                            username1 = con.Username;
+                        }
+                    }
                 }
             }
             //var people = db.Contractors.Where(x => x.UserId == identity).SingleOrDefault();
@@ -267,7 +268,7 @@ namespace WorkWarriors.Controllers
                     transportWeb.DeliverAsync(myMessage);
 
                 }
-                i.posted = true;
+                //i.posted = true;
                 db.SaveChanges();
             }
 
