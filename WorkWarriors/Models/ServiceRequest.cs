@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace WorkWarriors.Models
 {
     public class ServiceRequest
@@ -44,6 +46,8 @@ namespace WorkWarriors.Models
         public string Description { get; set; }
         [Required]
         public bool posted { get; set; }
-        
+        //[ForeignKey("Contractor")]
+        //public int ContractorID { get;  set;}
+        //public virtual Contractor Contractor { get; set; }
     }
 }

@@ -7,13 +7,13 @@ namespace WorkWarriors.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class acceptance : IMigrationMetadata
+    public sealed partial class dd : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(acceptance));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(dd));
         
         string IMigrationMetadata.Id
         {
-            get { return "201606091621538_acceptance"; }
+            get { return "201606101754269_dd"; }
         }
         
         string IMigrationMetadata.Source

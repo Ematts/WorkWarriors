@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Net.Mail;
 using SendGrid;
+using Microsoft.AspNet.Identity;
 
 
 
@@ -20,7 +21,7 @@ namespace WorkWarriors.Controllers
     public class EmailController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        //private Contractor contractor = new Contractor();
         // GET: Email
         public ActionResult Index()
         {
@@ -223,13 +224,32 @@ namespace WorkWarriors.Controllers
         public ActionResult acceptanceConfirmation(int id)
         {
 
-            
+            //if (this.User.IsInRole"conr"){
+
+            //}
+            string email1 = "";
             var myMessage = new SendGrid.SendGridMessage();
             var servicerequests = db.ServiceRequests.ToList();
-
+            string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            foreach(var user in db.Users)
+            {
+                if( user.Id == identity)
+                {
+                    email1 = user.Email;
+                    //foreach(var person in db.Contractors)
+                    //{
+                    //    if(person.email == email1)
+                    //    {
+                    //        person.
+                    //    }
+                    //}
+                }
+            }
+            var people = db.Contractors.Where(x => x.UserId == identity).SingleOrDefault();
 
             foreach (var i in servicerequests)
             {
+
                 if (id == i.ID)
                 {
                     myMessage.AddTo("wisepenny79@gmail.com");
@@ -237,7 +257,7 @@ namespace WorkWarriors.Controllers
                     myMessage.Subject = "New Service Request Posting!!";
                     string url = "http://localhost:14703/ServiceRequests/ContractorAcceptance/" + i.ID;
                     //string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href =" + url + "> Click Here </a>";
-                    String message = "Accepted" + i.Description;
+                    String message = "Accepted " + i.Description + people.email;
                     myMessage.Html = message;
                     var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
                     var transportWeb = new SendGrid.Web(credentials);

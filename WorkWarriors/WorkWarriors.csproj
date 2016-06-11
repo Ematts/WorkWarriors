@@ -233,61 +233,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201606062340005_updateDatabase.cs" />
-    <Compile Include="Migrations\201606062340005_updateDatabase.Designer.cs">
-      <DependentUpon>201606062340005_updateDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\201606101754269_dd.cs" />
+    <Compile Include="Migrations\201606101754269_dd.Designer.cs">
+      <DependentUpon>201606101754269_dd.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201606081910514_contractor.cs" />
-    <Compile Include="Migrations\201606081910514_contractor.Designer.cs">
-      <DependentUpon>201606081910514_contractor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606082043045_ServiceRequest.cs" />
-    <Compile Include="Migrations\201606082043045_ServiceRequest.Designer.cs">
-      <DependentUpon>201606082043045_ServiceRequest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606082049288_ServiceRequestAdded.cs" />
-    <Compile Include="Migrations\201606082049288_ServiceRequestAdded.Designer.cs">
-      <DependentUpon>201606082049288_ServiceRequestAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606082210242_service.cs" />
-    <Compile Include="Migrations\201606082210242_service.Designer.cs">
-      <DependentUpon>201606082210242_service.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606082222513_service1.cs" />
-    <Compile Include="Migrations\201606082222513_service1.Designer.cs">
-      <DependentUpon>201606082222513_service1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606082231339_update.cs" />
-    <Compile Include="Migrations\201606082231339_update.Designer.cs">
-      <DependentUpon>201606082231339_update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606082243069_test.cs" />
-    <Compile Include="Migrations\201606082243069_test.Designer.cs">
-      <DependentUpon>201606082243069_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606082246592_test2.cs" />
-    <Compile Include="Migrations\201606082246592_test2.Designer.cs">
-      <DependentUpon>201606082246592_test2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606082308030_test3.cs" />
-    <Compile Include="Migrations\201606082308030_test3.Designer.cs">
-      <DependentUpon>201606082308030_test3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606091417591_bool.cs" />
-    <Compile Include="Migrations\201606091417591_bool.Designer.cs">
-      <DependentUpon>201606091417591_bool.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606091426306_bool2.cs" />
-    <Compile Include="Migrations\201606091426306_bool2.Designer.cs">
-      <DependentUpon>201606091426306_bool2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606091621538_acceptance.cs" />
-    <Compile Include="Migrations\201606091621538_acceptance.Designer.cs">
-      <DependentUpon>201606091621538_acceptance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606091642514_c.cs" />
-    <Compile Include="Migrations\201606091642514_c.Designer.cs">
-      <DependentUpon>201606091642514_c.cs</DependentUpon>
+    <Compile Include="Migrations\201606102016472_id.cs" />
+    <Compile Include="Migrations\201606102016472_id.Designer.cs">
+      <DependentUpon>201606102016472_id.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -429,47 +381,11 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606062340005_updateDatabase.resx">
-      <DependentUpon>201606062340005_updateDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606101754269_dd.resx">
+      <DependentUpon>201606101754269_dd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606081910514_contractor.resx">
-      <DependentUpon>201606081910514_contractor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606082043045_ServiceRequest.resx">
-      <DependentUpon>201606082043045_ServiceRequest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606082049288_ServiceRequestAdded.resx">
-      <DependentUpon>201606082049288_ServiceRequestAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606082210242_service.resx">
-      <DependentUpon>201606082210242_service.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606082222513_service1.resx">
-      <DependentUpon>201606082222513_service1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606082231339_update.resx">
-      <DependentUpon>201606082231339_update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606082243069_test.resx">
-      <DependentUpon>201606082243069_test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606082246592_test2.resx">
-      <DependentUpon>201606082246592_test2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606082308030_test3.resx">
-      <DependentUpon>201606082308030_test3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606091417591_bool.resx">
-      <DependentUpon>201606091417591_bool.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606091426306_bool2.resx">
-      <DependentUpon>201606091426306_bool2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606091621538_acceptance.resx">
-      <DependentUpon>201606091621538_acceptance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606091642514_c.resx">
-      <DependentUpon>201606091642514_c.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606102016472_id.resx">
+      <DependentUpon>201606102016472_id.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

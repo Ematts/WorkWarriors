@@ -12,6 +12,7 @@ using WorkWarriors.Models;
 
 namespace WorkWarriors.Controllers
 {
+    
     [Authorize]
     public class AccountController : Controller
     {
@@ -139,6 +140,8 @@ namespace WorkWarriors.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ApplicationDbContext db = new ApplicationDbContext();
+            ViewBag.roles = new SelectList(db.Roles,"Id","Name");
             return View();
         }
 
@@ -149,12 +152,19 @@ namespace WorkWarriors.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            ApplicationDbContext db = new ApplicationDbContext();
+            ViewBag.roles = new SelectList(db.Roles, "Id", "Name");
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+
                 if (result.Succeeded)
                 {
+                    var role = db.Roles.Find(model.role_id.ToString());
+                    UserManager.AddToRole(user.Id, role.Name);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -163,7 +173,18 @@ namespace WorkWarriors.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    if(role.Id == "0")
+                    {
+                        return RedirectToAction("Create", "Contractors");
+                    }
+                    else if(role.Id == "1")
+                    {
+                        return RedirectToAction("Create", "Homeowners");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 AddErrors(result);
             }
