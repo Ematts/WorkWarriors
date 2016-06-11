@@ -365,6 +365,7 @@
     <Content Include="Views\BidAcceptances\Edit.cshtml" />
     <Content Include="Views\BidAcceptances\Index.cshtml" />
     <Content Include="Views\ServiceRequests\ContractorAcceptance.cshtml" />
+    <Content Include="Views\ServiceRequests\HomeownerConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

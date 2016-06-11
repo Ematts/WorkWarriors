@@ -137,5 +137,19 @@ namespace WorkWarriors.Controllers
             }
             return View(serviceRequest);
         }
+
+        public ActionResult HomeownerConfirmation(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ServiceRequest serviceRequest = db.ServiceRequests.Find(id);
+            if (serviceRequest == null)
+            {
+                return HttpNotFound();
+            }
+            return View(serviceRequest);
+        }
     }
 }
