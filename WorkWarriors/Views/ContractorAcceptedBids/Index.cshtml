@@ -1,0 +1,153 @@
+﻿@model IEnumerable<WorkWarriors.Models.ContractorAcceptedBids>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ConUsername)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HomeUsername)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConFirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HomeFirstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConLastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HomeLastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HomeAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HomeCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConState)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HomeState)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConZip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HomeZip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HomeEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompletionDeadline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Confirmed)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConUsername)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HomeUsername)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HomeFirstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HomeLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HomeAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConCity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HomeCity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConState)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HomeState)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConZip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HomeZip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HomeEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompletionDeadline)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Confirmed)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

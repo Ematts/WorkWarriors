@@ -1,0 +1,192 @@
+﻿@model WorkWarriors.Models.ContractorAcceptedBids
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ContractorAcceptedBids</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ConUsername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConUsername)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeUsername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeUsername)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeFirstname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeFirstname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConCity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConCity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeCity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeCity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConZip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConZip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeZip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeZip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompletionDeadline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompletionDeadline)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Confirmed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Confirmed)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -38,5 +38,7 @@ namespace WorkWarriors.Models
         public System.Data.Entity.DbSet<WorkWarriors.Models.ServiceRequest> ServiceRequests { get; set; }
 
         public System.Data.Entity.DbSet<WorkWarriors.Models.BidAcceptance> BidAcceptances { get; set; }
+
+        public System.Data.Entity.DbSet<WorkWarriors.Models.ContractorAcceptedBids> ContractorAcceptedBids { get; set; }
     }
 }
