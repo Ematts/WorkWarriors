@@ -222,6 +222,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BidAcceptancesController.cs" />
+    <Compile Include="Controllers\CompletedBidsController.cs" />
     <Compile Include="Controllers\ContractorAcceptedBidsController.cs" />
     <Compile Include="Controllers\ContractorsController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
@@ -307,9 +308,14 @@
     <Compile Include="Migrations\201606131511040_rr1.Designer.cs">
       <DependentUpon>201606131511040_rr1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606131632005_oo.cs" />
+    <Compile Include="Migrations\201606131632005_oo.Designer.cs">
+      <DependentUpon>201606131632005_oo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BidAcceptance.cs" />
+    <Compile Include="Models\CompletedBids.cs" />
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\Contractor.cs" />
     <Compile Include="Models\ContractorAcceptedBids.cs" />
@@ -447,6 +453,12 @@
     <Content Include="Views\HomeownerComfirmedBids\Edit.cshtml" />
     <Content Include="Views\HomeownerComfirmedBids\Index.cshtml" />
     <Content Include="Views\HomeownerComfirmedBids\Confirm.cshtml" />
+    <Content Include="Views\CompletedBids\Create.cshtml" />
+    <Content Include="Views\CompletedBids\Delete.cshtml" />
+    <Content Include="Views\CompletedBids\Details.cshtml" />
+    <Content Include="Views\CompletedBids\Edit.cshtml" />
+    <Content Include="Views\CompletedBids\Index.cshtml" />
+    <Content Include="Views\CompletedBids\CompletedBids.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -516,6 +528,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606131511040_rr1.resx">
       <DependentUpon>201606131511040_rr1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606131632005_oo.resx">
+      <DependentUpon>201606131632005_oo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

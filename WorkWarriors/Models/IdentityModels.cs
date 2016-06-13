@@ -42,5 +42,7 @@ namespace WorkWarriors.Models
         public System.Data.Entity.DbSet<WorkWarriors.Models.ContractorAcceptedBids> ContractorAcceptedBids { get; set; }
 
         public System.Data.Entity.DbSet<WorkWarriors.Models.HomeownerComfirmedBids> HomeownerComfirmedBids { get; set; }
+
+        public System.Data.Entity.DbSet<WorkWarriors.Models.CompletedBids> CompletedBids { get; set; }
     }
 }
