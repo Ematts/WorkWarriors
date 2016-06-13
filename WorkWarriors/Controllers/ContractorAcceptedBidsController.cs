@@ -122,63 +122,19 @@ namespace WorkWarriors.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult acceptanceConfirmation(int id)
+        public ActionResult HomeownerConfirmation(int? id)
         {
-
-            //if (this.User.IsInRole"conr"){
-
-            //}
-            string conEmail = "";
-            string conName = "";
-            var myMessage = new SendGrid.SendGridMessage();
-            var contractors = db.Contractors.ToList();
-            var servicerequests = db.ServiceRequests.ToList();
-            string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
-            var person = db.Contractors.Where(x => x.UserId == identity).SingleOrDefault();
-            foreach (var user in db.Users)
+            if (id == null)
             {
-                if (user.Id == identity)
-                {
-                    conEmail = user.Email;
-                    //username1 = user.UserName;
-                    foreach (var con in contractors)
-                    {
-                        if (con.email == conEmail)
-                        {
-                            conName = con.Username;
-                        }
-                    }
-                }
-
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-
-
-            foreach (var i in servicerequests)
+            ContractorAcceptedBids contractorAcceptedBids = db.ContractorAcceptedBids.Find(id);
+            if (contractorAcceptedBids == null)
             {
-
-                if (id == i.ID)
-                {
-                    myMessage.AddTo(i.email);
-                    myMessage.From = new MailAddress("workwarriors@gmail.com", "Admin");
-                    myMessage.Subject = "New Service Request Posting!!";
-                    string url = "http://localhost:14703/ServiceRequests/ContractorAcceptance/" + i.ID;
-                    //string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href =" + url + "> Click Here </a>";
-                    String message = "Hello " + i.FirstName + "," + "<br>" + "<br>" + conName + " has offered to accept your following service request:" + "<br>" + "<br>" + i.Description + "<br>" + "<br>" + "To confirm acceptance, click on link below: <br><a href =" + url + "> Click Here </a>";
-                    myMessage.Html = message;
-                    var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
-                    var transportWeb = new SendGrid.Web(credentials);
-                    transportWeb.DeliverAsync(myMessage);
-                    Create();
-                    db.SaveChanges();
-                }
-                //i.posted = true;
-                db.SaveChanges();
+                return HttpNotFound();
             }
-
-            return RedirectToAction("About", "Home");
+            return View(contractorAcceptedBids); 
         }
-
 
 
         protected override void Dispose(bool disposing)

@@ -228,6 +228,7 @@ namespace WorkWarriors.Controllers
             //if (this.User.IsInRole"conr"){
 
             //}
+            //}
             string ConEmail = "";
             string ConUserName = "";
             string ConFirstName = "";
@@ -236,6 +237,7 @@ namespace WorkWarriors.Controllers
             string ConCity = "";
             string ConState = "";
             string ConZip = "";
+            int Invoice = 1;
 
             var myMessage = new SendGrid.SendGridMessage();
             var contractors = db.Contractors.ToList();
@@ -263,27 +265,27 @@ namespace WorkWarriors.Controllers
                         }
                     }
                 }
-            
+
             }
 
-            
+
 
             foreach (var i in servicerequests)
             {
 
                 if (id == i.ID)
                 {
-                    myMessage.AddTo(i.email);
-                    myMessage.From = new MailAddress("workwarriors@gmail.com", "Admin");
-                    myMessage.Subject = "New Service Request Posting!!";
-                    string url = "http://localhost:14703/ServiceRequests/ContractorAcceptance/" + i.ID;
-                    //string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href =" + url + "> Click Here </a>";
-                    String message = "Hello " + i.FirstName + "," + "<br>" + "<br>" + ConUserName + " has offered to accept your following service request:" +"<br>" + "<br>" + i.Description + "<br>" + "<br>" + "To confirm acceptance, click on link below: <br><a href =" + url + "> Click Here </a>";
-                    myMessage.Html = message;
-                    var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
-                    var transportWeb = new SendGrid.Web(credentials);
-                    transportWeb.DeliverAsync(myMessage);
-                    conList.Add(ConEmail + i.ID);
+                    //myMessage.AddTo(i.email);
+                    //myMessage.From = new MailAddress("workwarriors@gmail.com", "Admin");
+                    //myMessage.Subject = "New Service Request Posting!!";
+                    //string url = "http://localhost:14703/ServiceRequests/ContractorAcceptance/" + i.ID;
+                    ////string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href =" + url + "> Click Here </a>";
+                    //String message = "Hello " + i.FirstName + "," + "<br>" + "<br>" + ConUserName + " has offered to accept your following service request:" + "<br>" + "<br>" + i.Description + "<br>" + "<br>" + "To confirm acceptance, click on link below: <br><a href =" + url + "> Click Here </a>";
+                    //myMessage.Html = message;
+                    //var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
+                    //var transportWeb = new SendGrid.Web(credentials);
+                    //transportWeb.DeliverAsync(myMessage);
+                    //conList.Add(ConEmail + i.ID);
                     ContractorAcceptedBids bid = new ContractorAcceptedBids();
                     db.ContractorAcceptedBids.Add(bid);
                     bid.ConUsername = ConUserName;
@@ -305,7 +307,21 @@ namespace WorkWarriors.Controllers
                     bid.PostedDate = i.PostedDate;
                     bid.CompletionDeadline = i.CompletionDeadline;
                     bid.Description = i.Description;
+                    bid.Bid = i.Bid;
                     bid.Confirmed = false;
+                    db.SaveChanges();
+                    Invoice = bid.ID;
+                    myMessage.AddTo(i.email);
+                    myMessage.From = new MailAddress("workwarriors@gmail.com", "Admin");
+                    myMessage.Subject = "New Service Request Posting!!";
+                    string url = "http://localhost:14703/ContractorAcceptedBids/HomeownerConfirmation/" + Invoice;
+                    //string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href =" + url + "> Click Here </a>";
+                    String message = "Hello " + i.FirstName + "," + "<br>" + "<br>" + "Contractor " + ConUserName + " has offered to perform your following service request:" + "<br>" + "<br>" + i.Description + "<br>" + "<br>" + "To confirm acceptance, click on link below: <br><a href =" + url + "> Click Here </a>";
+                    myMessage.Html = message;
+                    var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
+                    var transportWeb = new SendGrid.Web(credentials);
+                    transportWeb.DeliverAsync(myMessage);
+                    conList.Add(ConEmail + i.ID);
                 }
                 //i.posted = true;
                 db.SaveChanges();
@@ -314,7 +330,7 @@ namespace WorkWarriors.Controllers
             return RedirectToAction("About", "Home");
         }
 
-        public ActionResult homeOwnerConfirm(int id)
+        public ActionResult homeownerConfirm(int id)
         {
             string HomeEmail = "";
             string HomeUserName = "";
@@ -323,6 +339,7 @@ namespace WorkWarriors.Controllers
             var myMessage = new SendGrid.SendGridMessage();
             var contractors = db.Contractors.ToList();
             var homeowners = db.Homeowners.ToList();
+            var acceptence = db.ContractorAcceptedBids.ToList();
             var servicerequests = db.ServiceRequests.ToList();
             string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
             var person = db.Contractors.Where(x => x.UserId == identity).SingleOrDefault();
@@ -332,11 +349,11 @@ namespace WorkWarriors.Controllers
                 {
                     HomeEmail = user.Email;
                     //username1 = user.UserName;
-                    foreach (var home in homeowners)
+                    foreach (var home in acceptence)
                     {
-                        if (home.email == HomeEmail)
+                        if (home.HomeEmail == HomeEmail)
                         {
-                            HomeUserName = home.Username;
+                            HomeUserName = home.HomeUsername;
                         }
                     }
 
@@ -344,24 +361,19 @@ namespace WorkWarriors.Controllers
 
             }
 
-            foreach (var i in servicerequests)
+            foreach (var i in acceptence)
             {
 
                 if (id == i.ID)
                 {
-                    foreach (var con in contractors)
-                    {
-                        if (conList.Contains(con.email + i.ID))
-                        {
-
-                        }
-                    }
-                    myMessage.AddTo(i.email);
+                 
+                    
+                    myMessage.AddTo(i.ConEmail);
                     myMessage.From = new MailAddress("workwarriors@gmail.com", "Admin");
                     myMessage.Subject = "New Service Request Posting!!";
-                    string url = "http://localhost:14703/ServiceRequests/HomeownerConfirmation/" + i.ID;
+                    string url = "http://localhost:14703/ContractorAcceptedBids/" + i.ID;
                     //string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href =" + url + "> Click Here </a>";
-                    String message = "Hello " + i.FirstName + "," + "<br>" + "<br>" + ConUserName + " has offered to accept your following service request:" + "<br>" + "<br>" + i.Description + "<br>" + "<br>" + "To confirm acceptance, click on link below: <br><a href =" + url + "> Click Here </a>";
+                    String message = "Hello " + i.ConFirstName + "," + "<br>" + "<br>" + HomeUserName + " has confirmed your service for the following service request:" + "<br>" + "<br>" + i.Description + "<br>" + "<br>" + "To confirm acceptance, click on link below: <br><a href =" + url + "> Click Here </a>";
                     myMessage.Html = message;
                     var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
                     var transportWeb = new SendGrid.Web(credentials);

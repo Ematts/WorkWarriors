@@ -286,6 +286,22 @@
     <Compile Include="Migrations\201606121717472_qq2.Designer.cs">
       <DependentUpon>201606121717472_qq2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606121835192_ii.cs" />
+    <Compile Include="Migrations\201606121835192_ii.Designer.cs">
+      <DependentUpon>201606121835192_ii.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606121937574_rr.cs" />
+    <Compile Include="Migrations\201606121937574_rr.Designer.cs">
+      <DependentUpon>201606121937574_rr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606122200270_ii1.cs" />
+    <Compile Include="Migrations\201606122200270_ii1.Designer.cs">
+      <DependentUpon>201606122200270_ii1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606130150224_ww1.cs" />
+    <Compile Include="Migrations\201606130150224_ww1.Designer.cs">
+      <DependentUpon>201606130150224_ww1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BidAcceptance.cs" />
@@ -418,6 +434,7 @@
     <Content Include="Views\ContractorAcceptedBids\Edit.cshtml" />
     <Content Include="Views\ContractorAcceptedBids\Index.cshtml" />
     <Content Include="Views\ContractorAcceptedBids\ConAccept.cshtml" />
+    <Content Include="Views\ContractorAcceptedBids\HomeownerConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -472,6 +489,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606121717472_qq2.resx">
       <DependentUpon>201606121717472_qq2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606121835192_ii.resx">
+      <DependentUpon>201606121835192_ii.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606121937574_rr.resx">
+      <DependentUpon>201606121937574_rr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606122200270_ii1.resx">
+      <DependentUpon>201606122200270_ii1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606130150224_ww1.resx">
+      <DependentUpon>201606130150224_ww1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -11,7 +11,6 @@ namespace WorkWarriors.Models
     public class ContractorAcceptedBids
     {
         public int ID { get; set; }
-        public virtual ServiceRequest ServiceRequest { get; set; }
         public string ConUsername { get; set; }
         public string HomeUsername { get; set; }
         public string ConFirstName { get; set; }
@@ -41,5 +40,6 @@ namespace WorkWarriors.Models
         public string Description { get; set; }
 
         public bool Confirmed { get; set; }
+        public int Invoice { get; set; }
     }
 }
