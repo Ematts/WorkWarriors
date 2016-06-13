@@ -405,8 +405,9 @@ namespace WorkWarriors.Controllers
                     myMessage.From = new MailAddress("workwarriors@gmail.com", "Admin");
                     myMessage.Subject = "Homeowner Confirmed Your Service!!";
                     string url = "http://localhost:14703/HomeownerComfirmedBids/Confirm/" + Invoice;
+                    string url2 = "http://localhost:14703/Maps/Calculate/";
                     //string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href =" + url + "> Click Here </a>";
-                    String message = "Hello " + i.ConFirstName + "," + "<br>" + "<br>" + "Homeowner " + HomeUserName + " has confirmed your service for the following request:" + "<br>" + "<br>" + i.Description + "<br>" + "<br>" + "When the job is complete, please confirm completion by clicking on the link below: <br><a href =" + url + "> Click Here </a>";
+                    String message = "Hello " + i.ConFirstName + "," + "<br>" + "<br>" + "Homeowner " + HomeUserName + " has confirmed your service for the following request:" + "<br>" + "<br>" + i.Description + "<br>" + "<br>" + "When the job is complete, please confirm completion by clicking on the link below: <br><a href =" + url + "> Click Here </a>" + "<br>" + "<br>" + "Get directions by clicking on the link below: <br><a href =" + url2 + "> Click Here </a>";
                     myMessage.Html = message;
                     var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
                     var transportWeb = new SendGrid.Web(credentials);
@@ -504,7 +505,7 @@ namespace WorkWarriors.Controllers
                     Invoice = bid.ID;
                     myMessage.AddTo(i.HomeEmail);
                     myMessage.From = new MailAddress("workwarriors@gmail.com", "Admin");
-                    myMessage.Subject = "Service Request Acceptance!!";
+                    myMessage.Subject = "Job Complete!!";
                     string url = "http://localhost:14703/Paypal/";
                     //string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href =" + url + "> Click Here </a>";
                     String message = "Hello " + i.HomeFirstname + "," + "<br>" + "<br>" + "Contractor " + ConUserName + " has completed your following service request:" + "<br>" + "<br>" + i.Description + "<br>" + "<br>" + "To complete payment, please click on link below: <br><a href =" + url + "> Click Here </a>";
