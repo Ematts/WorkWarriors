@@ -1,10 +1,11 @@
-﻿@model WorkWarriors.Models.ContractorAcceptedBids
+﻿@model WorkWarriors.Models.HomeownerComfirmedBids
 
 @{
-    ViewBag.Title = "HomeownerConfirmation";
+    ViewBag.Title = "Confirm";
 }
 
-<h2>ContractorAcceptance</h2>
+<h2>Confirm</h2>
+
 @using (Html.BeginForm("sendContractor", "email", Model.ID))
 {
     <div>
@@ -173,19 +174,26 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Confirmed)
+                @Html.DisplayNameFor(model => model.Completed)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Confirmed)
+                @Html.DisplayFor(model => model.Completed)
             </dd>
 
+            <dt>
+                @Html.DisplayNameFor(model => model.Invoice)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Invoice)
+            </dd>
             @Html.HiddenFor(model => model.ID)
 
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Confirm Contractor" class="btn btn-default" />
+                    <input type="submit" value="Confirm Completion" class="btn btn-default" />
                 </div>
             </div>
         </dl>
