@@ -515,7 +515,7 @@ namespace WorkWarriors.Controllers
                     transportWeb.DeliverAsync(myMessage);
                     conList.Add(ConEmail + i.ID);
                 }
-                //i.posted = true;
+                //i.posted = truefrtgyhuj;
                 db.SaveChanges();
             }
 
