@@ -312,6 +312,10 @@
     <Compile Include="Migrations\201606131632005_oo.Designer.cs">
       <DependentUpon>201606131632005_oo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606152033267_location.cs" />
+    <Compile Include="Migrations\201606152033267_location.Designer.cs">
+      <DependentUpon>201606152033267_location.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BidAcceptance.cs" />
@@ -531,6 +535,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606131632005_oo.resx">
       <DependentUpon>201606131632005_oo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606152033267_location.resx">
+      <DependentUpon>201606152033267_location.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

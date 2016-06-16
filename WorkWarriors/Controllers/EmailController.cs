@@ -336,6 +336,7 @@ namespace WorkWarriors.Controllers
             string HomeState = "";
             string HomeZip = "";
             int Invoice = 1;
+            string JobLocation = "";
 
             var myMessage = new SendGrid.SendGridMessage();
             var contractors = db.Contractors.ToList();
@@ -379,33 +380,34 @@ namespace WorkWarriors.Controllers
                     HomeownerComfirmedBids bid = new HomeownerComfirmedBids();
                     db.HomeownerComfirmedBids.Add(bid);
                     bid.ConUsername = i.ConUsername;
-                    bid.HomeUsername = HomeUserName;
+                    bid.HomeUsername = i.HomeUsername;
                     bid.ConFirstName = i.ConFirstName;
-                    bid.HomeFirstname = HomeFirstName;
+                    bid.HomeFirstname = i.HomeFirstname;
                     bid.ConLastName = i.ConLastName;
-                    bid.HomeLastName = HomeLastName;
+                    bid.HomeLastName = i.HomeLastName;
                     bid.ConAddress = i.ConAddress;
-                    bid.HomeAddress = HomeAddress;
+                    bid.HomeAddress = i.HomeAddress;
                     bid.ConCity = i.ConCity;
-                    bid.HomeCity = HomeCity;
+                    bid.HomeCity = i.HomeCity;
                     bid.ConState = i.ConState;
                     bid.HomeState = i.HomeState;
                     bid.ConZip = i.ConZip;
-                    bid.HomeZip = HomeZip;
+                    bid.HomeZip = i.HomeZip;
                     bid.ConEmail = i.ConEmail;
-                    bid.HomeEmail = HomeEmail;
+                    bid.HomeEmail = i.HomeEmail;
                     bid.PostedDate = i.PostedDate;
                     bid.CompletionDeadline = i.CompletionDeadline;
                     bid.Description = i.Description;
                     bid.Bid = i.Bid;
                     bid.Completed = false;
+                    bid.JobLocation = bid.HomeAddress + ", " + bid.HomeCity + ", " + bid.HomeState + " " + bid.HomeZip + ", " + "USA";
                     db.SaveChanges();
                     Invoice = bid.ID;
                     myMessage.AddTo(i.ConEmail);
                     myMessage.From = new MailAddress("workwarriors@gmail.com", "Admin");
                     myMessage.Subject = "Homeowner Confirmed Your Service!!";
                     string url = "http://localhost:14703/HomeownerComfirmedBids/Confirm/" + Invoice;
-                    string url2 = "http://localhost:14703/Maps/Calculate/";
+                    string url2 = "http://localhost:14703/Maps/Calculate/" + Invoice;
                     //string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href =" + url + "> Click Here </a>";
                     String message = "Hello " + i.ConFirstName + "," + "<br>" + "<br>" + "Homeowner " + HomeUserName + " has confirmed your service for the following request:" + "<br>" + "<br>" + i.Description + "<br>" + "<br>" + "When the job is complete, please confirm completion by clicking on the link below: <br><a href =" + url + "> Click Here </a>" + "<br>" + "<br>" + "Get directions by clicking on the link below: <br><a href =" + url2 + "> Click Here </a>";
                     myMessage.Html = message;
@@ -480,21 +482,21 @@ namespace WorkWarriors.Controllers
 
                     CompletedBids bid = new CompletedBids();
                     db.CompletedBids.Add(bid);
-                    bid.ConUsername = ConUserName;
+                    bid.ConUsername = i.ConUsername;
                     bid.HomeUsername = i.HomeUsername;
-                    bid.ConFirstName = ConFirstName;
+                    bid.ConFirstName = i.ConFirstName;
                     bid.HomeFirstname = i.HomeFirstname;
-                    bid.ConLastName = ConLastName;
+                    bid.ConLastName = i.ConLastName;
                     bid.HomeLastName = i.HomeLastName;
-                    bid.ConAddress = ConAddress;
+                    bid.ConAddress = i.ConAddress;
                     bid.HomeAddress = i.HomeAddress;
-                    bid.ConCity = ConCity;
+                    bid.ConCity = i.ConCity;
                     bid.HomeCity = i.HomeCity;
-                    bid.ConState = ConState;
+                    bid.ConState = i.ConState;
                     bid.HomeState = i.HomeState;
-                    bid.ConZip = ConZip;
+                    bid.ConZip = i.ConZip;
                     bid.HomeZip = i.HomeZip;
-                    bid.ConEmail = ConEmail;
+                    bid.ConEmail = i.ConEmail;
                     bid.HomeEmail = i.HomeEmail;
                     bid.PostedDate = i.PostedDate;
                     bid.CompletionDeadline = i.CompletionDeadline;
@@ -515,7 +517,7 @@ namespace WorkWarriors.Controllers
                     transportWeb.DeliverAsync(myMessage);
                     conList.Add(ConEmail + i.ID);
                 }
-                //i.posted = truefrtgyhuj;
+                //i.posted = true;
                 db.SaveChanges();
             }
 
