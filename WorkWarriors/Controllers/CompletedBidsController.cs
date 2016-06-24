@@ -129,6 +129,21 @@ namespace WorkWarriors.Controllers
             return View(completedBids);
         }
 
+        public ActionResult Payment(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CompletedBids completedBids = db.CompletedBids.Find(id);
+            if (completedBids == null)
+            {
+                return HttpNotFound();
+            }
+            return View(completedBids);
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

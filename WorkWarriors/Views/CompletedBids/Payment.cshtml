@@ -1,0 +1,220 @@
+﻿@model WorkWarriors.Models.CompletedBids
+
+@{
+    ViewBag.Title = "Payment";
+}
+
+<h2>Payment</h2>
+
+
+@using (Html.BeginForm("PaymentWithPaypal", "PayPal", Model.ID))
+{
+    <div>
+        @Html.AntiForgeryToken()
+        <h4>ServiceRequest</h4>
+        <hr />
+        <dl class="dl-horizontal">
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConUsername)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConUsername)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HomeUsername)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HomeUsername)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConFirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConFirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HomeFirstname)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HomeFirstname)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConLastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConLastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HomeLastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HomeLastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConAddress)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConAddress)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HomeAddress)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HomeAddress)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConCity)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConCity)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HomeCity)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HomeCity)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConState)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConState)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HomeState)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HomeState)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConZip)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConZip)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HomeZip)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HomeZip)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConEmail)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConEmail)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HomeEmail)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HomeEmail)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PostedDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PostedDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Bid)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Bid)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CompletionDeadline)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CompletionDeadline)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Completed)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Completed)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Invoice)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Invoice)
+            </dd>
+
+            @Html.HiddenFor(model => model.ID)
+
+
+
+        </dl>
+   
+    </div>
+}
+@{double price = Model.Bid; }
+@{string service = Model.Description; }
+
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+
+    <input type="hidden" name="cmd" value="_xclick" />
+    <input type="hidden" name="business" value="wisepenny79-facilitator@gmail.com" />
+
+    <input type="hidden" name="item_name" value="@service" />
+    <input type="hidden" name="amount" value="@price" />
+    <input type="submit" value="Buy!" />
+
+</form>
+    
+
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")*@
+</p>

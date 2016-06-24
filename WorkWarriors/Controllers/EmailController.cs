@@ -508,7 +508,7 @@ namespace WorkWarriors.Controllers
                     myMessage.AddTo(i.HomeEmail);
                     myMessage.From = new MailAddress("workwarriors@gmail.com", "Admin");
                     myMessage.Subject = "Job Complete!!";
-                    string url = "http://localhost:14703/Paypal/";
+                    string url = "http://localhost:14703/CompletedBids/Payment/" + Invoice;
                     //string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href =" + url + "> Click Here </a>";
                     String message = "Hello " + i.HomeFirstname + "," + "<br>" + "<br>" + "Contractor " + ConUserName + " has completed your following service request:" + "<br>" + "<br>" + i.Description + "<br>" + "<br>" + "To complete payment, please click on link below: <br><a href =" + url + "> Click Here </a>";
                     myMessage.Html = message;

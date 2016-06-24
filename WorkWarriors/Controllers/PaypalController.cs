@@ -1,4 +1,5 @@
-﻿using PayPal.Api;
+﻿
+using PayPal.Api;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -197,7 +198,7 @@ namespace WorkWarriors.Controllers
             {
                 name = "Item",
                 currency = "USD",
-                price = "100",
+                price = "10",
                 quantity = "1",
                 sku = "sku"
             });
@@ -213,15 +214,15 @@ namespace WorkWarriors.Controllers
 
             var details = new Details()
             {
-                tax = "1",
-                shipping = "15",
-                subtotal = "100"
+                tax = "0",
+                shipping = "0",
+                subtotal = "10"
             };
 
             var amount = new Amount()
             {
                 currency = "USD",
-                total = "116",
+                total = "10",
                 details = details
             };
 
@@ -261,4 +262,4 @@ namespace WorkWarriors.Controllers
 
     }
 }
-    
+
