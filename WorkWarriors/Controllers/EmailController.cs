@@ -378,7 +378,7 @@ namespace WorkWarriors.Controllers
                 {
 
                     HomeownerComfirmedBids bid = new HomeownerComfirmedBids();
-                    db.HomeownerComfirmedBids.Add(bid);
+                    //db.HomeownerComfirmedBids.Add(bid);
                     bid.ConUsername = i.ConUsername;
                     bid.HomeUsername = i.HomeUsername;
                     bid.ConFirstName = i.ConFirstName;
@@ -401,8 +401,10 @@ namespace WorkWarriors.Controllers
                     bid.Bid = i.Bid;
                     bid.Completed = false;
                     bid.JobLocation = bid.HomeAddress + ", " + bid.HomeCity + ", " + bid.HomeState + " " + bid.HomeZip + ", " + "USA";
+                    db.HomeownerComfirmedBids.Add(bid);
                     db.SaveChanges();
                     Invoice = bid.ID;
+                    bid.Invoice = Invoice;
                     myMessage.AddTo(i.ConEmail);
                     myMessage.From = new MailAddress("workwarriors@gmail.com", "Admin");
                     myMessage.Subject = "Homeowner Confirmed Your Service!!";
@@ -481,7 +483,7 @@ namespace WorkWarriors.Controllers
                 {
 
                     CompletedBids bid = new CompletedBids();
-                    db.CompletedBids.Add(bid);
+                    //db.CompletedBids.Add(bid);
                     bid.ConUsername = i.ConUsername;
                     bid.HomeUsername = i.HomeUsername;
                     bid.ConFirstName = i.ConFirstName;
@@ -503,8 +505,10 @@ namespace WorkWarriors.Controllers
                     bid.Description = i.Description;
                     bid.Bid = i.Bid;
                     bid.Completed = true;
+                    db.CompletedBids.Add(bid);
                     db.SaveChanges();
                     Invoice = bid.ID;
+                    bid.Invoice = Invoice;
                     myMessage.AddTo(i.HomeEmail);
                     myMessage.From = new MailAddress("workwarriors@gmail.com", "Admin");
                     myMessage.Subject = "Job Complete!!";
