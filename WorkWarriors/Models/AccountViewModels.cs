@@ -81,7 +81,7 @@ namespace WorkWarriors.Models
         public string ConfirmPassword { get; set; }
 
         [Display(Name ="User Type")]
-        public int role_id { get; set; }
+        public int roles { get; set; }
     }
 
     public class ResetPasswordViewModel

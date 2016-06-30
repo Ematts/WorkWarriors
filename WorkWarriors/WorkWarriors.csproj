@@ -467,6 +467,7 @@
     <Content Include="Views\CompletedBids\Index.cshtml" />
     <Content Include="Views\CompletedBids\CompletedBids.cshtml" />
     <Content Include="Views\CompletedBids\Payment.cshtml" />
+    <Content Include="Views\Home\InvalidLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

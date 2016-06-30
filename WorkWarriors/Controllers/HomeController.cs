@@ -26,5 +26,12 @@ namespace WorkWarriors.Controllers
 
             return View();
         }
+
+        public ActionResult InvalidLogin()
+        {
+            ViewBag.Message = "Invalid Login Attempt.";
+
+            return View();
+        }
     }
 }

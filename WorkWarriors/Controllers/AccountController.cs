@@ -154,7 +154,11 @@ namespace WorkWarriors.Controllers
         {
             ApplicationDbContext db = new ApplicationDbContext();
             ViewBag.roles = new SelectList(db.Roles, "Id", "Name");
-
+            var roleCheck = model.roles.ToString();
+            if(roleCheck == "3" && model.Password != "Warrior20!")
+            {
+                return RedirectToAction("InvalidLogin", "Home");
+            }
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
@@ -163,7 +167,7 @@ namespace WorkWarriors.Controllers
 
                 if (result.Succeeded)
                 {
-                    var role = db.Roles.Find(model.role_id.ToString());
+                    var role = db.Roles.Find(model.roles.ToString());
                     UserManager.AddToRole(user.Id, role.Name);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
@@ -178,6 +182,11 @@ namespace WorkWarriors.Controllers
                         return RedirectToAction("Create", "Contractors");
                     }
                     else if(role.Id == "1")
+                    {
+                        return RedirectToAction("Create", "Homeowners");
+                    }
+
+                    else if(role.Id == "3" && model.Password == "Warrior20!")
                     {
                         return RedirectToAction("Create", "Homeowners");
                     }

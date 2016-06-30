@@ -336,7 +336,7 @@ namespace WorkWarriors.Controllers
             string HomeState = "";
             string HomeZip = "";
             int Invoice = 1;
-            string JobLocation = "";
+            //string JobLocation = "";
 
             var myMessage = new SendGrid.SendGridMessage();
             var contractors = db.Contractors.ToList();
