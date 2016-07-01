@@ -33,5 +33,17 @@ namespace WorkWarriors.Controllers
 
             return View();
         }
+        public ActionResult Unauthorized_Access()
+        {
+            ViewBag.Message = "You are not authorized to view this page.";
+
+            return View();
+        }
+        public ActionResult View_Databases()
+        {
+            ViewBag.Message = "Select Database";
+
+            return View();
+        }
     }
 }

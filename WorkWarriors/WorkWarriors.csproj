@@ -468,6 +468,9 @@
     <Content Include="Views\CompletedBids\CompletedBids.cshtml" />
     <Content Include="Views\CompletedBids\Payment.cshtml" />
     <Content Include="Views\Home\InvalidLogin.cshtml" />
+    <Content Include="Views\Shared\_Admin_Layout.cshtml" />
+    <Content Include="Views\Home\Unauthorized_Access.cshtml" />
+    <Content Include="Views\Home\View_Databases.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

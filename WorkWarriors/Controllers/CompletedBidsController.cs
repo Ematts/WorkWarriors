@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WorkWarriors.Models;
+using Microsoft.AspNet.Identity;
 
 namespace WorkWarriors.Controllers
 {
@@ -17,12 +18,20 @@ namespace WorkWarriors.Controllers
         // GET: CompletedBids
         public ActionResult Index()
         {
+             if (!this.User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Unauthorized_Access", "Home");
+            }
             return View(db.CompletedBids.ToList());
         }
 
         // GET: CompletedBids/Details/5
         public ActionResult Details(int? id)
         {
+            if (!this.User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Unauthorized_Access", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -131,17 +140,55 @@ namespace WorkWarriors.Controllers
 
         public ActionResult Payment(int? id)
         {
-            if (id == null)
+            string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            if (identity == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Unauthorized_Access", "Home");
             }
-            CompletedBids completedBids = db.CompletedBids.Find(id);
-            if (completedBids == null)
+            var completedList = db.CompletedBids.ToList();
+            string HomeOwnerEmail = "";
+            string payeeEmail = "";
+            var person = db.Homeowners.Where(x => x.UserId == identity).SingleOrDefault();
+            
+
+            foreach (var user in db.Users)
             {
-                return HttpNotFound();
+                if (user.Id == identity)
+                {
+                    payeeEmail = user.Email;
+                }
             }
-            return View(completedBids);
-        }
+
+            foreach (var i in completedList)
+            {
+                if(id == i.ID)
+                {
+                    HomeOwnerEmail = i.HomeEmail;
+                }
+            }
+
+
+            if (this.User.IsInRole("Admin") || HomeOwnerEmail == payeeEmail)
+            {
+
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                CompletedBids completedBids = db.CompletedBids.Find(id);
+                if (completedBids == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(completedBids);
+            }
+            else
+            {
+                return RedirectToAction("Unauthorized_Access", "Home");
+            }
+       }
+        
 
 
         protected override void Dispose(bool disposing)
