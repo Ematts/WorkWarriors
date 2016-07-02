@@ -37,7 +37,7 @@ namespace WorkWarriors.Models
         [Required]
         public string Zip { get; set; }
         [StringLength(25, MinimumLength = 5)]
-        [Required]
+        //[Required]
         public string email { get; set; }
     }
 

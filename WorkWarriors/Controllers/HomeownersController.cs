@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WorkWarriors.Models;
+using Microsoft.AspNet.Identity;
 
 namespace WorkWarriors.Controllers
 {
@@ -70,6 +71,18 @@ namespace WorkWarriors.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Username,FirstName,LastName,Address,City,State,Zip,email")] Homeowner homeowner)
         {
+            string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            if (identity == null)
+            {
+                return RedirectToAction("Must_be_logged_in", "Homeowners");
+            }
+            foreach (var user in db.Users)
+            {
+                if (user.Id == identity)
+                {
+                    homeowner.email = user.Email;
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Homeowners.Add(homeowner);
@@ -135,6 +148,13 @@ namespace WorkWarriors.Controllers
             db.Homeowners.Remove(homeowner);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Must_be_logged_in()
+        {
+            ViewBag.Message = "You must log in as a registered user to create a homeowner profile";
+
+            return View();
         }
 
         protected override void Dispose(bool disposing)
