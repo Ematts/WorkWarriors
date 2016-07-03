@@ -11,14 +11,12 @@ namespace WorkWarriors.Models
     {
         public int ID { get; set; }
         public virtual Homeowner Homeowner { get; set; }
-        [StringLength(15, MinimumLength = 6)]
-        [Required]
+        //[StringLength(15, MinimumLength = 6)]
+        //[Required]
         public string Username { get; set; }
-        [StringLength(20, MinimumLength = 1)]
-        [Required]
+       // [StringLength(20, MinimumLength = 1)]
         public string FirstName { get; set; }
-        [StringLength(25, MinimumLength = 1)]
-        [Required]
+       // [StringLength(25, MinimumLength = 1)]
         public string LastName { get; set; }
         [StringLength(40, MinimumLength = 6)]
         [Required]
@@ -33,9 +31,9 @@ namespace WorkWarriors.Models
         [Required]
         public string Zip { get; set; }
         [StringLength(25, MinimumLength = 5)]
-        [Required]
+        //[Required]
         public string email { get; set; }
-        [Required]
+       // [Required]
         public DateTime PostedDate { get; set; }
         [Required]
         public double Bid { get; set; }

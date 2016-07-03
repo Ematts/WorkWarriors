@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WorkWarriors.Models;
+using Microsoft.AspNet.Identity;
+using System.Globalization;
 
 namespace WorkWarriors.Controllers
 {
@@ -48,6 +50,36 @@ namespace WorkWarriors.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Username,FirstName,LastName,Address,City,State,Zip,email,PostedDate,Bid,CompletionDeadline,Description,posted,Contractor")] ServiceRequest serviceRequest)
         {
+
+            string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            if (identity == null)
+            {
+                return RedirectToAction("Must_be_logged_in", "ServiceRequests");
+            }
+
+            if (!this.User.IsInRole("Admin") && (!this.User.IsInRole("Homeowner")))
+            {
+                return RedirectToAction("Must_be_logged_in", "ServiceRequests");
+            }
+
+            foreach (var user in db.Users)
+            {
+                if (user.Id == identity)
+                {
+                    serviceRequest.email = user.Email;
+                    serviceRequest.Username = user.Screen_Name;
+                    serviceRequest.FirstName = user.First_Name;
+                    serviceRequest.LastName = user.Last_Name;
+                    serviceRequest.PostedDate = DateTime.Now;
+                }
+            }
+
+            if(serviceRequest.PostedDate > serviceRequest.CompletionDeadline)
+            {
+                return RedirectToAction("DateIssue", "ServiceRequests");
+            }
+
+
             if (ModelState.IsValid)
             {
                 db.ServiceRequests.Add(serviceRequest);
@@ -153,6 +185,21 @@ namespace WorkWarriors.Controllers
             }
             return View(serviceRequest);
         }
+
+        public ActionResult Must_be_logged_in()
+        {
+            ViewBag.Message = "You must log in as a registered homeowner to create a service request";
+
+            return View();
+        }
+
+        public ActionResult DateIssue()
+        {
+            ViewBag.Message = "Completion deadline must be later than posted date";
+
+            return View();
+        }
+
 
 
         //public ActionResult HomeownerConfirmation(int? id)

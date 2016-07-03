@@ -17,6 +17,8 @@ namespace WorkWarriors.Models
             return userIdentity;
         }
         public string Screen_Name { get; set; }
+        public string First_Name { get; set; }
+        public string Last_Name { get; set; }
 
 
     }
@@ -40,7 +42,7 @@ namespace WorkWarriors.Models
 
         public System.Data.Entity.DbSet<WorkWarriors.Models.ServiceRequest> ServiceRequests { get; set; }
 
-        public System.Data.Entity.DbSet<WorkWarriors.Models.BidAcceptance> BidAcceptances { get; set; }
+        //public System.Data.Entity.DbSet<WorkWarriors.Models.BidAcceptance> BidAcceptances { get; set; }
 
         public System.Data.Entity.DbSet<WorkWarriors.Models.ContractorAcceptedBids> ContractorAcceptedBids { get; set; }
 

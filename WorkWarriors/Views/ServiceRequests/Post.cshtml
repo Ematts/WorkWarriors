@@ -112,8 +112,9 @@
             </dt>
 
             <dd>
-                @Html.HiddenFor(model => model.ID)
-
+                @Html.DisplayFor(model => model.posted)
+            </dd>
+            @Html.HiddenFor(model => model.ID)
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">

@@ -161,7 +161,7 @@ namespace WorkWarriors.Controllers
             }
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Screen_Name = model.Screen_Name };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Screen_Name = model.Screen_Name, First_Name = model.First_Name, Last_Name = model.Last_Name };
                 var result = await UserManager.CreateAsync(user, model.Password);
 
 

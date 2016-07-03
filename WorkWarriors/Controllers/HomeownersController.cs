@@ -88,6 +88,8 @@ namespace WorkWarriors.Controllers
                 {
                     homeowner.email = user.Email;
                     homeowner.Username = user.Screen_Name;
+                    homeowner.FirstName = user.First_Name;
+                    homeowner.LastName = user.Last_Name;
                 }
             }
             if (ModelState.IsValid)

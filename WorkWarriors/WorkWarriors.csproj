@@ -237,21 +237,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607022304083_b.cs" />
-    <Compile Include="Migrations\201607022304083_b.Designer.cs">
-      <DependentUpon>201607022304083_b.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607022314262_q.cs" />
-    <Compile Include="Migrations\201607022314262_q.Designer.cs">
-      <DependentUpon>201607022314262_q.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607022346040_w.cs" />
-    <Compile Include="Migrations\201607022346040_w.Designer.cs">
-      <DependentUpon>201607022346040_w.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607022357157_o.cs" />
-    <Compile Include="Migrations\201607022357157_o.Designer.cs">
-      <DependentUpon>201607022357157_o.cs</DependentUpon>
+    <Compile Include="Migrations\201607032038535_n.cs" />
+    <Compile Include="Migrations\201607032038535_n.Designer.cs">
+      <DependentUpon>201607032038535_n.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -411,6 +399,8 @@
     <Content Include="Views\Contractors\Must_be_logged_in.cshtml" />
     <Content Include="Views\ServiceRequests\Post.cshtml" />
     <Content Include="Views\Email\Post_must_be_logged.cshtml" />
+    <Content Include="Views\ServiceRequests\Must_be_logged_in.cshtml" />
+    <Content Include="Views\ServiceRequests\DateIssue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -428,17 +418,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607022304083_b.resx">
-      <DependentUpon>201607022304083_b.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607022314262_q.resx">
-      <DependentUpon>201607022314262_q.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607022346040_w.resx">
-      <DependentUpon>201607022346040_w.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607022357157_o.resx">
-      <DependentUpon>201607022357157_o.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607032038535_n.resx">
+      <DependentUpon>201607032038535_n.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

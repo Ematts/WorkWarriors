@@ -18,10 +18,8 @@ namespace WorkWarriors.Models
         [StringLength(15, MinimumLength = 6)]
         public string Username { get; set; }
         [StringLength(20, MinimumLength = 1)]
-        [Required]
         public string FirstName { get; set; }
         [StringLength(25, MinimumLength = 1)]
-        [Required]
         public string LastName { get; set; }
         [StringLength(40, MinimumLength = 6)]
         [Required]
