@@ -52,7 +52,9 @@ namespace WorkWarriors.Controllers
             {
                 db.ServiceRequests.Add(serviceRequest);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Post", new { id = serviceRequest.ID });
+
+
             }
 
             return View(serviceRequest);
@@ -137,6 +139,21 @@ namespace WorkWarriors.Controllers
             }
             return View(serviceRequest);
         }
+
+        public ActionResult Post(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ServiceRequest serviceRequest = db.ServiceRequests.Find(id);
+            if (serviceRequest == null)
+            {
+                return HttpNotFound();
+            }
+            return View(serviceRequest);
+        }
+
 
         //public ActionResult HomeownerConfirmation(int? id)
         //{

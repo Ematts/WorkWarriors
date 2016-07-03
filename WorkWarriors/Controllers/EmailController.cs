@@ -185,14 +185,58 @@ namespace WorkWarriors.Controllers
 
         }
 
-        public ActionResult postServiceRequest()
-        {
+        //public ActionResult postServiceRequest()
+        //{
             
+        //    var myMessage = new SendGrid.SendGridMessage();
+        //    var contractors = db.Contractors.ToList();
+        //    var servicerequests = db.ServiceRequests.ToList();
+        //    List<String> recipients = new List<String> { };
+
+        //    foreach (var i in contractors)
+        //    {
+
+        //        recipients.Add(i.email);
+
+        //    };
+
+        //    foreach (var i in servicerequests)
+        //    {
+        //        if(i.posted == false)
+        //        {
+        //            myMessage.AddTo(recipients);
+        //            myMessage.From = new MailAddress("workwarriors@gmail.com", "Admin");
+        //            myMessage.Subject = "New Service Request Posting!!";
+        //            string url = "http://localhost:14703/ServiceRequests/ContractorAcceptance/" + i.ID;
+        //            string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href ="+url+"> Click Here </a>" ;
+        //            myMessage.Html = message;
+        //            var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
+        //            var transportWeb = new SendGrid.Web(credentials);
+        //            transportWeb.DeliverAsync(myMessage);
+                    
+        //        }
+        //        i.posted = true;
+        //        db.SaveChanges();
+        //    }
+
+        //    return RedirectToAction("About", "Home");
+        //}
+
+        public ActionResult postServiceRequest(int id)
+        {
+
             var myMessage = new SendGrid.SendGridMessage();
             var contractors = db.Contractors.ToList();
+            var homeowners = db.Homeowners.ToList();
             var servicerequests = db.ServiceRequests.ToList();
             List<String> recipients = new List<String> { };
+            string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            if (identity == null)
+            {
+                return RedirectToAction("Post_must_be_logged", "Email");
+            }
 
+            var person = db.Homeowners.Where(x => x.UserId == identity).SingleOrDefault();
             foreach (var i in contractors)
             {
 
@@ -200,27 +244,38 @@ namespace WorkWarriors.Controllers
 
             };
 
-            foreach (var i in servicerequests)
+            foreach (var user in db.Users)
             {
-                if(i.posted == false)
+                if (user.Id == identity)
                 {
-                    myMessage.AddTo(recipients);
-                    myMessage.From = new MailAddress("workwarriors@gmail.com", "Admin");
-                    myMessage.Subject = "New Service Request Posting!!";
-                    string url = "http://localhost:14703/ServiceRequests/ContractorAcceptance/" + i.ID;
-                    string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href ="+url+"> Click Here </a>" ;
-                    myMessage.Html = message;
-                    var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
-                    var transportWeb = new SendGrid.Web(credentials);
-                    transportWeb.DeliverAsync(myMessage);
-                    
+                    foreach (var i in servicerequests)
+                    {
+                        if (id == i.ID)
+                        {
+                            if (i.posted == false)
+                            {
+                                myMessage.AddTo(recipients);
+                                myMessage.From = new MailAddress("workwarriors@gmail.com", "Admin");
+                                myMessage.Subject = "New Service Request Posting!!";
+                                string url = "http://localhost:14703/ServiceRequests/ContractorAcceptance/" + i.ID;
+                                string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href =" + url + "> Click Here </a>";
+                                myMessage.Html = message;
+                                var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
+                                var transportWeb = new SendGrid.Web(credentials);
+                                transportWeb.DeliverAsync(myMessage);
+                                i.posted = true;
+                                
+                            }
+                            
+                        }
+                    }
                 }
-                i.posted = true;
-                db.SaveChanges();
+                
             }
-
+            db.SaveChanges();
             return RedirectToAction("About", "Home");
         }
+
 
         public ActionResult acceptanceConfirmation(int id)
         {
@@ -527,6 +582,14 @@ namespace WorkWarriors.Controllers
 
             return RedirectToAction("About", "Home");
         }
+
+        public ActionResult Post_must_be_logged()
+        {
+            ViewBag.Message = "You must log in as a registered user to create a contractor profile";
+
+            return View();
+        }
+
 
         protected override void Dispose(bool disposing)
         {

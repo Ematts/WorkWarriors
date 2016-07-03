@@ -409,6 +409,8 @@
     <Content Include="Views\Home\View_Databases.cshtml" />
     <Content Include="Views\Homeowners\Must_be_logged_in.cshtml" />
     <Content Include="Views\Contractors\Must_be_logged_in.cshtml" />
+    <Content Include="Views\ServiceRequests\Post.cshtml" />
+    <Content Include="Views\Email\Post_must_be_logged.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
