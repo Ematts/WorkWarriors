@@ -16,6 +16,9 @@ namespace WorkWarriors.Models
             // Add custom user claims here
             return userIdentity;
         }
+        public string Screen_Name { get; set; }
+
+
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

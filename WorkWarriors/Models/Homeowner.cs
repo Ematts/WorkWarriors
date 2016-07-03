@@ -16,7 +16,6 @@ namespace WorkWarriors.Models
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
         [StringLength(15, MinimumLength = 6)]
-        [Required]
         public string Username { get; set; }
         [StringLength(20, MinimumLength = 1)]
         [Required]

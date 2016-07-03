@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WorkWarriors.Models;
+using Microsoft.AspNet.Identity;
 
 namespace WorkWarriors.Controllers
 {
@@ -70,6 +71,25 @@ namespace WorkWarriors.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Username,FirstName,LastName,Address,City,State,Zip,email")] Contractor contractor)
         {
+            string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            if (identity == null)
+            {
+                return RedirectToAction("Must_be_logged_in", "Contractors");
+            }
+
+            if (!this.User.IsInRole("Admin") && (!this.User.IsInRole("Contractor")))
+            {
+                return RedirectToAction("Must_be_logged_in", "Contractors");
+            }
+
+            foreach (var user in db.Users)
+            {
+                if (user.Id == identity)
+                {
+                    contractor.email = user.Email;
+                    contractor.Username = user.Screen_Name;
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Contractors.Add(contractor);
@@ -135,6 +155,13 @@ namespace WorkWarriors.Controllers
             db.Contractors.Remove(contractor);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Must_be_logged_in()
+        {
+            ViewBag.Message = "You must log in as a registered user to create a contractor profile";
+
+            return View();
         }
 
         protected override void Dispose(bool disposing)

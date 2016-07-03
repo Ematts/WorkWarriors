@@ -3,16 +3,16 @@ namespace WorkWarriors.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class dd : DbMigration
+    public partial class o : DbMigration
     {
         public override void Up()
         {
-            DropColumn("dbo.ServiceRequests", "Contractor");
+            AlterColumn("dbo.Homeowners", "Username", c => c.String(maxLength: 15));
         }
         
         public override void Down()
         {
-            AddColumn("dbo.ServiceRequests", "Contractor", c => c.String());
+            AlterColumn("dbo.Homeowners", "Username", c => c.String(nullable: false, maxLength: 15));
         }
     }
 }

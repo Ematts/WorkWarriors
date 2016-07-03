@@ -82,6 +82,11 @@ namespace WorkWarriors.Models
 
         [Display(Name ="User Type")]
         public int roles { get; set; }
+
+        [Required]
+        [StringLength(15, MinimumLength = 6)]
+        [Display(Name = "Username")]
+        public string Screen_Name { get; set; }
     }
 
     public class ResetPasswordViewModel

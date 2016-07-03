@@ -76,11 +76,18 @@ namespace WorkWarriors.Controllers
             {
                 return RedirectToAction("Must_be_logged_in", "Homeowners");
             }
+
+            if (!this.User.IsInRole("Admin") && (!this.User.IsInRole("Homeowner")))
+            {
+                return RedirectToAction("Must_be_logged_in", "Homeowners");
+            }
+
             foreach (var user in db.Users)
             {
                 if (user.Id == identity)
                 {
                     homeowner.email = user.Email;
+                    homeowner.Username = user.Screen_Name;
                 }
             }
             if (ModelState.IsValid)
