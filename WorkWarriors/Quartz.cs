@@ -32,7 +32,7 @@ namespace WorkWarriors
                     myMessage.AddTo("erickmattson@msn.com");
                     myMessage.From = new MailAddress("monsymonster@msn.com", "Joe Johnson");
                     myMessage.Subject = "New Service Request Posting!!";
-                    myMessage.Text = "Service request:";
+                    myMessage.Text = "Service request expired:";
                     var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
                     var transportWeb = new SendGrid.Web(credentials);
                     transportWeb.DeliverAsync(myMessage);
