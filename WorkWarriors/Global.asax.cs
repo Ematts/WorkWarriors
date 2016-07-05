@@ -29,7 +29,7 @@ namespace WorkWarriors
             IJobDetail job = JobBuilder.Create<Quartz>().Build();
 
 
-            // Trigger the job to run now, and then every 40 seconds
+            // Trigger the job to run now, and then every 10 seconds
             ITrigger trigger = TriggerBuilder.Create()
               .WithIdentity("myTrigger", "group1")
               .StartNow()

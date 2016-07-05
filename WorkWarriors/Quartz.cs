@@ -31,10 +31,11 @@ namespace WorkWarriors
             {
                 if ((i.CompletionDeadline < DateTime.Now) && (i.expired == false))
                 {
-                    myMessage.AddTo("erickmattson@msn.com");
+                    myMessage.AddTo(i.email);
                     myMessage.From = new MailAddress("monsymonster@msn.com", "Joe Johnson");
-                    myMessage.Subject = "New Service Request Posting!!";
-                    myMessage.Text = "Service request expired:";
+                    myMessage.Subject = "Your service request has expired!";
+                    string message = "Hello " + i.Username + "," + "<br>" + "<br>" + "Your service request \"" + i.Description + "\" has expired because the completion deadline has passed.";
+                    myMessage.Html = message;
                     var credentials = new NetworkCredential(name, pass);
                     var transportWeb = new SendGrid.Web(credentials);
                     transportWeb.DeliverAsync(myMessage);
