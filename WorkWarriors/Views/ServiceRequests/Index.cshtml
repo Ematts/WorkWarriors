@@ -50,6 +50,9 @@
         <th>
             @Html.DisplayNameFor(model => model.posted)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.expired)
+        </th>
         <th></th>
     </tr>
 
@@ -93,6 +96,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.posted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.expired)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

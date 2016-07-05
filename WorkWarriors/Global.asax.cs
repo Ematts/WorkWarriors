@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Quartz;
+using Quartz.Impl;
+
 
 namespace WorkWarriors
 {
@@ -16,6 +19,26 @@ namespace WorkWarriors
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ConfigureQuartzJobs();
+        }
+        public static void ConfigureQuartzJobs()
+        {
+            IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
+            scheduler.Start();
+
+            IJobDetail job = JobBuilder.Create<Quartz>().Build();
+
+
+            // Trigger the job to run now, and then every 40 seconds
+            ITrigger trigger = TriggerBuilder.Create()
+              .WithIdentity("myTrigger", "group1")
+              .StartNow()
+              .WithSimpleSchedule(x => x
+                  .WithIntervalInSeconds(10)
+                  .RepeatForever())
+              .Build();
+
+            scheduler.ScheduleJob(job, trigger);
         }
     }
 }
