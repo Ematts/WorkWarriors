@@ -130,6 +130,8 @@ namespace WorkWarriors.Controllers
 
             db = new ApplicationDbContext();
             var myMessage = new SendGrid.SendGridMessage();
+            string name = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\name.txt");
+            string pass = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\password.txt");
 
             List<String> recipients = new List<String> { };
             //{
@@ -150,7 +152,7 @@ namespace WorkWarriors.Controllers
             myMessage.Subject = "Sending with SendGrid is Fun";
             //myMessage.Html = "<p>Hello World!</p>";
             myMessage.Text = "Welcome to Work Warriors";
-            var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
+            var credentials = new NetworkCredential(name, pass);
             var transportWeb = new SendGrid.Web(credentials);
             transportWeb.DeliverAsync(myMessage);
 
@@ -163,6 +165,8 @@ namespace WorkWarriors.Controllers
 
             db = new ApplicationDbContext();
             var myMessage = new SendGrid.SendGridMessage();
+            string name = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\name.txt");
+            string pass = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\password.txt");
 
             List<String> recipients = new List<String> { };
 
@@ -177,7 +181,7 @@ namespace WorkWarriors.Controllers
             myMessage.From = new MailAddress("monsymonster@msn.com", "Joe Johnson");
             myMessage.Subject = "New Service Request Posting!!";
             myMessage.Text = "Service request:";
-            var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
+            var credentials = new NetworkCredential(name, pass);
             var transportWeb = new SendGrid.Web(credentials);
             transportWeb.DeliverAsync(myMessage);
 
@@ -187,10 +191,12 @@ namespace WorkWarriors.Controllers
 
         //public ActionResult postServiceRequest()
         //{
-            
+
         //    var myMessage = new SendGrid.SendGridMessage();
         //    var contractors = db.Contractors.ToList();
         //    var servicerequests = db.ServiceRequests.ToList();
+              //string name = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\name.txt");
+              //string pass = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\password.txt");
         //    List<String> recipients = new List<String> { };
 
         //    foreach (var i in contractors)
@@ -210,10 +216,10 @@ namespace WorkWarriors.Controllers
         //            string url = "http://localhost:14703/ServiceRequests/ContractorAcceptance/" + i.ID;
         //            string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href ="+url+"> Click Here </a>" ;
         //            myMessage.Html = message;
-        //            var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
+        //            var credentials = new NetworkCredential("pennywise", "Honeybump20");
         //            var transportWeb = new SendGrid.Web(credentials);
         //            transportWeb.DeliverAsync(myMessage);
-                    
+
         //        }
         //        i.posted = true;
         //        db.SaveChanges();
@@ -226,6 +232,8 @@ namespace WorkWarriors.Controllers
         {
 
             var myMessage = new SendGrid.SendGridMessage();
+            string name = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\name.txt");
+            string pass = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\password.txt");
             var contractors = db.Contractors.ToList();
             var homeowners = db.Homeowners.ToList();
             var servicerequests = db.ServiceRequests.ToList();
@@ -260,7 +268,7 @@ namespace WorkWarriors.Controllers
                                 string url = "http://localhost:14703/ServiceRequests/ContractorAcceptance/" + i.ID;
                                 string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href =" + url + "> Click Here </a>";
                                 myMessage.Html = message;
-                                var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
+                                var credentials = new NetworkCredential(name, pass);
                                 var transportWeb = new SendGrid.Web(credentials);
                                 transportWeb.DeliverAsync(myMessage);
                                 i.posted = true;
@@ -295,6 +303,8 @@ namespace WorkWarriors.Controllers
             int Invoice = 1;
 
             var myMessage = new SendGrid.SendGridMessage();
+            string name = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\name.txt");
+            string pass = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\password.txt");
             var contractors = db.Contractors.ToList();
             var servicerequests = db.ServiceRequests.ToList();
             var acceptList = db.ContractorAcceptedBids.ToList();
@@ -363,7 +373,7 @@ namespace WorkWarriors.Controllers
                     //string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href =" + url + "> Click Here </a>";
                     String message = "Hello " + i.FirstName + "," + "<br>" + "<br>" + "Contractor " + ConUserName + " has offered to perform your following service request:" + "<br>" + "<br>" + i.Description + "<br>" + "<br>" + "To confirm acceptance, click on link below: <br><a href =" + url + "> Click Here </a>";
                     myMessage.Html = message;
-                    var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
+                    var credentials = new NetworkCredential(name, pass);
                     var transportWeb = new SendGrid.Web(credentials);
                     transportWeb.DeliverAsync(myMessage);
                     conList.Add(ConEmail + i.ID);
@@ -394,6 +404,8 @@ namespace WorkWarriors.Controllers
             //string JobLocation = "";
 
             var myMessage = new SendGrid.SendGridMessage();
+            string name = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\name.txt");
+            string pass = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\password.txt");
             var contractors = db.Contractors.ToList();
             var homeowners = db.Homeowners.ToList();
             var servicerequests = db.ServiceRequests.ToList();
@@ -468,7 +480,7 @@ namespace WorkWarriors.Controllers
                     //string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href =" + url + "> Click Here </a>";
                     String message = "Hello " + i.ConFirstName + "," + "<br>" + "<br>" + "Homeowner " + HomeUserName + " has confirmed your service for the following request:" + "<br>" + "<br>" + i.Description + "<br>" + "<br>" + "When the job is complete, please confirm completion by clicking on the link below: <br><a href =" + url + "> Click Here </a>" + "<br>" + "<br>" + "Get directions by clicking on the link below: <br><a href =" + url2 + "> Click Here </a>";
                     myMessage.Html = message;
-                    var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
+                    var credentials = new NetworkCredential(name, pass);
                     var transportWeb = new SendGrid.Web(credentials);
                     transportWeb.DeliverAsync(myMessage);
                     
@@ -498,6 +510,8 @@ namespace WorkWarriors.Controllers
             int Invoice = 1;
 
             var myMessage = new SendGrid.SendGridMessage();
+            string name = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\name.txt");
+            string pass = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\password.txt");
             var contractors = db.Contractors.ToList();
             var homeowners = db.Homeowners.ToList();
             var servicerequests = db.ServiceRequests.ToList();
@@ -571,7 +585,7 @@ namespace WorkWarriors.Controllers
                     //string message = "Job Location: <br>" + i.Address + "<br>" + i.City + "<br>" + i.State + "<br>" + i.Zip + "<br>" + "<br>" + "Job Description: <br>" + i.Description + "<br>" + "<br>" + "Bid price: <br>$" + i.Bid + "<br>" + "<br>" + "Must be completed by: <br>" + i.CompletionDeadline + "<br>" + "<br>" + "Date Posted: <br>" + i.PostedDate + "<br>" + "<br>" + "To accept job, click on link below: <br><a href =" + url + "> Click Here </a>";
                     String message = "Hello " + i.HomeFirstname + "," + "<br>" + "<br>" + "Contractor " + ConUserName + " has completed your following service request:" + "<br>" + "<br>" + i.Description + "<br>" + "<br>" + "To complete payment, please click on link below: <br><a href =" + url + "> Click Here </a>";
                     myMessage.Html = message;
-                    var credentials = new NetworkCredential("quikdevstudent", "Lexusi$3");
+                    var credentials = new NetworkCredential(name, pass);
                     var transportWeb = new SendGrid.Web(credentials);
                     transportWeb.DeliverAsync(myMessage);
                     conList.Add(ConEmail + i.ID);
