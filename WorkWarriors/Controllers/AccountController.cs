@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WorkWarriors.Models;
+using System.Web.Security;
 
 namespace WorkWarriors.Controllers
 {
@@ -480,6 +481,18 @@ namespace WorkWarriors.Controllers
                 return Redirect(returnUrl);
             }
             return RedirectToAction("Index", "Home");
+        }
+        [AllowAnonymous]
+        
+        public JsonResult doesUserNameExist(string Screen_Name)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var result = db.Users.Where(x => x.Screen_Name == Screen_Name);
+            if (result.Count() < 1)
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            return Json("Error, Username \"" + Screen_Name + "\" is already taken.", JsonRequestBehavior.AllowGet);
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
