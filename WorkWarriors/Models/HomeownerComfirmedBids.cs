@@ -39,6 +39,7 @@ namespace WorkWarriors.Models
         public bool Completed { get; set; }
         public int Invoice { get; set; }
         public string JobLocation { get; set; }
+        public bool expired { get; set; }
     }
 }
     

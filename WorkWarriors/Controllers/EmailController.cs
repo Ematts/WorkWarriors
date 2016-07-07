@@ -369,6 +369,7 @@ namespace WorkWarriors.Controllers
                     bid.Description = i.Description;
                     bid.Bid = i.Bid;
                     bid.Confirmed = false;
+                    bid.expired = i.expired;
                     db.SaveChanges();
                     Invoice = bid.ID;
                     myMessage.AddTo(i.email);
@@ -451,6 +452,7 @@ namespace WorkWarriors.Controllers
 
                     HomeownerComfirmedBids bid = new HomeownerComfirmedBids();
                     //db.HomeownerComfirmedBids.Add(bid);
+                    i.Confirmed = true;
                     bid.ConUsername = i.ConUsername;
                     bid.HomeUsername = i.HomeUsername;
                     bid.ConFirstName = i.ConFirstName;
@@ -471,6 +473,7 @@ namespace WorkWarriors.Controllers
                     bid.CompletionDeadline = i.CompletionDeadline;
                     bid.Description = i.Description;
                     bid.Bid = i.Bid;
+                    bid.expired = i.expired;
                     bid.Completed = false;
                     bid.JobLocation = bid.HomeAddress + ", " + bid.HomeCity + ", " + bid.HomeState + " " + bid.HomeZip + ", " + "USA";
                     db.HomeownerComfirmedBids.Add(bid);
