@@ -301,6 +301,14 @@
     <Compile Include="Migrations\201607062214512_mm1.Designer.cs">
       <DependentUpon>201607062214512_mm1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607072120433_mm2.cs" />
+    <Compile Include="Migrations\201607072120433_mm2.Designer.cs">
+      <DependentUpon>201607072120433_mm2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607072123119_qq2.cs" />
+    <Compile Include="Migrations\201607072123119_qq2.Designer.cs">
+      <DependentUpon>201607072123119_qq2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BidAcceptance.cs" />
@@ -467,6 +475,7 @@
     <Content Include="Views\Email\Post_must_be_logged.cshtml" />
     <Content Include="Views\ServiceRequests\Must_be_logged_in.cshtml" />
     <Content Include="Views\ServiceRequests\DateIssue.cshtml" />
+    <Content Include="Views\ServiceRequests\Expired.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -522,6 +531,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607062214512_mm1.resx">
       <DependentUpon>201607062214512_mm1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607072120433_mm2.resx">
+      <DependentUpon>201607072120433_mm2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607072123119_qq2.resx">
+      <DependentUpon>201607072123119_qq2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

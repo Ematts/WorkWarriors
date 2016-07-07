@@ -25,6 +25,7 @@ namespace WorkWarriors
             db = new ApplicationDbContext();
             var myMessage = new SendGrid.SendGridMessage();
             var requests = db.ServiceRequests.ToList();
+            var conAccept = db.ContractorAcceptedBids.ToList();
             string name = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\name.txt");
             string pass = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\password.txt");
             foreach (var i in requests)
@@ -42,7 +43,24 @@ namespace WorkWarriors
                     i.expired = true;
                     db.SaveChanges();
                 }
-               
+
+            }
+
+            foreach (var i in requests)
+            {
+                if ((i.CompletionDeadline < DateTime.Now) && (i.expired == false))
+                {
+                    myMessage.AddTo(i.email);
+                    myMessage.From = new MailAddress("monsymonster@msn.com", "Joe Johnson");
+                    myMessage.Subject = "Your service request has expired!";
+                    string message = "Hello " + i.Username + "," + "<br>" + "<br>" + "Your service request \"" + i.Description + "\" has expired because the completion deadline has passed.";
+                    myMessage.Html = message;
+                    var credentials = new NetworkCredential(name, pass);
+                    var transportWeb = new SendGrid.Web(credentials);
+                    transportWeb.DeliverAsync(myMessage);
+                    i.expired = true;
+                    db.SaveChanges();
+                }
             }
         }
     }

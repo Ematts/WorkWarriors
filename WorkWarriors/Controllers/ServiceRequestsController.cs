@@ -160,30 +160,89 @@ namespace WorkWarriors.Controllers
 
         public ActionResult ContractorAcceptance(int? id)
         {
-            if (id == null)
+            string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            var serviceList = db.ServiceRequests.ToList();
+            if (identity == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Unauthorized_Access", "Home");
             }
-            ServiceRequest serviceRequest = db.ServiceRequests.Find(id);
-            if (serviceRequest == null)
+
+            var person = db.Homeowners.Where(x => x.UserId == identity).SingleOrDefault();
+
+            if (this.User.IsInRole("Admin") || this.User.IsInRole("Contractor"))
             {
-                return HttpNotFound();
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                ServiceRequest serviceRequest = db.ServiceRequests.Find(id);
+                if (serviceRequest == null)
+                {
+                    return HttpNotFound();
+                }
+
+                if (serviceRequest.expired == true)
+                {
+                        return RedirectToAction("expired", "ServiceRequests");
+                }
+
+                return View(serviceRequest);
+                }
+            else
+            {
+                return RedirectToAction("Unauthorized_Access", "Home");
             }
-            return View(serviceRequest);
         }
 
         public ActionResult Post(int? id)
         {
-            if (id == null)
+            string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            if (identity == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Unauthorized_Access", "Home");
             }
-            ServiceRequest serviceRequest = db.ServiceRequests.Find(id);
-            if (serviceRequest == null)
+            var serviceList = db.ServiceRequests.ToList();
+            string HomeOwnerEmail1 = "";
+            string HomeOwnerEmail2 = "";
+            var person = db.Homeowners.Where(x => x.UserId == identity).SingleOrDefault();
+
+
+            foreach (var user in db.Users)
             {
-                return HttpNotFound();
+                if (user.Id == identity)
+                {
+                    HomeOwnerEmail2 = user.Email;
+                }
             }
-            return View(serviceRequest);
+
+            foreach (var i in serviceList)
+            {
+                if (id == i.ID)
+                {
+                    HomeOwnerEmail1 = i.email;
+                }
+            }
+
+            if (this.User.IsInRole("Admin") || HomeOwnerEmail1 == HomeOwnerEmail2)
+            {
+
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                ServiceRequest serviceRequest = db.ServiceRequests.Find(id);
+                if (serviceRequest == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(serviceRequest);
+            }
+            else
+            {
+                return RedirectToAction("Unauthorized_Access", "Home");
+            }
         }
 
         public ActionResult Must_be_logged_in()
@@ -196,6 +255,13 @@ namespace WorkWarriors.Controllers
         public ActionResult DateIssue()
         {
             ViewBag.Message = "Completion deadline must be later than posted date";
+
+            return View();
+        }
+
+        public ActionResult Expired()
+        {
+            ViewBag.Message = "This service request has expired because the completion deadline has passed.";
 
             return View();
         }

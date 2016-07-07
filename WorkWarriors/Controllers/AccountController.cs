@@ -492,7 +492,7 @@ namespace WorkWarriors.Controllers
             {
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
-            return Json("Error, Username \"" + Screen_Name + "\" is already taken.", JsonRequestBehavior.AllowGet);
+            return Json("Username \"" + Screen_Name + "\" is already taken.", JsonRequestBehavior.AllowGet);
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

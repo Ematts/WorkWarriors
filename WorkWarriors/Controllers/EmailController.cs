@@ -340,6 +340,11 @@ namespace WorkWarriors.Controllers
 
                 if (id == i.ID)
                 {
+
+                    if(i.expired == true)
+                    {
+                        return RedirectToAction("expired", "ServiceRequests");
+                    }
                 
                     ContractorAcceptedBids bid = new ContractorAcceptedBids();
                     db.ContractorAcceptedBids.Add(bid);
