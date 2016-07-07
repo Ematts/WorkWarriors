@@ -124,16 +124,50 @@ namespace WorkWarriors.Controllers
 
         public ActionResult HomeownerConfirmation(int? id)
         {
-            if (id == null)
+            string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            if (identity == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Unauthorized_Access", "Home");
             }
-            ContractorAcceptedBids contractorAcceptedBids = db.ContractorAcceptedBids.Find(id);
-            if (contractorAcceptedBids == null)
+            var acceptList = db.ContractorAcceptedBids.ToList();
+            string HomeOwnerEmail1 = "";
+            string HomeOwnerEmail2 = "";
+            var person = db.Homeowners.Where(x => x.UserId == identity).SingleOrDefault();
+
+            foreach (var user in db.Users)
             {
-                return HttpNotFound();
+                if (user.Id == identity)
+                {
+                    HomeOwnerEmail2 = user.Email;
+                }
             }
-            return View(contractorAcceptedBids); 
+
+            foreach (var i in acceptList)
+            {
+                if (id == i.ID)
+                {
+                    HomeOwnerEmail1 = i.HomeEmail;
+                }
+            }
+
+            if (this.User.IsInRole("Admin") || HomeOwnerEmail1 == HomeOwnerEmail2)
+            {
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                ContractorAcceptedBids contractorAcceptedBids = db.ContractorAcceptedBids.Find(id);
+                if (contractorAcceptedBids == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(contractorAcceptedBids);
+            }
+            else
+            {
+                return RedirectToAction("Unauthorized_Access", "Home");
+            }
         }
 
 
