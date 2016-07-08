@@ -42,5 +42,6 @@ namespace WorkWarriors.Models
         public bool Confirmed { get; set; }
         public int Invoice { get; set; }
         public bool expired { get; set; }
+        public int ServiceNumber { get; set; }
     }
 }

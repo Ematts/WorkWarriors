@@ -55,7 +55,7 @@ namespace WorkWarriors.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ConUsername,HomeUsername,ConFirstName,HomeFirstname,ConLastName,HomeLastName,ConAddress,HomeAddress,ConCity,HomeCity,ConState,HomeState,ConZip,HomeZip,ConEmail,HomeEmail,PostedDate,Bid,CompletionDeadline,Description,Completed,Invoice")] CompletedBids completedBids)
+        public ActionResult Create([Bind(Include = "ID,ConUsername,HomeUsername,ConFirstName,HomeFirstname,ConLastName,HomeLastName,ConAddress,HomeAddress,ConCity,HomeCity,ConState,HomeState,ConZip,HomeZip,ConEmail,HomeEmail,PostedDate,Bid,CompletionDeadline,Description,Completed,Invoice,ConstactorPaid,ConstactorDue")] CompletedBids completedBids)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace WorkWarriors.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ConUsername,HomeUsername,ConFirstName,HomeFirstname,ConLastName,HomeLastName,ConAddress,HomeAddress,ConCity,HomeCity,ConState,HomeState,ConZip,HomeZip,ConEmail,HomeEmail,PostedDate,Bid,CompletionDeadline,Description,Completed,Invoice")] CompletedBids completedBids)
+        public ActionResult Edit([Bind(Include = "ID,ConUsername,HomeUsername,ConFirstName,HomeFirstname,ConLastName,HomeLastName,ConAddress,HomeAddress,ConCity,HomeCity,ConState,HomeState,ConZip,HomeZip,ConEmail,HomeEmail,PostedDate,Bid,CompletionDeadline,Description,Completed,Invoice,ContractorPaid,ContractorDue")] CompletedBids completedBids)
         {
             if (ModelState.IsValid)
             {
@@ -188,7 +188,28 @@ namespace WorkWarriors.Controllers
                 return RedirectToAction("Unauthorized_Access", "Home");
             }
        }
-        
+
+        public ActionResult AdminPaymentsDue()
+        {
+            if (!this.User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Unauthorized_Access", "Home");
+            }
+
+            var dueList = db.CompletedBids.ToList();
+            List<CompletedBids> payList = new List<CompletedBids>();
+
+            foreach (var i in dueList)
+            {
+                if (i.ContractorPaid == false)
+                {
+                    payList.Add(i);
+                }
+            }
+
+            return View(payList);
+        }
+
 
 
         protected override void Dispose(bool disposing)

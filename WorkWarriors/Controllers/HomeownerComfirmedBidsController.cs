@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WorkWarriors.Models;
+using Microsoft.AspNet.Identity;
+
 
 namespace WorkWarriors.Controllers
 {
@@ -117,7 +119,37 @@ namespace WorkWarriors.Controllers
 
         public ActionResult Confirm(int? id)
         {
-            if (id == null)
+
+            string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            if (identity == null)
+            {
+                return RedirectToAction("Unauthorized_Access", "Home");
+            }
+            var confirmedList = db.HomeownerComfirmedBids.ToList();
+            string ConEmail1 = "";
+            string ConEmail2 = "";
+            var person = db.Homeowners.Where(x => x.UserId == identity).SingleOrDefault();
+
+            foreach (var user in db.Users)
+            {
+                if (user.Id == identity)
+                {
+                    ConEmail2 = user.Email;
+                }
+            }
+
+            foreach (var i in confirmedList)
+            {
+                if (id == i.ID)
+                {
+                    ConEmail1 = i.ConEmail;
+                }
+            }
+
+            if (this.User.IsInRole("Admin") || ConEmail1 == ConEmail2)
+            {
+
+                if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -127,6 +159,11 @@ namespace WorkWarriors.Controllers
                 return HttpNotFound();
             }
             return View(homeownerComfirmedBids);
+            }
+            else
+            {
+                return RedirectToAction("Unauthorized_Access", "Home");
+            }
         }
 
 

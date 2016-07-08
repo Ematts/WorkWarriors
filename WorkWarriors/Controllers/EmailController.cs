@@ -272,7 +272,13 @@ namespace WorkWarriors.Controllers
                                 var transportWeb = new SendGrid.Web(credentials);
                                 transportWeb.DeliverAsync(myMessage);
                                 i.posted = true;
+                                i.ServiceNumber = i.ID;
                                 
+                            }
+
+                            else
+                            {
+                                return RedirectToAction("DuplicatePost", "ServiceRequests");
                             }
                             
                         }
@@ -347,7 +353,7 @@ namespace WorkWarriors.Controllers
                     }
                 
                     ContractorAcceptedBids bid = new ContractorAcceptedBids();
-                    db.ContractorAcceptedBids.Add(bid);
+                    //db.ContractorAcceptedBids.Add(bid);
                     bid.ConUsername = ConUserName;
                     bid.HomeUsername = i.Username;
                     bid.ConFirstName = ConFirstName;
@@ -370,6 +376,15 @@ namespace WorkWarriors.Controllers
                     bid.Bid = i.Bid;
                     bid.Confirmed = false;
                     bid.expired = i.expired;
+                    bid.ServiceNumber = i.ServiceNumber;
+                    foreach(var x in acceptList)
+                    {
+                        if((x.ConUsername == bid.ConUsername) && (x.ServiceNumber == bid.ServiceNumber))
+                            {
+                            return RedirectToAction("Duplicate", "ContractorAcceptedBids");
+                            }
+                    }
+                    db.ContractorAcceptedBids.Add(bid);
                     db.SaveChanges();
                     Invoice = bid.ID;
                     myMessage.AddTo(i.email);
@@ -582,7 +597,10 @@ namespace WorkWarriors.Controllers
                     bid.Description = i.Description;
                     bid.Bid = i.Bid;
                     bid.Completed = true;
+                    bid.ContractorDue = i.Bid * .90;
+                    bid.ContractorPaid = false;
                     db.CompletedBids.Add(bid);
+                    i.Completed = true;
                     db.SaveChanges();
                     Invoice = bid.ID;
                     bid.Invoice = Invoice;

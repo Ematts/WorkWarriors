@@ -266,7 +266,15 @@ namespace WorkWarriors.Controllers
             return View();
         }
 
+        public ActionResult DuplicatePost()
+        {
+            ViewBag.Message = "This service request has already been posted.";
 
+            return View();
+        }
+
+
+        
 
         //public ActionResult HomeownerConfirmation(int? id)
         //{

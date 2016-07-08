@@ -170,6 +170,14 @@ namespace WorkWarriors.Controllers
             }
         }
 
+        public ActionResult Duplicate()
+        {
+            ViewBag.Message = "You have already accepted this service request.";
+
+            return View();
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {

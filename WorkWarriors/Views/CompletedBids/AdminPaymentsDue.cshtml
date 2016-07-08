@@ -1,10 +1,10 @@
-﻿@model IEnumerable<WorkWarriors.Models.ContractorAcceptedBids>
+﻿@model IEnumerable<WorkWarriors.Models.CompletedBids>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "AdminPaymentsDue";
 }
 
-<h2>Index</h2>
+<h2>AdminPaymentsDue</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -72,10 +72,16 @@
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Confirmed)
+            @Html.DisplayNameFor(model => model.Completed)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ServiceNumber)
+            @Html.DisplayNameFor(model => model.Invoice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContractorDue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContractorPaid)
         </th>
         <th></th>
     </tr>
@@ -143,15 +149,22 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Confirmed)
+            @Html.DisplayFor(modelItem => item.Completed)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ServiceNumber)
+            @Html.DisplayFor(modelItem => item.Invoice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContractorDue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContractorPaid)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Stay here", "AdminPaymentsDue", new { id = item.ID })
         </td>
     </tr>
 }

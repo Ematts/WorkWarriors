@@ -45,6 +45,7 @@ namespace WorkWarriors.Models
         [Required]
         public bool posted { get; set; }
         public bool expired { get; set; }
+        public int ServiceNumber { get; set; }
         //[ForeignKey("Contractor")]
         //public int ContractorID { get;  set;}
         //public virtual Contractor Contractor { get; set; }
