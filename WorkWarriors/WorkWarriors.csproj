@@ -491,6 +491,7 @@
     <Content Include="Views\CompletedBids\AdminPaymentsDue.cshtml" />
     <Content Include="Views\ServiceRequests\DuplicatePost.cshtml" />
     <Content Include="Views\ContractorAcceptedBids\Duplicate.cshtml" />
+    <Content Include="Views\CompletedBids\PayContractor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

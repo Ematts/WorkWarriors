@@ -211,6 +211,25 @@ namespace WorkWarriors.Controllers
         }
 
 
+        public ActionResult PayContractor(int? id)
+        {
+
+            if (!this.User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Unauthorized_Access", "Home");
+            }
+
+                if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CompletedBids completedBids = db.CompletedBids.Find(id);
+            if (completedBids == null)
+            {
+                return HttpNotFound();
+            }
+            return View(completedBids);
+        }
 
         protected override void Dispose(bool disposing)
         {
