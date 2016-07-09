@@ -40,5 +40,7 @@ namespace WorkWarriors.Models
         public int Invoice { get; set; }
         public double ContractorDue { get; set; }
         public bool ContractorPaid { get; set; }
+        public int Service_Number { get; set; }
+        public bool Expired { get; set; }
     }
 }

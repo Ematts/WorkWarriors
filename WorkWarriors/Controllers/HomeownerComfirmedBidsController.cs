@@ -166,6 +166,13 @@ namespace WorkWarriors.Controllers
             }
         }
 
+        public ActionResult Already_Confirmed()
+        {
+            ViewBag.Message = "You have already confirmed a contractor for this service request.";
+
+            return View();
+        }
+
 
         protected override void Dispose(bool disposing)
         {

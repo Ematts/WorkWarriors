@@ -26,6 +26,9 @@ namespace WorkWarriors
             //var myMessage = new SendGrid.SendGridMessage();
             var requests = db.ServiceRequests.ToList();
             var AcceptedList = db.HomeownerComfirmedBids.ToList();
+            var completed = db.CompletedBids.ToList();
+            var conList = db.ContractorAcceptedBids.ToList();
+
             string name = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\name.txt");
             string pass = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\password.txt");
             foreach (var i in requests)
@@ -64,7 +67,34 @@ namespace WorkWarriors
                     db.SaveChanges();
                 }
             }
-           
+
+            foreach (var i in completed)
+            {
+                if ((i.CompletionDeadline < DateTime.Now) && (i.Expired == false))
+                {
+                    i.Expired = true;
+                    db.SaveChanges();
+                }
+            }
+
+            foreach (var i in completed)
+            {
+                if ((i.CompletionDeadline < DateTime.Now) && (i.Expired == false))
+                {
+                    i.Expired = true;
+                    db.SaveChanges();
+                }
+            }
+
+            foreach (var i in conList)
+            {
+                if ((i.CompletionDeadline < DateTime.Now) && (i.expired == false))
+                {
+                    i.expired = true;
+                    db.SaveChanges();
+                }
+            }
+
         }
     }
 }

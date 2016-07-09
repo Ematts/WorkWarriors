@@ -188,6 +188,13 @@
                 @Html.DisplayFor(model => model.Invoice)
             </dd>
             <dt>
+                @Html.DisplayNameFor(model => model.Service_Number)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Service_Number)
+            </dd>
+            <dt>
                 @Html.DisplayNameFor(model => model.ContractorDue)
             </dt>
 
@@ -200,6 +207,13 @@
 
             <dd>
                 @Html.DisplayFor(model => model.ContractorPaid)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Expired)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Expired)
             </dd>
             @Html.HiddenFor(model => model.ID)
 

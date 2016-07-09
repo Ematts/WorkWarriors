@@ -273,6 +273,7 @@ namespace WorkWarriors.Controllers
                                 transportWeb.DeliverAsync(myMessage);
                                 i.posted = true;
                                 i.ServiceNumber = i.ID;
+                                i.Confirmed = false;
                                 
                             }
 
@@ -351,6 +352,11 @@ namespace WorkWarriors.Controllers
                     {
                         return RedirectToAction("expired", "ServiceRequests");
                     }
+
+                    if(i.Confirmed == true)
+                    {
+                        return RedirectToAction("Already_Confirmed", "ContractorAcceptedBids");
+                    }
                 
                     ContractorAcceptedBids bid = new ContractorAcceptedBids();
                     //db.ContractorAcceptedBids.Add(bid);
@@ -374,8 +380,8 @@ namespace WorkWarriors.Controllers
                     bid.CompletionDeadline = i.CompletionDeadline;
                     bid.Description = i.Description;
                     bid.Bid = i.Bid;
-                    bid.Confirmed = false;
                     bid.expired = i.expired;
+                    bid.Confirmed = i.Confirmed;
                     bid.ServiceNumber = i.ServiceNumber;
                     foreach(var x in acceptList)
                     {
@@ -467,7 +473,6 @@ namespace WorkWarriors.Controllers
 
                     HomeownerComfirmedBids bid = new HomeownerComfirmedBids();
                     //db.HomeownerComfirmedBids.Add(bid);
-                    i.Confirmed = true;
                     bid.ConUsername = i.ConUsername;
                     bid.HomeUsername = i.HomeUsername;
                     bid.ConFirstName = i.ConFirstName;
@@ -490,7 +495,24 @@ namespace WorkWarriors.Controllers
                     bid.Bid = i.Bid;
                     bid.expired = i.expired;
                     bid.Completed = false;
+                    bid.Service_Number = i.ServiceNumber;
                     bid.JobLocation = bid.HomeAddress + ", " + bid.HomeCity + ", " + bid.HomeState + " " + bid.HomeZip + ", " + "USA";
+                    foreach (var x in confirmedList)
+                    {
+                        if (x.Service_Number == bid.Service_Number) 
+                        {
+                            return RedirectToAction("Already_Confirmed", "HomeOwnerComfirmedBids");
+                        }
+                    }
+                    foreach(var z in servicerequests)
+                    {
+                        if(z.ServiceNumber == bid.Service_Number)
+                        {
+                            z.Confirmed = true;
+                        }
+                    }
+                    i.Confirmed = true;
+                    bid.Confirmed = true;
                     db.HomeownerComfirmedBids.Add(bid);
                     db.SaveChanges();
                     Invoice = bid.ID;
@@ -596,9 +618,18 @@ namespace WorkWarriors.Controllers
                     bid.CompletionDeadline = i.CompletionDeadline;
                     bid.Description = i.Description;
                     bid.Bid = i.Bid;
-                    bid.Completed = true;
+                    bid.Service_Number = i.Service_Number;
                     bid.ContractorDue = i.Bid * .90;
                     bid.ContractorPaid = false;
+                    foreach (var x in completedList)
+                    {
+                        if (x.Service_Number == bid.Service_Number)
+                        {
+                            return RedirectToAction("Already_Confirmed_Completion", "CompletedBids");
+                        }
+                    }
+
+                    bid.Completed = true;
                     db.CompletedBids.Add(bid);
                     i.Completed = true;
                     db.SaveChanges();

@@ -228,7 +228,27 @@ namespace WorkWarriors.Controllers
             {
                 return HttpNotFound();
             }
+
+            if (completedBids.ContractorPaid == true)
+            {
+                return RedirectToAction("Already_Paid", "CompletedBids");
+            }
+
             return View(completedBids);
+        }
+
+        public ActionResult Already_Paid()
+        {
+            ViewBag.Message = "This contractor has already been paid for this job.";
+
+            return View();
+        }
+
+        public ActionResult Already_Confirmed_Completion()
+        {
+            ViewBag.Message = "You have already confirmed completion for this job.";
+
+            return View();
         }
 
         protected override void Dispose(bool disposing)

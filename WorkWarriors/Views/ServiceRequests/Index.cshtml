@@ -56,6 +56,9 @@
         <th>
             @Html.DisplayNameFor(model => model.ServiceNumber)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Confirmed)
+        </th>
         <th></th>
     </tr>
 
@@ -105,6 +108,10 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ServiceNumber)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Confirmed)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

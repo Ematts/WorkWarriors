@@ -40,6 +40,8 @@ namespace WorkWarriors.Models
         public int Invoice { get; set; }
         public string JobLocation { get; set; }
         public bool expired { get; set; }
+        public int Service_Number { get; set; }
+        public bool Confirmed { get; set; }
     }
 }
     
