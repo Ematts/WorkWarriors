@@ -83,6 +83,9 @@
         <th>
             @Html.DisplayNameFor(model => model.ContractorPaid)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Expired)
+        </th>
         <th></th>
     </tr>
 
@@ -159,6 +162,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ContractorPaid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Expired)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
