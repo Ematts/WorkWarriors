@@ -48,7 +48,7 @@ namespace WorkWarriors.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Username,FirstName,LastName,Address,City,State,Zip,email,PostedDate,Bid,CompletionDeadline,Description,posted,Contractor")] ServiceRequest serviceRequest)
+        public ActionResult Create([Bind(Include = "ID,Username,FirstName,LastName,Address,City,State,Zip,email,PostedDate,Bid,CompletionDeadline,Description,posted,Contractor")] ServiceRequest serviceRequest, HttpPostedFileBase upload)
         {
 
             string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
@@ -82,6 +82,20 @@ namespace WorkWarriors.Controllers
 
             if (ModelState.IsValid)
             {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var picture = new File
+                    {
+                        FileName = System.IO.Path.GetFileName(upload.FileName),
+                        FileType = FileType.Picture,
+                        ContentType = upload.ContentType
+                    };
+                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                    {
+                        picture.Content = reader.ReadBytes(upload.ContentLength);
+                    }
+                    serviceRequest.Files = new List<File> { picture };
+                }
                 db.ServiceRequests.Add(serviceRequest);
                 db.SaveChanges();
                 return RedirectToAction("Post", new { id = serviceRequest.ID });
@@ -233,6 +247,7 @@ namespace WorkWarriors.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
                 ServiceRequest serviceRequest = db.ServiceRequests.Find(id);
+                ServiceRequest serviceRequestPic = db.ServiceRequests.Include(s => s.Files).SingleOrDefault(s => s.ID == id);
                 if (serviceRequest == null)
                 {
                     return HttpNotFound();

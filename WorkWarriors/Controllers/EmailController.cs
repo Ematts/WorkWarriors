@@ -380,6 +380,7 @@ namespace WorkWarriors.Controllers
                     bid.CompletionDeadline = i.CompletionDeadline;
                     bid.Description = i.Description;
                     bid.Bid = i.Bid;
+                    bid.Files = i.Files;
                     bid.expired = i.expired;
                     bid.Confirmed = i.Confirmed;
                     bid.ServiceNumber = i.ServiceNumber;
@@ -493,6 +494,7 @@ namespace WorkWarriors.Controllers
                     bid.CompletionDeadline = i.CompletionDeadline;
                     bid.Description = i.Description;
                     bid.Bid = i.Bid;
+                    bid.Files = i.Files;
                     bid.expired = i.expired;
                     bid.Completed = false;
                     bid.Service_Number = i.ServiceNumber;
@@ -618,6 +620,7 @@ namespace WorkWarriors.Controllers
                     bid.CompletionDeadline = i.CompletionDeadline;
                     bid.Description = i.Description;
                     bid.Bid = i.Bid;
+                    bid.Files = i.Files;
                     bid.Service_Number = i.Service_Number;
                     bid.ContractorDue = i.Bid * .90;
                     bid.ContractorPaid = false;

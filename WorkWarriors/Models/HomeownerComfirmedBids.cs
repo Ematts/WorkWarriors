@@ -42,6 +42,7 @@ namespace WorkWarriors.Models
         public bool expired { get; set; }
         public int Service_Number { get; set; }
         public bool Confirmed { get; set; }
+        public virtual ICollection<File> Files { get; set; }
     }
 }
     

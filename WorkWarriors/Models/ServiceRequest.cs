@@ -48,6 +48,8 @@ namespace WorkWarriors.Models
 
         public bool Confirmed { get; set; }
         public int ServiceNumber { get; set; }
+
+        public virtual ICollection<File> Files { get; set; }
         //[ForeignKey("Contractor")]
         //public int ContractorID { get;  set;}
         //public virtual Contractor Contractor { get; set; }

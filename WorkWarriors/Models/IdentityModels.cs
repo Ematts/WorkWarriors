@@ -26,6 +26,7 @@ namespace WorkWarriors.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Homeowner> Homeowners { get; set; }
+        public DbSet<File> Files { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

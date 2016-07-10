@@ -113,6 +113,15 @@
         <dd>
             @Html.DisplayFor(model => model.posted)
         </dd>
+        @if (Model.Files.Any(f => f.FileType == WorkWarriors.Models.FileType.Picture))
+            {
+            <dt>
+                Picture
+            </dt>
+                <dd>
+                    <img src="~/File?id=@Model.Files.First(f => f.FileType == WorkWarriors.Models.FileType.Picture).FileId" alt="picture" />
+                </dd>
+        }
 
     </dl>
 </div>

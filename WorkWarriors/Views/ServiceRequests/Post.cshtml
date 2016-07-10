@@ -130,6 +130,16 @@
             </dd>
             @Html.HiddenFor(model => model.ID)
 
+            @if (Model.Files.Any(f => f.FileType == WorkWarriors.Models.FileType.Picture))
+            {
+                <dt>
+                    Picture
+                </dt>
+                <dd>
+                    <img src="~/File?id=@Model.Files.First(f => f.FileType == WorkWarriors.Models.FileType.Picture).FileId" alt="picture" />
+                </dd>
+            }
+
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Post!" class="btn btn-default" />

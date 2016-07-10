@@ -238,6 +238,7 @@
     <Compile Include="Controllers\ContractorAcceptedBidsController.cs" />
     <Compile Include="Controllers\ContractorsController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeownerComfirmedBidsController.cs" />
     <Compile Include="Controllers\HomeownersController.cs" />
@@ -249,89 +250,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607032038535_n.cs" />
-    <Compile Include="Migrations\201607032038535_n.Designer.cs">
-      <DependentUpon>201607032038535_n.cs</DependentUpon>
+    <Compile Include="Migrations\201607101925024_ff.cs" />
+    <Compile Include="Migrations\201607101925024_ff.Designer.cs">
+      <DependentUpon>201607101925024_ff.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607051913264_we.cs" />
-    <Compile Include="Migrations\201607051913264_we.Designer.cs">
-      <DependentUpon>201607051913264_we.cs</DependentUpon>
+    <Compile Include="Migrations\201607102014436_qq.cs" />
+    <Compile Include="Migrations\201607102014436_qq.Designer.cs">
+      <DependentUpon>201607102014436_qq.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607061836593_ww.cs" />
-    <Compile Include="Migrations\201607061836593_ww.Designer.cs">
-      <DependentUpon>201607061836593_ww.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607061858578_qq.cs" />
-    <Compile Include="Migrations\201607061858578_qq.Designer.cs">
-      <DependentUpon>201607061858578_qq.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607061908534_q.cs" />
-    <Compile Include="Migrations\201607061908534_q.Designer.cs">
-      <DependentUpon>201607061908534_q.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607061917595_cc.cs" />
-    <Compile Include="Migrations\201607061917595_cc.Designer.cs">
-      <DependentUpon>201607061917595_cc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607061925337_bb.cs" />
-    <Compile Include="Migrations\201607061925337_bb.Designer.cs">
-      <DependentUpon>201607061925337_bb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607061953375_qq1.cs" />
-    <Compile Include="Migrations\201607061953375_qq1.Designer.cs">
-      <DependentUpon>201607061953375_qq1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607062006378_tt.cs" />
-    <Compile Include="Migrations\201607062006378_tt.Designer.cs">
-      <DependentUpon>201607062006378_tt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607062128285_rr.cs" />
-    <Compile Include="Migrations\201607062128285_rr.Designer.cs">
-      <DependentUpon>201607062128285_rr.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607062132482_bb1.cs" />
-    <Compile Include="Migrations\201607062132482_bb1.Designer.cs">
-      <DependentUpon>201607062132482_bb1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607062147324_mm.cs" />
-    <Compile Include="Migrations\201607062147324_mm.Designer.cs">
-      <DependentUpon>201607062147324_mm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607062214512_mm1.cs" />
-    <Compile Include="Migrations\201607062214512_mm1.Designer.cs">
-      <DependentUpon>201607062214512_mm1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607072120433_mm2.cs" />
-    <Compile Include="Migrations\201607072120433_mm2.Designer.cs">
-      <DependentUpon>201607072120433_mm2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607072123119_qq2.cs" />
-    <Compile Include="Migrations\201607072123119_qq2.Designer.cs">
-      <DependentUpon>201607072123119_qq2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607072214193_tt1.cs" />
-    <Compile Include="Migrations\201607072214193_tt1.Designer.cs">
-      <DependentUpon>201607072214193_tt1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607081827361_rr1.cs" />
-    <Compile Include="Migrations\201607081827361_rr1.Designer.cs">
-      <DependentUpon>201607081827361_rr1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607082300516_tt2.cs" />
-    <Compile Include="Migrations\201607082300516_tt2.Designer.cs">
-      <DependentUpon>201607082300516_tt2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607092046131_nn.cs" />
-    <Compile Include="Migrations\201607092046131_nn.Designer.cs">
-      <DependentUpon>201607092046131_nn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607092114581_cc1.cs" />
-    <Compile Include="Migrations\201607092114581_cc1.Designer.cs">
-      <DependentUpon>201607092114581_cc1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607092220143_aaa.cs" />
-    <Compile Include="Migrations\201607092220143_aaa.Designer.cs">
-      <DependentUpon>201607092220143_aaa.cs</DependentUpon>
+    <Compile Include="Migrations\201607102019599_ww.cs" />
+    <Compile Include="Migrations\201607102019599_ww.Designer.cs">
+      <DependentUpon>201607102019599_ww.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -340,6 +269,8 @@
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\Contractor.cs" />
     <Compile Include="Models\ContractorAcceptedBids.cs" />
+    <Compile Include="Models\File.cs" />
+    <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\Homeowner.cs" />
     <Compile Include="Models\HomeownerComfirmedBids.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -511,6 +442,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\File\" />
     <Folder Include="Views\Payment\" />
   </ItemGroup>
   <ItemGroup>
@@ -525,68 +457,14 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607032038535_n.resx">
-      <DependentUpon>201607032038535_n.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607101925024_ff.resx">
+      <DependentUpon>201607101925024_ff.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607051913264_we.resx">
-      <DependentUpon>201607051913264_we.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607102014436_qq.resx">
+      <DependentUpon>201607102014436_qq.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607061836593_ww.resx">
-      <DependentUpon>201607061836593_ww.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607061858578_qq.resx">
-      <DependentUpon>201607061858578_qq.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607061908534_q.resx">
-      <DependentUpon>201607061908534_q.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607061917595_cc.resx">
-      <DependentUpon>201607061917595_cc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607061925337_bb.resx">
-      <DependentUpon>201607061925337_bb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607061953375_qq1.resx">
-      <DependentUpon>201607061953375_qq1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607062006378_tt.resx">
-      <DependentUpon>201607062006378_tt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607062128285_rr.resx">
-      <DependentUpon>201607062128285_rr.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607062132482_bb1.resx">
-      <DependentUpon>201607062132482_bb1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607062147324_mm.resx">
-      <DependentUpon>201607062147324_mm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607062214512_mm1.resx">
-      <DependentUpon>201607062214512_mm1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607072120433_mm2.resx">
-      <DependentUpon>201607072120433_mm2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607072123119_qq2.resx">
-      <DependentUpon>201607072123119_qq2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607072214193_tt1.resx">
-      <DependentUpon>201607072214193_tt1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607081827361_rr1.resx">
-      <DependentUpon>201607081827361_rr1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607082300516_tt2.resx">
-      <DependentUpon>201607082300516_tt2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607092046131_nn.resx">
-      <DependentUpon>201607092046131_nn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607092114581_cc1.resx">
-      <DependentUpon>201607092114581_cc1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607092220143_aaa.resx">
-      <DependentUpon>201607092220143_aaa.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607102019599_ww.resx">
+      <DependentUpon>201607102019599_ww.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
