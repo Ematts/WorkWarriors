@@ -43,6 +43,7 @@ namespace WorkWarriors.Models
         public int Service_Number { get; set; }
         public bool Confirmed { get; set; }
         public virtual ICollection<File> Files { get; set; }
+        public virtual ICollection<ServiceRequestPath> ServiceRequestPaths { get; set; }
     }
 }
     

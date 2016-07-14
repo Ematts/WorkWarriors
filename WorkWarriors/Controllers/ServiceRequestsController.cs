@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using WorkWarriors.Models;
 using Microsoft.AspNet.Identity;
 using System.Globalization;
+using System.IO;
 
 namespace WorkWarriors.Controllers
 {
@@ -30,6 +31,7 @@ namespace WorkWarriors.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ServiceRequest serviceRequest = db.ServiceRequests.Find(id);
+            ServiceRequest serviceRequestPic = db.ServiceRequests.Include(i => i.ServiceRequestPaths).SingleOrDefault(i => i.ID == id);
             if (serviceRequest == null)
             {
                 return HttpNotFound();
@@ -48,7 +50,7 @@ namespace WorkWarriors.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Username,FirstName,LastName,Address,City,State,Zip,email,PostedDate,Bid,CompletionDeadline,Description,posted,Contractor")] ServiceRequest serviceRequest, HttpPostedFileBase upload)
+        public ActionResult Create([Bind(Include = "ID,Username,FirstName,LastName,Address,City,State,Zip,email,PostedDate,Bid,CompletionDeadline,Description,posted,Contractor")] ServiceRequest serviceRequest, IEnumerable<HttpPostedFileBase> files)
         {
 
             string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
@@ -79,22 +81,22 @@ namespace WorkWarriors.Controllers
                 return RedirectToAction("DateIssue", "ServiceRequests");
             }
 
-
+            serviceRequest.ServiceRequestPaths = new List<ServiceRequestPath>();
             if (ModelState.IsValid)
             {
-                if (upload != null && upload.ContentLength > 0)
+                foreach (var file in files)
                 {
-                    var picture = new File
+
+                    if (file != null && file.ContentLength > 0)
                     {
-                        FileName = System.IO.Path.GetFileName(upload.FileName),
-                        FileType = FileType.Picture,
-                        ContentType = upload.ContentType
-                    };
-                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
-                    {
-                        picture.Content = reader.ReadBytes(upload.ContentLength);
+
+
+                        var photo = new ServiceRequestPath() { FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(file.FileName) };
+                        file.SaveAs(Path.Combine(Server.MapPath("~/images"), photo.FileName));
+                        //movie.FilePaths = new List<FilePath>();
+                        serviceRequest.ServiceRequestPaths.Add(photo);
                     }
-                    serviceRequest.Files = new List<File> { picture };
+
                 }
                 db.ServiceRequests.Add(serviceRequest);
                 db.SaveChanges();
@@ -191,6 +193,7 @@ namespace WorkWarriors.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
                 ServiceRequest serviceRequest = db.ServiceRequests.Find(id);
+                ServiceRequest serviceRequestPic = db.ServiceRequests.Include(i => i.ServiceRequestPaths).SingleOrDefault(i => i.ID == id);
                 if (serviceRequest == null)
                 {
                     return HttpNotFound();

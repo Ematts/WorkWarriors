@@ -27,6 +27,7 @@ namespace WorkWarriors.Models
     {
         public DbSet<Homeowner> Homeowners { get; set; }
         public DbSet<File> Files { get; set; }
+        public DbSet<ServiceRequestPath> ServiceRequestPaths { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

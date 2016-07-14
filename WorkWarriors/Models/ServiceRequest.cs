@@ -50,6 +50,7 @@ namespace WorkWarriors.Models
         public int ServiceNumber { get; set; }
 
         public virtual ICollection<File> Files { get; set; }
+        public virtual ICollection<ServiceRequestPath> ServiceRequestPaths { get; set; }
         //[ForeignKey("Contractor")]
         //public int ContractorID { get;  set;}
         //public virtual Contractor Contractor { get; set; }

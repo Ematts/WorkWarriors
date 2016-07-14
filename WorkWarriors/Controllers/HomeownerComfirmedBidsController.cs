@@ -68,6 +68,7 @@ namespace WorkWarriors.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             HomeownerComfirmedBids homeownerComfirmedBids = db.HomeownerComfirmedBids.Find(id);
+            HomeownerComfirmedBids homeownerPics = db.HomeownerComfirmedBids.Include(i => i.ServiceRequestPaths).SingleOrDefault(i => i.ID == id);
             if (homeownerComfirmedBids == null)
             {
                 return HttpNotFound();

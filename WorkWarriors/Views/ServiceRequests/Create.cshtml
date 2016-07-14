@@ -111,12 +111,12 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.Label("Picture", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" id="Picture" name="upload" />
             </div>
-        </div>
+        </div>*@
 
         @*<div class="form-group">
             @Html.LabelFor(model => model.posted, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -127,6 +127,16 @@
                 </div>
             </div>
         </div>*@
+
+        <div id="multiple">
+            <input type="file" class="multiple" name="files" multiple />
+        </div>
+        <div id="single">
+            <input type="file" class="single" name="files" /><br />
+            <input type="file" class="single" name="files" /><br />
+            <input type="file" class="single" name="files" /><br />
+        </div>
+        <button class="btn btn-default">Upload</button>   
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -142,4 +152,15 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+        $(function () {
+            if(window.FileReader != null){
+                $('#single').hide();
+                $('.single').prop('disabled', true);
+            } else {
+                $('#multiple').hide();
+                $('.multiple').prop('disabled', true);
+            }
+        });
+</script>
 }

@@ -113,17 +113,17 @@
         <dd>
             @Html.DisplayFor(model => model.posted)
         </dd>
-        @if (Model.Files.Any(f => f.FileType == WorkWarriors.Models.FileType.Picture))
-            {
-            <dt>
-                Picture
-            </dt>
-                <dd>
-                    <img src="~/File?id=@Model.Files.First(f => f.FileType == WorkWarriors.Models.FileType.Picture).FileId" alt="picture" />
-                </dd>
-        }
 
     </dl>
+
+    <strong>Service Request Photos:</strong>
+    <br> <br>
+
+    @foreach (var item in Model.ServiceRequestPaths)
+    {
+        <img src="~/images/@item.FileName" alt="" />
+
+    }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |

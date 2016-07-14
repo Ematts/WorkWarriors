@@ -190,15 +190,16 @@
 
             @Html.HiddenFor(model => model.ID)
 
-            @if (Model.Files.Any(f => f.FileType == WorkWarriors.Models.FileType.Picture))
+            <strong>Service Request Photos:</strong>
+            <br>
+            <br>
+
+            @foreach (var item in Model.ServiceRequestPaths)
             {
-                <dt>
-                    Picture
-                </dt>
-                <dd>
-                    <img src="~/File?id=@Model.Files.First(f => f.FileType == WorkWarriors.Models.FileType.Picture).FileId" alt="picture" />
-                </dd>
+                <img src="~/images/@item.FileName" alt="" />
+
             }
+
 
 
             <div class="form-group">

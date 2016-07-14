@@ -359,7 +359,7 @@ namespace WorkWarriors.Controllers
                     }
                 
                     ContractorAcceptedBids bid = new ContractorAcceptedBids();
-                    //db.ContractorAcceptedBids.Add(bid);
+                    bid.ServiceRequestPaths = new List<ServiceRequestPath>();
                     bid.ConUsername = ConUserName;
                     bid.HomeUsername = i.Username;
                     bid.ConFirstName = ConFirstName;
@@ -381,6 +381,17 @@ namespace WorkWarriors.Controllers
                     bid.Description = i.Description;
                     bid.Bid = i.Bid;
                     bid.Files = i.Files;
+                    foreach(var x in i.ServiceRequestPaths)
+                    {
+
+
+                        bid.ServiceRequestPaths.Add(new ServiceRequestPath() { FileName = x.FileName });
+                        //if (x != null)
+                        //{
+                        //    bid.ServiceRequestPaths.Add(new ServiceRequestPath() { FileName = x.FileName });
+                        //}    
+
+                    }
                     bid.expired = i.expired;
                     bid.Confirmed = i.Confirmed;
                     bid.ServiceNumber = i.ServiceNumber;
@@ -495,6 +506,7 @@ namespace WorkWarriors.Controllers
                     bid.Description = i.Description;
                     bid.Bid = i.Bid;
                     bid.Files = i.Files;
+                    bid.ServiceRequestPaths = i.ServiceRequestPaths;
                     bid.expired = i.expired;
                     bid.Completed = false;
                     bid.Service_Number = i.ServiceNumber;
@@ -621,6 +633,7 @@ namespace WorkWarriors.Controllers
                     bid.Description = i.Description;
                     bid.Bid = i.Bid;
                     bid.Files = i.Files;
+                    bid.ServiceRequestPaths = i.ServiceRequestPaths;
                     bid.Service_Number = i.Service_Number;
                     bid.ContractorDue = i.Bid * .90;
                     bid.ContractorPaid = false;

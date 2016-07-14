@@ -37,6 +37,7 @@ namespace WorkWarriors.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             CompletedBids completedBids = db.CompletedBids.Find(id);
+            CompletedBids Pics = db.CompletedBids.Include(i => i.ServiceRequestPaths).SingleOrDefault(i => i.ID == id);
             if (completedBids == null)
             {
                 return HttpNotFound();
