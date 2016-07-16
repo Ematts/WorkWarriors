@@ -632,6 +632,7 @@ namespace WorkWarriors.Controllers
                     CompletedBids bid = new CompletedBids();
                     bid.ServiceRequestPaths = new List<ServiceRequestPath>();
                     bid.AfterPaths = new List<AfterPath>();
+                    bid.CompletedPaths = new List<CompletedPath>();
                     bid.ConUsername = i.ConUsername;
                     bid.HomeUsername = i.HomeUsername;
                     bid.ConFirstName = i.ConFirstName;
@@ -669,7 +670,11 @@ namespace WorkWarriors.Controllers
 
 
                     }
-                    bid.AfterPaths = i.AfterPaths;
+                    foreach (var x in i.AfterPaths)
+                    {
+                        bid.CompletedPaths.Add(new CompletedPath() { FileName = x.FileName });
+                    }
+                    //bid.AfterPaths = i.AfterPaths;
                     //foreach (var x in i.AfterPaths)
                     //{
 

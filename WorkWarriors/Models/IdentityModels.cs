@@ -28,10 +28,8 @@ namespace WorkWarriors.Models
         public DbSet<Homeowner> Homeowners { get; set; }
         public DbSet<File> Files { get; set; }
         public DbSet<ServiceRequestPath> ServiceRequestPaths { get; set; }
-
-        
-
         public DbSet<AfterPath> AfterPaths { get; set; }
+        public DbSet<CompletedPath> CompletedPaths { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

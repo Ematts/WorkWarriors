@@ -159,6 +159,11 @@ namespace WorkWarriors.Controllers
             var person = db.Homeowners.Where(x => x.UserId == identity).SingleOrDefault();
             HomeownerComfirmedBids homeownerComfirmedBids = db.HomeownerComfirmedBids.Find(id);
 
+            if (homeownerComfirmedBids == null)
+            {
+                return HttpNotFound();
+            }
+
             if (homeownerComfirmedBids.Completed == true)
             {
                 return RedirectToAction("Already_Confirmed_Completion", "CompletedBids");

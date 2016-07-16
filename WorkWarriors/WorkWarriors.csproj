@@ -250,15 +250,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607160536336_m.cs" />
-    <Compile Include="Migrations\201607160536336_m.Designer.cs">
-      <DependentUpon>201607160536336_m.cs</DependentUpon>
+    <Compile Include="Migrations\201607161837103_c.cs" />
+    <Compile Include="Migrations\201607161837103_c.Designer.cs">
+      <DependentUpon>201607161837103_c.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AfterPath.cs" />
     <Compile Include="Models\BidAcceptance.cs" />
     <Compile Include="Models\CompletedBids.cs" />
+    <Compile Include="Models\CompletedPath.cs" />
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\Contractor.cs" />
     <Compile Include="Models\ContractorAcceptedBids.cs" />
@@ -454,8 +455,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607160536336_m.resx">
-      <DependentUpon>201607160536336_m.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607161837103_c.resx">
+      <DependentUpon>201607161837103_c.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

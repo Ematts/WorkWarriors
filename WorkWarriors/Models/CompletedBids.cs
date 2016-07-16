@@ -46,5 +46,6 @@ namespace WorkWarriors.Models
         public virtual ICollection<File> Files { get; set; }
         public virtual ICollection<ServiceRequestPath> ServiceRequestPaths { get; set; }
         public virtual ICollection<AfterPath> AfterPaths { get; set; }
+        public virtual ICollection<CompletedPath> CompletedPaths { get; set; }
     }
 }
