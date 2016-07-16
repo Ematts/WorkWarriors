@@ -177,7 +177,17 @@
         <dd>
             @Html.DisplayFor(model => model.Confirmed)
         </dd>
+        <strong>Service Request Photos:</strong>
+        <br>
+        <br>
 
+        @foreach (var item in Model.ServiceRequestPaths)
+        {
+            <div class="photocontainer">
+                <a href="~/images/@item.FileName"><img class="photo" src="~/images/@item.FileName" alt="" width="200" height="133" /></a>
+            </div>
+
+        }
     </dl>
 </div>
 <p>

@@ -250,32 +250,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607101925024_ff.cs" />
-    <Compile Include="Migrations\201607101925024_ff.Designer.cs">
-      <DependentUpon>201607101925024_ff.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607102014436_qq.cs" />
-    <Compile Include="Migrations\201607102014436_qq.Designer.cs">
-      <DependentUpon>201607102014436_qq.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607102019599_ww.cs" />
-    <Compile Include="Migrations\201607102019599_ww.Designer.cs">
-      <DependentUpon>201607102019599_ww.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607142018205_paths.cs" />
-    <Compile Include="Migrations\201607142018205_paths.Designer.cs">
-      <DependentUpon>201607142018205_paths.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607142233147_f.cs" />
-    <Compile Include="Migrations\201607142233147_f.Designer.cs">
-      <DependentUpon>201607142233147_f.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607142326264_dd.cs" />
-    <Compile Include="Migrations\201607142326264_dd.Designer.cs">
-      <DependentUpon>201607142326264_dd.cs</DependentUpon>
+    <Compile Include="Migrations\201607160536336_m.cs" />
+    <Compile Include="Migrations\201607160536336_m.Designer.cs">
+      <DependentUpon>201607160536336_m.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AfterPath.cs" />
     <Compile Include="Models\BidAcceptance.cs" />
     <Compile Include="Models\CompletedBids.cs" />
     <Compile Include="Models\Configuration.cs" />
@@ -452,6 +433,8 @@
     <Content Include="Views\HomeownerComfirmedBids\Already_Confirmed.cshtml" />
     <Content Include="Views\CompletedBids\Already_Confirmed_Completion.cshtml" />
     <Content Include="Views\ContractorAcceptedBids\Already_Confirmed.cshtml" />
+    <Content Include="Views\CompletedBids\ConPics.cshtml" />
+    <Content Include="Views\HomeownerComfirmedBids\After.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -471,23 +454,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607101925024_ff.resx">
-      <DependentUpon>201607101925024_ff.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607102014436_qq.resx">
-      <DependentUpon>201607102014436_qq.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607102019599_ww.resx">
-      <DependentUpon>201607102019599_ww.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607142018205_paths.resx">
-      <DependentUpon>201607142018205_paths.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607142233147_f.resx">
-      <DependentUpon>201607142233147_f.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607142326264_dd.resx">
-      <DependentUpon>201607142326264_dd.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607160536336_m.resx">
+      <DependentUpon>201607160536336_m.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

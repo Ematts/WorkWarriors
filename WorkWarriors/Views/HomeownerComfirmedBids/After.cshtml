@@ -1,0 +1,77 @@
+﻿@model WorkWarriors.Models.HomeownerComfirmedBids
+
+@{
+    ViewBag.Title = "After";
+}
+
+<h2>After</h2>
+
+@using (Html.BeginForm("Edit", "HomeOwnerComfirmedBids", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.ConUsername)
+        @Html.HiddenFor(model => model.HomeUsername)
+        @Html.HiddenFor(model => model.ConFirstName)
+        @Html.HiddenFor(model => model.HomeFirstname)
+        @Html.HiddenFor(model => model.ConLastName)
+        @Html.HiddenFor(model => model.HomeLastName)
+        @Html.HiddenFor(model => model.ConAddress)
+        @Html.HiddenFor(model => model.HomeAddress)
+        @Html.HiddenFor(model => model.ConCity)
+        @Html.HiddenFor(model => model.HomeCity)
+        @Html.HiddenFor(model => model.ConState)
+        @Html.HiddenFor(model => model.HomeState)
+        @Html.HiddenFor(model => model.ConZip)
+        @Html.HiddenFor(model => model.HomeZip)
+        @Html.HiddenFor(model => model.ConEmail)
+        @Html.HiddenFor(model => model.HomeEmail)
+        @Html.HiddenFor(model => model.PostedDate)
+        @Html.HiddenFor(model => model.Bid)
+        @Html.HiddenFor(model => model.CompletionDeadline)
+        @Html.HiddenFor(model => model.Description)
+        @Html.HiddenFor(model => model.Completed)
+        @Html.HiddenFor(model => model.Invoice)
+        @Html.HiddenFor(model => model.Service_Number)
+        
+
+        <div id="multiple">
+            <input type="file" class="multiple" name="files" multiple />
+        </div>
+        <div id="single">
+            <input type="file" class="single" name="files" /><br />
+            <input type="file" class="single" name="files" /><br />
+            <input type="file" class="single" name="files" /><br />
+        </div>
+        <button class="btn btn-default">Upload</button>  
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(function () {
+            if(window.FileReader != null){
+                $('#single').hide();
+                $('.single').prop('disabled', true);
+            } else {
+                $('#multiple').hide();
+                $('.multiple').prop('disabled', true);
+            }
+        });
+    </script>
+}

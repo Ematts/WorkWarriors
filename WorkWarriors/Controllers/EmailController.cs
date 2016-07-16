@@ -386,10 +386,7 @@ namespace WorkWarriors.Controllers
 
 
                         bid.ServiceRequestPaths.Add(new ServiceRequestPath() { FileName = x.FileName });
-                        //if (x != null)
-                        //{
-                        //    bid.ServiceRequestPaths.Add(new ServiceRequestPath() { FileName = x.FileName });
-                        //}    
+               
 
                     }
                     bid.expired = i.expired;
@@ -484,7 +481,7 @@ namespace WorkWarriors.Controllers
                 {
 
                     HomeownerComfirmedBids bid = new HomeownerComfirmedBids();
-                    //db.HomeownerComfirmedBids.Add(bid);
+                    bid.ServiceRequestPaths = new List<ServiceRequestPath>();
                     bid.ConUsername = i.ConUsername;
                     bid.HomeUsername = i.HomeUsername;
                     bid.ConFirstName = i.ConFirstName;
@@ -506,25 +503,47 @@ namespace WorkWarriors.Controllers
                     bid.Description = i.Description;
                     bid.Bid = i.Bid;
                     bid.Files = i.Files;
-                    bid.ServiceRequestPaths = i.ServiceRequestPaths;
-                    bid.expired = i.expired;
-                    bid.Completed = false;
                     bid.Service_Number = i.ServiceNumber;
-                    bid.JobLocation = bid.HomeAddress + ", " + bid.HomeCity + ", " + bid.HomeState + " " + bid.HomeZip + ", " + "USA";
                     foreach (var x in confirmedList)
                     {
-                        if (x.Service_Number == bid.Service_Number) 
+                        if (x.Service_Number == bid.Service_Number)
                         {
                             return RedirectToAction("Already_Confirmed", "HomeOwnerComfirmedBids");
                         }
                     }
-                    foreach(var z in servicerequests)
+                    foreach (var z in servicerequests)
                     {
-                        if(z.ServiceNumber == bid.Service_Number)
+                        if (z.ServiceNumber == bid.Service_Number)
                         {
                             z.Confirmed = true;
                         }
                     }
+                    foreach (var x in i.ServiceRequestPaths)
+                    {
+
+
+                        bid.ServiceRequestPaths.Add(new ServiceRequestPath() { FileName = x.FileName });
+
+
+                    }
+                    bid.expired = i.expired;
+                    bid.Completed = false;
+                    //bid.Service_Number = i.ServiceNumber;
+                    bid.JobLocation = bid.HomeAddress + ", " + bid.HomeCity + ", " + bid.HomeState + " " + bid.HomeZip + ", " + "USA";
+                    //foreach (var x in confirmedList)
+                    //{
+                    //    if (x.Service_Number == bid.Service_Number) 
+                    //    {
+                    //        return RedirectToAction("Already_Confirmed", "HomeOwnerComfirmedBids");
+                    //    }
+                    //}
+                    //foreach(var z in servicerequests)
+                    //{
+                    //    if(z.ServiceNumber == bid.Service_Number)
+                    //    {
+                    //        z.Confirmed = true;
+                    //    }
+                    //}
                     i.Confirmed = true;
                     bid.Confirmed = true;
                     db.HomeownerComfirmedBids.Add(bid);
@@ -611,7 +630,8 @@ namespace WorkWarriors.Controllers
                 {
 
                     CompletedBids bid = new CompletedBids();
-                    //db.CompletedBids.Add(bid);
+                    bid.ServiceRequestPaths = new List<ServiceRequestPath>();
+                    bid.AfterPaths = new List<AfterPath>();
                     bid.ConUsername = i.ConUsername;
                     bid.HomeUsername = i.HomeUsername;
                     bid.ConFirstName = i.ConFirstName;
@@ -633,10 +653,7 @@ namespace WorkWarriors.Controllers
                     bid.Description = i.Description;
                     bid.Bid = i.Bid;
                     bid.Files = i.Files;
-                    bid.ServiceRequestPaths = i.ServiceRequestPaths;
                     bid.Service_Number = i.Service_Number;
-                    bid.ContractorDue = i.Bid * .90;
-                    bid.ContractorPaid = false;
                     foreach (var x in completedList)
                     {
                         if (x.Service_Number == bid.Service_Number)
@@ -644,6 +661,33 @@ namespace WorkWarriors.Controllers
                             return RedirectToAction("Already_Confirmed_Completion", "CompletedBids");
                         }
                     }
+                    foreach (var x in i.ServiceRequestPaths)
+                    {
+
+
+                        bid.ServiceRequestPaths.Add(new ServiceRequestPath() { FileName = x.FileName });
+
+
+                    }
+                    bid.AfterPaths = i.AfterPaths;
+                    //foreach (var x in i.AfterPaths)
+                    //{
+
+
+                    //    bid.AfterPaths.Add(new AfterPath() { FileName = x.FileName });
+                    //    bid. = homeownerComfirmedBids.ID;
+
+                    //}
+                    //bid.Service_Number = i.Service_Number;
+                    bid.ContractorDue = i.Bid * .90;
+                    bid.ContractorPaid = false;
+                    //foreach (var x in completedList)
+                    //{
+                    //    if (x.Service_Number == bid.Service_Number)
+                    //    {
+                    //        return RedirectToAction("Already_Confirmed_Completion", "CompletedBids");
+                    //    }
+                    //}
 
                     bid.Completed = true;
                     db.CompletedBids.Add(bid);

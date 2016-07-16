@@ -84,7 +84,7 @@ namespace WorkWarriors.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ConUsername")]ContractorAcceptedBids contractorAcceptedBids)
+        public ActionResult Edit([Bind(Include = "ID,ConUsername,HomeUsername,ConFirstName,HomeFirstname,ConLastName,HomeLastName,ConAddress,HomeAddress,ConCity,HomeCity,ConState,HomeState,ConZip,HomeZip,Conemail,Homeemail,PostedDate,Bid,CompletionDeadline,Description,confirmed,ServiceNumber")] ContractorAcceptedBids contractorAcceptedBids)
 
         //,HomeUsername,ConFirstName,HomeFirstname,ConLastName,HomeLastName,ConAddress,HomeAddress,ConCity,HomeCity,ConState,HomeState,ConZip,HomeZip,Conemail,Homeemail,PostedDate,Bid,CompletionDeadline,Description,confirmed")] ContractorAcceptedBids contractorAcceptedBids)
         {

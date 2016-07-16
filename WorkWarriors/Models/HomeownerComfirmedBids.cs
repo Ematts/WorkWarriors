@@ -44,6 +44,7 @@ namespace WorkWarriors.Models
         public bool Confirmed { get; set; }
         public virtual ICollection<File> Files { get; set; }
         public virtual ICollection<ServiceRequestPath> ServiceRequestPaths { get; set; }
+        public virtual ICollection<AfterPath> AfterPaths { get; set; }
     }
 }
     
