@@ -253,6 +253,35 @@ namespace WorkWarriors.Controllers
             return View(completedBids);
         }
 
+        public ActionResult MarkAsPaid(int? id)
+        {
+
+            if (!this.User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Unauthorized_Access", "Home");
+            }
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CompletedBids completedBids = db.CompletedBids.Find(id);
+            if (completedBids == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (completedBids.ContractorPaid == true)
+            {
+                return RedirectToAction("Already_Paid", "CompletedBids");
+            }
+
+            completedBids.ContractorPaid = true;
+            db.SaveChanges();
+
+            return View("PayContractor", completedBids);
+        }
+
         public ActionResult Already_Paid()
         {
             ViewBag.Message = "This contractor has already been paid for this job.";

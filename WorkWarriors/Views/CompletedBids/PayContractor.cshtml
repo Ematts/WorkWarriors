@@ -248,6 +248,8 @@
 @{double price = Model.ContractorDue; }
 @{string service = Model.Description + " Invoice = " + Model.Invoice; }
 @{string payee = Model.ConEmail; }
+@{string url = "http://localhost:14703/CompletedBids/PayContractor/" + Model.ID; }
+
 
 
 <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
@@ -257,12 +259,24 @@
 
     <input type="hidden" name="item_name" value="@service" />
     <input type="hidden" name="amount" value="@price" />
-    <input type="submit" value="Pay Here!" />
+    <input type="hidden" value="@url" name="return">
+    <input type="hidden" value="Return to website" name="cbt">
+    <input type="submit" value="Pay Contractor!" />
 
 </form>
 
 
+@using (Html.BeginForm("MarkAsPaid", "CompletedBids", Model.ID))
+{
+    @Html.HiddenFor(model => model.ID)
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Mark As Paid" class="btn btn-default" />
+        </div>
+    </div>
+}
+
 <p>
-    @*@Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-        @Html.ActionLink("Back to List", "Index")*@
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "AdminPaymentsDue")
 </p>

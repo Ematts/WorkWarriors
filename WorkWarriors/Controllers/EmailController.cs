@@ -380,8 +380,16 @@ namespace WorkWarriors.Controllers
                     bid.CompletionDeadline = i.CompletionDeadline;
                     bid.Description = i.Description;
                     bid.Bid = i.Bid;
+                    bid.ServiceNumber = i.ServiceNumber;
                     bid.Files = i.Files;
-                    foreach(var x in i.ServiceRequestPaths)
+                    foreach (var x in acceptList)
+                    {
+                        if ((x.ConUsername == bid.ConUsername) && (x.ServiceNumber == bid.ServiceNumber))
+                        {
+                            return RedirectToAction("Duplicate", "ContractorAcceptedBids");
+                        }
+                    }
+                    foreach (var x in i.ServiceRequestPaths)
                     {
 
 
@@ -391,14 +399,14 @@ namespace WorkWarriors.Controllers
                     }
                     bid.expired = i.expired;
                     bid.Confirmed = i.Confirmed;
-                    bid.ServiceNumber = i.ServiceNumber;
-                    foreach(var x in acceptList)
-                    {
-                        if((x.ConUsername == bid.ConUsername) && (x.ServiceNumber == bid.ServiceNumber))
-                            {
-                            return RedirectToAction("Duplicate", "ContractorAcceptedBids");
-                            }
-                    }
+                    //bid.ServiceNumber = i.ServiceNumber;
+                    //foreach(var x in acceptList)
+                    //{
+                    //    if((x.ConUsername == bid.ConUsername) && (x.ServiceNumber == bid.ServiceNumber))
+                    //        {
+                    //        return RedirectToAction("Duplicate", "ContractorAcceptedBids");
+                    //        }
+                    //}
                     db.ContractorAcceptedBids.Add(bid);
                     db.SaveChanges();
                     Invoice = bid.ID;
