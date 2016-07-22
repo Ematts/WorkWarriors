@@ -692,7 +692,7 @@ namespace WorkWarriors.Controllers
 
                     //}
                     //bid.Service_Number = i.Service_Number;
-                    bid.ContractorDue = i.Bid * .90;
+                    bid.ContractorDue = i.Bid * .9m;
                     bid.ContractorPaid = false;
                     //foreach (var x in completedList)
                     //{

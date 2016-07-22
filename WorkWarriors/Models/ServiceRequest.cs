@@ -36,7 +36,7 @@ namespace WorkWarriors.Models
        // [Required]
         public DateTime PostedDate { get; set; }
         [Required]
-        public double Bid { get; set; }
+        public decimal Bid { get; set; }
         [Required]
         public DateTime CompletionDeadline { get; set; }
         [StringLength(100, MinimumLength = 6)]

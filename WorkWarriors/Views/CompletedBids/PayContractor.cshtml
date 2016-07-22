@@ -245,7 +245,7 @@
 
     </div>
 
-@{double price = Model.ContractorDue; }
+@{decimal price = Model.ContractorDue; }
 @{string service = Model.Description + " Invoice = " + Model.Invoice; }
 @{string payee = Model.ConEmail; }
 @{string url = "http://localhost:14703/CompletedBids/PayContractor/" + Model.ID; }

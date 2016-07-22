@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "SuccessView";
+}
+
+<h2>SuccessView</h2>
+
+<script>
+    $(document).ready(function () {
+        if (window != top) {
+            top.location.replace(document.location);
+        }
+    });
+</script>
+<h4> Your payment has been successfully processed. </h4>

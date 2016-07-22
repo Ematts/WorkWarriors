@@ -8,258 +8,78 @@ using System.Web.Mvc;
 using WorkWarriors.Models;
 using log4net.Core;
 using log4net;
-
+using PayPal.AdaptivePayments.Model;
+using PayPal.AdaptivePayments;
 
 namespace WorkWarriors.Controllers
 {
     public class PaypalController : Controller
     {
-        // GET: Paypal
-        private static readonly ILogger Logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType).Logger;
-        public ActionResult Index()
+
+        public ActionResult Index(int? id)
         {
+            //decimal price = 50;
+            //Bids bid = db.Bids.Find(id);
+            ReceiverList receiverList = new ReceiverList();
+            receiverList.receiver = new List<Receiver>();
+            Receiver receiver = new Receiver(50);
+            //var query = from v in db.Ventures where v.Id == bid.ventureID select v.investorID;
+            //string receiverID = query.ToList().ElementAt(0);
+            //ApplicationUser recvUser = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(receiverID.ToString());
+            receiver.email = "workwarriors@gmail.com";
+            receiver.primary = true;
+            receiverList.receiver.Add(receiver);
+            Receiver receiver2 = new Receiver(10);
+            //var query = from v in db.Ventures where v.Id == bid.ventureID select v.investorID;
+            //string receiverID = query.ToList().ElementAt(0);
+            //ApplicationUser recvUser = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(receiverID.ToString());
+            receiver2.email = "carlcontractor@gmail.com";
+            receiver2.primary = false;
+            receiverList.receiver.Add(receiver2);
+
+            RequestEnvelope requestEnvelope = new RequestEnvelope("en_US");
+            string actionType = "PAY";
+
+            string successUrl = "http://" + System.Web.HttpContext.Current.Request.Url.Authority + "/PayPal/SuccessView/{0}";
+            string failureUrl = "http://" + System.Web.HttpContext.Current.Request.Url.Authority + "/PayPal/FailureView/{0}";
+            successUrl = String.Format(successUrl, id);
+            failureUrl = String.Format(failureUrl, id);
+            string returnUrl = successUrl;
+            string cancelUrl = failureUrl;
+
+            string currencyCode = "USD";
+            PayRequest payRequest = new PayRequest(requestEnvelope, actionType, cancelUrl, currencyCode, receiverList, returnUrl);
+            payRequest.ipnNotificationUrl = "http://replaceIpnUrl.com";
+
+            Dictionary<string, string> sdkConfig = new Dictionary<string, string>();
+            sdkConfig.Add("mode", "sandbox");
+            sdkConfig.Add("account1.apiUsername", "mattjheller-facilitator_api1.yahoo.com"); //PayPal.Account.APIUserName
+            sdkConfig.Add("account1.apiPassword", "DG6GB55TRBWLESWG"); //PayPal.Account.APIPassword
+            sdkConfig.Add("account1.apiSignature", "AFcWxV21C7fd0v3bYYYRCpSSRl31AafAKKwBsAp2EBV9PExGkablGWhj"); //.APISignature
+            sdkConfig.Add("account1.applicationId", "APP-80W284485P519543T"); //.ApplicatonId
+
+            AdaptivePaymentsService adaptivePaymentsService = new AdaptivePaymentsService(sdkConfig);
+            PayResponse payResponse = adaptivePaymentsService.Pay(payRequest);
+            ViewData["paykey"] = payResponse.payKey;
+            //string payKey = payResponse.payKey; ////////
+            //string paymentExecStatus = payResponse.paymentExecStatus;
+            //string payURL = String.Format("https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey={0}", payKey);
+
             return View();
         }
 
-        public ActionResult PaymentWithCreditCard()
+        public ActionResult FailureView(int? id)
         {
 
-            Item item = new Item();
-            item.name = "Demo Item";
-            item.currency = "USD";
-            item.price = "5";
-            item.quantity = "1";
-            item.sku = "sku";
+            return View();
 
-
-            List<Item> itms = new List<Item>();
-            itms.Add(item);
-            ItemList itemList = new ItemList();
-            itemList.items = itms;
-
-
-            Address billingAddress = new Address();
-            billingAddress.city = "NewYork";
-            billingAddress.country_code = "US";
-            billingAddress.line1 = "23rd street kew gardens";
-            billingAddress.postal_code = "43210";
-            billingAddress.state = "NY";
-
-
-
-            CreditCard crdtCard = new CreditCard();
-            crdtCard.billing_address = billingAddress;
-            crdtCard.cvv2 = "874";
-            crdtCard.expire_month = 1;
-            crdtCard.expire_year = 2020;
-            crdtCard.first_name = "Aman";
-            crdtCard.last_name = "Thakur";
-            crdtCard.number = "1234567890123456";
-            crdtCard.type = "visa";
-
-
-            Details details = new Details();
-            details.shipping = "1";
-            details.subtotal = "5";
-            details.tax = "1";
-
-            Amount amnt = new Amount();
-            amnt.currency = "USD";
-
-            amnt.total = "5";
-            amnt.details = details;
-
-
-            Transaction tran = new Transaction();
-            tran.amount = amnt;
-            tran.description = "Description about the payment amount.";
-            tran.item_list = itemList;
-            tran.invoice_number = "your invoice number which you are generating";
-
-
-            List<Transaction> transactions = new List<Transaction>();
-            transactions.Add(tran);
-
-
-
-            FundingInstrument fundInstrument = new FundingInstrument();
-            fundInstrument.credit_card = crdtCard;
-
-
-
-            List<FundingInstrument> fundingInstrumentList = new List<FundingInstrument>();
-            fundingInstrumentList.Add(fundInstrument);
-
-
-            Payer payr = new Payer();
-            payr.funding_instruments = fundingInstrumentList;
-            payr.payment_method = "credit_card";
-
-            Payment pymnt = new Payment();
-            pymnt.intent = "sale";
-            pymnt.payer = payr;
-            pymnt.transactions = transactions;
-
-            try
-            {
-
-                APIContext apiContext = Configuration.GetAPIContext();
-
-
-                Payment createdPayment = pymnt.Create(apiContext);
-
-
-                if (createdPayment.state.ToLower() != "approved")
-                {
-                    return View("FailureView");
-                }
-            }
-            catch (PayPal.PayPalException ex)
-            {
-                Logger.Log(Logger.GetType(), Level.Critical, "Error:", ex); return View("FailureView");
-            }
-
-            return View("SuccessView");
         }
-
-        public ActionResult PaymentWithPaypal()
-        {
-            APIContext apiContext = Configuration.GetAPIContext();
-
-            try
-            {
-                string payerId = Request.Params["PayerID"];
-
-                if (string.IsNullOrEmpty(payerId))
-                {
-
-                    string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority +
-                                "/Paypal/PaymentWithPayPal?";
-
-                    var guid = Convert.ToString((new Random()).Next(100000));
-
-                    var createdPayment = this.CreatePayment(apiContext, baseURI + "guid=" + guid);
-
-
-                    var links = createdPayment.links.GetEnumerator();
-
-                    string paypalRedirectUrl = null;
-
-                    while (links.MoveNext())
-                    {
-                        Links lnk = links.Current;
-
-                        if (lnk.rel.ToLower().Trim().Equals("approval_url"))
-                        {
-                            paypalRedirectUrl = lnk.href;
-                        }
-                    }
-
-                    Session.Add(guid, createdPayment.id);
-
-                    return Redirect(paypalRedirectUrl);
-                }
-                else
-                {
-                    var guid = Request.Params["guid"];
-
-                    var executedPayment = ExecutePayment(apiContext, payerId, Session[guid] as string);
-
-                    if (executedPayment.state.ToLower() != "approved")
-                    {
-                        return View("FailureView");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(Logger.GetType(), Level.Critical, "Error:", ex);
-            }
-
-            return View("SuccessView");
-        }
-
-        private PayPal.Api.Payment payment;
-
-        private Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
-        {
-            var paymentExecution = new PaymentExecution() { payer_id = payerId };
-            this.payment = new Payment() { id = paymentId };
-            return this.payment.Execute(apiContext, paymentExecution);
-        }
-
-
-        private Payment CreatePayment(APIContext apiContext, string redirectUrl)
+        public ActionResult SuccessView(int? id)
         {
 
-            var itemList = new ItemList() { items = new List<Item>() };
-
-            itemList.items.Add(new Item()
-            {
-                name = "Item",
-                currency = "USD",
-                price = "10",
-                quantity = "1",
-                sku = "sku"
-            });
-
-            var payer = new Payer() { payment_method = "paypal" };
-
-            var redirUrls = new RedirectUrls()
-            {
-                cancel_url = redirectUrl,
-                return_url = redirectUrl
-            };
-
-
-            var details = new Details()
-            {
-                tax = "0",
-                shipping = "0",
-                subtotal = "10"
-            };
-
-            var amount = new Amount()
-            {
-                currency = "USD",
-                total = "10",
-                details = details
-            };
-
-            var transactionList = new List<Transaction>();
-
-            transactionList.Add(new Transaction()
-            {
-                description = "Transaction description.",
-                invoice_number = "your invoice number",
-                amount = amount,
-                item_list = itemList
-            });
-
-            this.payment = new Payment()
-            {
-                intent = "sale",
-                payer = payer,
-                transactions = transactionList,
-                redirect_urls = redirUrls
-            };
-
-
-            return this.payment.Create(apiContext);
+            return View();
         }
-
-        //public ActionResult RouteCalculator()
-
-        //{
-        //    return View();
-        //}
-
-        //public ActionResult RouteSubmission()
-
-        //{
-        //    return View();
-        //}
-
     }
 }
+
 

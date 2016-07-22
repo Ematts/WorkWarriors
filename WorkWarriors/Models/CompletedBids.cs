@@ -32,14 +32,14 @@ namespace WorkWarriors.Models
 
         public DateTime PostedDate { get; set; }
 
-        public double Bid { get; set; }
+        public decimal Bid { get; set; }
 
         public DateTime CompletionDeadline { get; set; }
         public string Description { get; set; }
 
         public bool Completed { get; set; }
         public int Invoice { get; set; }
-        public double ContractorDue { get; set; }
+        public decimal ContractorDue { get; set; }
         public bool ContractorPaid { get; set; }
         public int Service_Number { get; set; }
         public bool Expired { get; set; }
