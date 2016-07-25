@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 using PayPal.AdaptivePayments.Model;
 using PayPal.AdaptivePayments;
 using PayPal.Api;
+using System.Net.Mail;
 
 namespace WorkWarriors.Controllers
 {
@@ -21,7 +22,7 @@ namespace WorkWarriors.Controllers
         // GET: CompletedBids
         public ActionResult Index()
         {
-             if (!this.User.IsInRole("Admin"))
+            if (!this.User.IsInRole("Admin"))
             {
                 return RedirectToAction("Unauthorized_Access", "Home");
             }
@@ -168,7 +169,7 @@ namespace WorkWarriors.Controllers
             string HomeOwnerEmail = "";
             string payeeEmail = "";
             var person = db.Homeowners.Where(x => x.UserId == identity).SingleOrDefault();
-            
+
 
             foreach (var user in db.Users)
             {
@@ -180,7 +181,7 @@ namespace WorkWarriors.Controllers
 
             foreach (var i in completedList)
             {
-                if(id == i.ID)
+                if (id == i.ID)
                 {
                     HomeOwnerEmail = i.HomeEmail;
                 }
@@ -249,7 +250,7 @@ namespace WorkWarriors.Controllers
             {
                 return RedirectToAction("Unauthorized_Access", "Home");
             }
-       }
+        }
 
         public ActionResult AdminPaymentsDue()
         {
@@ -281,7 +282,7 @@ namespace WorkWarriors.Controllers
                 return RedirectToAction("Unauthorized_Access", "Home");
             }
 
-                if (id == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -351,60 +352,6 @@ namespace WorkWarriors.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult PayWithPayPal(int? id)
-        {
-            CompletedBids completedBids = db.CompletedBids.Find(id);
-            //decimal price = 50;
-            //Bids bid = db.Bids.Find(id);
-            ReceiverList receiverList = new ReceiverList();
-            receiverList.receiver = new List<Receiver>();
-            Receiver receiver = new Receiver(50);
-            //var query = from v in db.Ventures where v.Id == bid.ventureID select v.investorID;
-            //string receiverID = query.ToList().ElementAt(0);
-            //ApplicationUser recvUser = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(receiverID.ToString());
-            receiver.email = "workwarriors@gmail.com";
-            receiver.primary = true;
-            receiverList.receiver.Add(receiver);
-            Receiver receiver2 = new Receiver(10);
-            //var query = from v in db.Ventures where v.Id == bid.ventureID select v.investorID;
-            //string receiverID = query.ToList().ElementAt(0);
-            //ApplicationUser recvUser = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(receiverID.ToString());
-            receiver2.email = "carlcontractor@gmail.com";
-            receiver2.primary = false;
-            receiverList.receiver.Add(receiver2);
-
-            RequestEnvelope requestEnvelope = new RequestEnvelope("en_US");
-            string actionType = "PAY";
-
-            string successUrl = "http://" + System.Web.HttpContext.Current.Request.Url.Authority + "/CompletedBids/SuccessView/{0}";
-            string failureUrl = "http://" + System.Web.HttpContext.Current.Request.Url.Authority + "/CompletedBids/FailureView/{0}";
-            successUrl = String.Format(successUrl, id);
-            failureUrl = String.Format(failureUrl, id);
-            string returnUrl = successUrl;
-            string cancelUrl = failureUrl;
-
-            string currencyCode = "USD";
-            PayRequest payRequest = new PayRequest(requestEnvelope, actionType, cancelUrl, currencyCode, receiverList, returnUrl);
-            payRequest.ipnNotificationUrl = "http://replaceIpnUrl.com";
-
-            Dictionary<string, string> sdkConfig = new Dictionary<string, string>();
-            sdkConfig.Add("mode", "sandbox");
-            sdkConfig.Add("account1.apiUsername", "mattjheller-facilitator_api1.yahoo.com"); //PayPal.Account.APIUserName
-            sdkConfig.Add("account1.apiPassword", "DG6GB55TRBWLESWG"); //PayPal.Account.APIPassword
-            sdkConfig.Add("account1.apiSignature", "AFcWxV21C7fd0v3bYYYRCpSSRl31AafAKKwBsAp2EBV9PExGkablGWhj"); //.APISignature
-            sdkConfig.Add("account1.applicationId", "APP-80W284485P519543T"); //.ApplicatonId
-
-            AdaptivePaymentsService adaptivePaymentsService = new AdaptivePaymentsService(sdkConfig);
-            PayResponse payResponse = adaptivePaymentsService.Pay(payRequest);
-            ViewData["paykey"] = payResponse.payKey;
-            //string payKey = payResponse.payKey; ////////
-            //string paymentExecStatus = payResponse.paymentExecStatus;
-            //string payURL = String.Format("https://www.sandbox.paypal.com/webscr?cmd=_ap-payment&paykey={0}", payKey);
-
-            return RedirectToAction("Index", "Paypal");
-            
-
-        }
 
         public ActionResult FailureView(int? id)
         {
@@ -414,10 +361,141 @@ namespace WorkWarriors.Controllers
         }
         public ActionResult SuccessView(int? id)
         {
+            string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            CompletedBids completedBids = db.CompletedBids.Find(id);
 
-            return View();
+            if (identity == null)
+            {
+                return RedirectToAction("Unauthorized_Access", "Home");
+            }
+            var completedList = db.CompletedBids.ToList();
+            string HomeOwnerEmail = "";
+            string payeeEmail = "";
+            var person = db.Homeowners.Where(x => x.UserId == identity).SingleOrDefault();
+
+
+            foreach (var user in db.Users)
+            {
+                if (user.Id == identity)
+                {
+                    payeeEmail = user.Email;
+                }
+            }
+
+            foreach (var i in completedList)
+            {
+                if (id == i.ID)
+                {
+                    HomeOwnerEmail = i.HomeEmail;
+                }
+            }
+
+
+            if (this.User.IsInRole("Admin") || HomeOwnerEmail == payeeEmail)
+            {
+
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                if (completedBids == null)
+                {
+                    return HttpNotFound();
+                }
+
+                if (completedBids.ContractorPaid == true)
+                {
+                    return RedirectToAction("Paid", new  { id = completedBids.ID } );
+                }
+
+                completedBids.ContractorPaid = true;
+                db.SaveChanges();
+                var myMessage = new SendGrid.SendGridMessage();
+                string name = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\name.txt");
+                string pass = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\password.txt");
+                myMessage.AddTo(completedBids.HomeEmail);
+                myMessage.From = new MailAddress("workwarriors@gmail.com", "Admin");
+                myMessage.Subject = "Job Complete!!";
+                String message = "Hello " + completedBids.HomeFirstname + "," + "<br>" + "<br>" + "Thank you for using Work Warriors!";
+                myMessage.Html = message;
+                var credentials = new NetworkCredential(name, pass);
+                var transportWeb = new SendGrid.Web(credentials);
+                transportWeb.DeliverAsync(myMessage);
+                ConPaidMail(completedBids.ConEmail, completedBids.ConUsername, completedBids.ContractorDue);
+
+            }
+
+            return View(completedBids);
+        }
+
+        public static void ConPaidMail(string ConEmail, string ConUsername, decimal Amount)
+        {
+            var myMessage = new SendGrid.SendGridMessage();
+            string name = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\name.txt");
+            string pass = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\password.txt");
+            myMessage.AddTo(ConEmail);
+            myMessage.From = new MailAddress("workwarriors@gmail.com", "Admin");
+            myMessage.Subject = "Job Complete!!";
+            String message = "Hello " + ConUsername + "," + "<br>" + "<br>" + "Thank you for using Work Warriors! $" + Amount + " has been paid to your account!";
+            myMessage.Html = message;
+            var credentials = new NetworkCredential(name, pass);
+            var transportWeb = new SendGrid.Web(credentials);
+            transportWeb.DeliverAsync(myMessage);
+        }
+
+        public ActionResult Paid(int? id)
+        {
+            string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            CompletedBids completedBids = db.CompletedBids.Find(id);
+            if (identity == null)
+            {
+                return RedirectToAction("Unauthorized_Access", "Home");
+            }
+            var completedList = db.CompletedBids.ToList();
+            string HomeOwnerEmail = "";
+            string payeeEmail = "";
+            var person = db.Homeowners.Where(x => x.UserId == identity).SingleOrDefault();
+
+
+            foreach (var user in db.Users)
+            {
+                if (user.Id == identity)
+                {
+                    payeeEmail = user.Email;
+                }
+            }
+
+            foreach (var i in completedList)
+            {
+                if (id == i.ID)
+                {
+                    HomeOwnerEmail = i.HomeEmail;
+                }
+            }
+
+
+            if (this.User.IsInRole("Admin") || HomeOwnerEmail == payeeEmail)
+            {
+
+
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                if (completedBids == null)
+                {
+                    return HttpNotFound();
+                }
+
+              
+            }
+            return View(completedBids);
         }
     }
 }
-    
+
+
 

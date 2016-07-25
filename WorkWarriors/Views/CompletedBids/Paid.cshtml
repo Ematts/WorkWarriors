@@ -1,24 +1,9 @@
 ﻿@model WorkWarriors.Models.CompletedBids
-    
 @{
-    ViewBag.Title = "SuccessView";
+    ViewBag.Title = "Paid";
 }
 
-<h2>SuccessView</h2>
-
-<script>
-    $(document).ready(function () {
-        if (window != top) {
-            top.location.replace(document.location);
-        }
-    });
-</script>
-<h4> Your payment has been successfully processed. </h4>
-
-@using (Html.BeginForm(Model.ID))
-{
-
-
+<h2>Paid</h2>
 
     <div>
         @Html.AntiForgeryToken()
@@ -244,5 +229,5 @@
         </dl>
 
     </div>
-}
+
 

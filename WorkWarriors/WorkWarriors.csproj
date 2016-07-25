@@ -446,6 +446,7 @@
     <Content Include="Views\HomeownerComfirmedBids\After.cshtml" />
     <Content Include="Views\CompletedBids\SuccessView.cshtml" />
     <Content Include="Views\CompletedBids\FailureView.cshtml" />
+    <Content Include="Views\CompletedBids\Paid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
