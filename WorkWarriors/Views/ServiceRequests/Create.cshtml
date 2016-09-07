@@ -7,152 +7,248 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm("Create", "ServiceRequests", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>ServiceRequest</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    @using (Html.BeginForm("Create", "ServiceRequests", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <div class="form-horizontal">
+            <h4>ServiceRequest</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Place Autocomplete Address Form</title>
+                <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+                <meta charset="utf-8">
+                <style>
+                    html, body {
+                        height: 100%;
+                        margin: 0;
+                        padding: 0;
+                    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                    #map {
+                        height: 100%;
+                    }
+                </style>
+                <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+                <style>
+                    #locationField, #controls {
+                        position: relative;
+                        width: 480px;
+                    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    #autocomplete {
+                        position: absolute;
+                        top: 0px;
+                        left: 0px;
+                        width: 99%;
+                    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    .label {
+                        text-align: right;
+                        font-weight: bold;
+                        width: 100px;
+                        color: #303030;
+                    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    #address {
+                        border: 1px solid #000090;
+                        background-color: #f0f0ff;
+                        width: 480px;
+                        padding-right: 2px;
+                    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Zip, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Zip, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Zip, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        #address td {
+                            font-size: 10pt;
+                        }
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    .field {
+                        width: 99%;
+                    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PostedDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PostedDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PostedDate, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                    .slimField {
+                        width: 80px;
+                    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Bid, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Bid, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Bid, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    .wideField {
+                        width: 200px;
+                    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CompletionDeadline, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CompletionDeadline, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CompletionDeadline, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    #locationField {
+                        height: 20px;
+                        margin-bottom: 2px;
+                    }
+                </style>
+            </head>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*<div class="form-group">
-            @Html.Label("Picture", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="file" id="Picture" name="upload" />
-            </div>
-        </div>*@
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.posted, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.posted)
-                    @Html.ValidationMessageFor(model => model.posted, "", new { @class = "text-danger" })
+            <body>
+                <div id="locationField">
+                    <input id="autocomplete" placeholder="Enter your address"
+                           onFocus="geolocate()" type="text"></input>
                 </div>
-            </div>
-        </div>*@
 
-        <div id="multiple">
-            <input type="file" class="multiple" name="files" multiple />
-        </div>
-        <div id="single">
-            <input type="file" class="single" name="files" /><br />
-            <input type="file" class="single" name="files" /><br />
-            <input type="file" class="single" name="files" /><br />
-        </div>
-        <button class="btn btn-default">Upload</button>   
+                <table id="address">
+                    <tr>
+                        <td class="label">Street address</td>
+                        <td class="slimField">
+                            <input class="field" id="street_number" name="number" disabled="true"></input>
+                        </td>
+                        <td class="wideField" colspan="2">
+                            <input class="field" id="route" name="street" disabled="true"></input>
+                        </td>
+                        
+                       
+                    </tr>
+                    <tr>
+                        <td class="label">City</td>
+                        <td class="wideField" colspan="3">
+                            <input class="field" id="locality" name="City"
+                                   disabled="true"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">State</td>
+                        <td class="slimField">
+                            <input class="field"
+                                   id="administrative_area_level_1" name="State" disabled="true"></input>
+                        </td>
+                        <td class="label">Zip code</td>
+                        <td class="wideField">
+                            <input class="field" id="postal_code" name="Zip"
+                                   disabled="true"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">Country</td>
+                        <td class="wideField" colspan="3">
+                            <input class="field"
+                                   id="country" disabled="true"></input>
+                        </td>
+                    </tr>
+                </table>
+                @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Zip, "", new { @class = "text-danger" })
+                <input type="hidden" name="Address" id="Address" value="generateAddress()">
+                @*@Html.HiddenFor(model => model.Address)*@
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Zip, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Zip, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Zip, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PostedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.PostedDate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PostedDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Bid, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Bid, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Bid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CompletionDeadline, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CompletionDeadline, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CompletionDeadline, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                        @Html.Label("Picture", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="file" id="Picture" name="upload" />
+                        </div>
+                    </div>*@
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.posted, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.posted)
+                                @Html.ValidationMessageFor(model => model.posted, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>*@
+
+                <div id="multiple">
+                    <input type="file" class="multiple" name="files" multiple />
+                </div>
+                <div id="single">
+                    <input type="file" class="single" name="files" /><br />
+                    <input type="file" class="single" name="files" /><br />
+                    <input type="file" class="single" name="files" /><br />
+                </div>
+                <button class="btn btn-default">Upload</button>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
     </div>
-}
+    }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-<script type="text/javascript">
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script type="text/javascript">
         $(function () {
             if(window.FileReader != null){
                 $('#single').hide();
@@ -162,5 +258,40 @@
                 $('.multiple').prop('disabled', true);
             }
         });
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9QoDm5hkolKOKUlQpLDZFBUzg122vEVc&libraries=places&callback=initAutocomplete"
+                async defer></script>
+        <script src="~/Scripts/Auto.js" </script>
+<script type="text/javascript">
+    function generateAddress()
+    {
+        
+        document.getElementById('Address').innerText =
+            document.getElementById('street_number').value + ' ' +
+            document.getElementById('route').value;
+        $('Address').on('change', function () {
+            alert (document.getElementById('Address').innerText); // or $(this).val()
+        });
+    }
 </script>
-}
+<script>
+$(document).ready(function(){
+
+ $("#street_number").change(function(){
+   $("#Address").val($("#street_number").val() + $("#route").val());
+ })
+ $("#route").change(function(){
+   $("#Address").val($("#street_number").val() + $("#route").val());
+ })
+
+})
+</script>
+@*<script>
+    $(document).ready(function(){
+        $('#a').change(function() {
+            alert('Something changed');
+            // Try validating form again (if valid, activate submit button)
+        })
+    });
+</script>*@
+  }

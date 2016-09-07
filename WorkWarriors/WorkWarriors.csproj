@@ -245,6 +245,7 @@
     <Compile Include="Controllers\CompletedBidsController.cs" />
     <Compile Include="Controllers\ContractorAcceptedBidsController.cs" />
     <Compile Include="Controllers\ContractorsController.cs" />
+    <Compile Include="Controllers\DistanceController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -266,6 +267,34 @@
     <Compile Include="Migrations\201607252257452_c.cs" />
     <Compile Include="Migrations\201607252257452_c.Designer.cs">
       <DependentUpon>201607252257452_c.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607252325103_f.cs" />
+    <Compile Include="Migrations\201607252325103_f.Designer.cs">
+      <DependentUpon>201607252325103_f.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607261805500_range.cs" />
+    <Compile Include="Migrations\201607261805500_range.Designer.cs">
+      <DependentUpon>201607261805500_range.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607261818399_mm.cs" />
+    <Compile Include="Migrations\201607261818399_mm.Designer.cs">
+      <DependentUpon>201607261818399_mm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607261959032_f1.cs" />
+    <Compile Include="Migrations\201607261959032_f1.Designer.cs">
+      <DependentUpon>201607261959032_f1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609061920044_s.cs" />
+    <Compile Include="Migrations\201609061920044_s.Designer.cs">
+      <DependentUpon>201609061920044_s.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609062318094_d1.cs" />
+    <Compile Include="Migrations\201609062318094_d1.Designer.cs">
+      <DependentUpon>201609062318094_d1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609062319561_d2.cs" />
+    <Compile Include="Migrations\201609062319561_d2.Designer.cs">
+      <DependentUpon>201609062319561_d2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -300,6 +329,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="Scripts\Auto.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -319,6 +349,7 @@
     <Content Include="Scripts\cldr\event.js" />
     <Content Include="Scripts\cldr\supplemental.js" />
     <Content Include="Scripts\cldr\unresolved.js" />
+    <Content Include="Scripts\Distance.js" />
     <Content Include="Scripts\globalize.js" />
     <Content Include="Scripts\globalize\currency.js" />
     <Content Include="Scripts\globalize\date.js" />
@@ -458,6 +489,10 @@
     <Content Include="Views\Reviews\Details.cshtml" />
     <Content Include="Views\Reviews\Edit.cshtml" />
     <Content Include="Views\Reviews\Index.cshtml" />
+    <Content Include="Views\CompletedBids\Add_Review.cshtml" />
+    <Content Include="Views\Distance.cshtml" />
+    <Content Include="Views\Distance\getDistance.cshtml" />
+    <Content Include="Views\Distance\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -482,6 +517,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607252257452_c.resx">
       <DependentUpon>201607252257452_c.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607252325103_f.resx">
+      <DependentUpon>201607252325103_f.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607261805500_range.resx">
+      <DependentUpon>201607261805500_range.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607261818399_mm.resx">
+      <DependentUpon>201607261818399_mm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607261959032_f1.resx">
+      <DependentUpon>201607261959032_f1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609061920044_s.resx">
+      <DependentUpon>201609061920044_s.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609062318094_d1.resx">
+      <DependentUpon>201609062318094_d1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609062319561_d2.resx">
+      <DependentUpon>201609062319561_d2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

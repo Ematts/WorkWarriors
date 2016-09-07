@@ -87,6 +87,20 @@ namespace WorkWarriors.Controllers
             return View(completedBids);
         }
 
+        public ActionResult Add_Review(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CompletedBids completedBids = db.CompletedBids.Find(id);
+            if (completedBids == null)
+            {
+                return HttpNotFound();
+            }
+            return View(completedBids);
+        }
+
         // GET: CompletedBids/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -107,16 +121,58 @@ namespace WorkWarriors.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ConUsername,HomeUsername,ConFirstName,HomeFirstname,ConLastName,HomeLastName,ConAddress,HomeAddress,ConCity,HomeCity,ConState,HomeState,ConZip,HomeZip,ConEmail,HomeEmail,PostedDate,Bid,CompletionDeadline,Description,Completed,Invoice,ContractorPaid,ContractorDue,Expired,Service_Number")] CompletedBids completedBids)
+        public ActionResult Edit([Bind(Include = "ID,ConUsername,HomeUsername,ConFirstName,HomeFirstname,ConLastName,HomeLastName,ConAddress,HomeAddress,ConCity,HomeCity,ConState,HomeState,ConZip,HomeZip,ConEmail,HomeEmail,PostedDate,Bid,CompletionDeadline,Description,Completed,Invoice,ContractorPaid,ContractorDue,Expired,Service_Number,Review,Rating")] CompletedBids completedBids)
         {
+            if (completedBids.Review == null)
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Entry(completedBids).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(completedBids);
+            }
+
             if (ModelState.IsValid)
             {
+                Reviews review = new Reviews();
+                review.ConUsername = completedBids.ConUsername;
+                review.HomeUsername = completedBids.HomeUsername;
+                review.ConFirstName = completedBids.ConFirstName;
+                review.HomeFirstname = completedBids.HomeFirstname;
+                review.ConLastName = completedBids.ConLastName;
+                review.HomeLastName = completedBids.HomeLastName;
+                review.ConAddress = completedBids.ConAddress;
+                review.HomeAddress = completedBids.HomeAddress;
+                review.ConCity = completedBids.ConCity;
+                review.HomeCity = completedBids.HomeCity;
+                review.ConState = completedBids.ConState;
+                review.HomeState = completedBids.HomeState;
+                review.ConZip = completedBids.ConZip;
+                review.HomeZip = completedBids.HomeZip;
+                review.ConEmail = completedBids.ConEmail;
+                review.HomeEmail = completedBids.HomeEmail;
+                review.PostedDate = completedBids.PostedDate;
+                review.Bid = completedBids.Bid;
+                review.CompletionDeadline = completedBids.CompletionDeadline;
+                review.Description = completedBids.Description;
+                review.Completed = completedBids.Completed;
+                review.Invoice = completedBids.Invoice;
+                review.ContractorDue = completedBids.ContractorDue;
+                review.ContractorPaid = completedBids.ContractorPaid;
+                review.Service_Number = completedBids.Service_Number;
+                review.Expired = completedBids.Expired;
+                review.Review = completedBids.Review;
+                review.Rating = completedBids.Rating;
+                db.Reviews.Add(review);
                 db.Entry(completedBids).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(completedBids);
         }
+                   
 
         // GET: CompletedBids/Delete/5
         public ActionResult Delete(int? id)
@@ -418,7 +474,8 @@ namespace WorkWarriors.Controllers
                 myMessage.AddTo(completedBids.HomeEmail);
                 myMessage.From = new MailAddress("workwarriors@gmail.com", "Admin");
                 myMessage.Subject = "Job Complete!!";
-                String message = "Hello " + completedBids.HomeFirstname + "," + "<br>" + "<br>" + "Thank you for using Work Warriors!";
+                string url = "http://localhost:14703/CompletedBids/Add_Review/" + completedBids.ID;
+                String message = "Hello " + completedBids.HomeFirstname + "," + "<br>" + "<br>" + "Thank you for using Work Warriors!  To review " + completedBids.ConUsername + "'s service, please click on link below: <br><a href =" + url + "> Click Here </a>"; 
                 myMessage.Html = message;
                 var credentials = new NetworkCredential(name, pass);
                 var transportWeb = new SendGrid.Web(credentials);

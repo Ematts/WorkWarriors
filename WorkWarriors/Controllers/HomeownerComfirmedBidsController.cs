@@ -164,11 +164,6 @@ namespace WorkWarriors.Controllers
                 return HttpNotFound();
             }
 
-            if (homeownerComfirmedBids.Completed == true)
-            {
-                return RedirectToAction("Already_Confirmed_Completion", "CompletedBids");
-            }
-
             foreach (var user in db.Users)
             {
                 if (user.Id == identity)
@@ -185,11 +180,14 @@ namespace WorkWarriors.Controllers
                 }
             }
 
-            if (this.User.IsInRole("Admin") || ConEmail1 == ConEmail2)
+            if (!this.User.IsInRole("Admin") && !(ConEmail1 == ConEmail2))
             {
 
-                if (id == null)
-            {
+                return RedirectToAction("Unauthorized_Access", "Home");
+            }
+            
+            if(id == null)
+            { 
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //HomeownerComfirmedBids homeownerComfirmedBids = db.HomeownerComfirmedBids.Find(id);
@@ -197,13 +195,16 @@ namespace WorkWarriors.Controllers
             {
                 return HttpNotFound();
             }
-            return View(homeownerComfirmedBids);
-            }
-            else
+
+            if (homeownerComfirmedBids.Completed == true)
             {
-                return RedirectToAction("Unauthorized_Access", "Home");
+                return RedirectToAction("Already_Confirmed_Completion", "CompletedBids");
             }
-        }
+
+            return View(homeownerComfirmedBids);
+      }
+
+        
 
         public ActionResult Already_Confirmed()
         {

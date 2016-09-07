@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace WorkWarriors.Models
 {
@@ -43,6 +44,10 @@ namespace WorkWarriors.Models
         public bool ContractorPaid { get; set; }
         public int Service_Number { get; set; }
         public bool Expired { get; set; }
+        [DataType(DataType.MultilineText)]
+        public string Review { get; set; }
+        [Range(0, 5)]
+        public double Rating { get; set; }
         public virtual ICollection<File> Files { get; set; }
         public virtual ICollection<ServiceRequestPath> ServiceRequestPaths { get; set; }
         public virtual ICollection<AfterPath> AfterPaths { get; set; }

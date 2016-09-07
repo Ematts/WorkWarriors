@@ -89,6 +89,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Expired)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Review)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
         <th></th>
     </tr>
 
@@ -171,6 +177,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Expired)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Review)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rating)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

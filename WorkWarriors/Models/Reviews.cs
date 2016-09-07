@@ -43,5 +43,6 @@ namespace WorkWarriors.Models
         public int Service_Number { get; set; }
         public bool Expired { get; set; }
         public string Review { get; set; }
+        public double Rating { get; set; }
     }
 }
