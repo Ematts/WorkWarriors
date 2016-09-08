@@ -53,7 +53,7 @@ namespace WorkWarriors.Controllers
         public ActionResult Create([Bind(Include = "ID,Username,FirstName,LastName,Address,City,State,Zip,email,PostedDate,Bid,CompletionDeadline,Description,posted,Contractor")] ServiceRequest serviceRequest, IEnumerable<HttpPostedFileBase> files, string street, string number)
         {
 
-            serviceRequest.Address = number + " " + street;
+            //serviceRequest.Address = number + " " + street;
 
             string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
             if (identity == null)

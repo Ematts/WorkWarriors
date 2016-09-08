@@ -41,6 +41,7 @@ namespace WorkWarriors.Models
         public DateTime CompletionDeadline { get; set; }
         [StringLength(100, MinimumLength = 6)]
         [Required]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [Required]
         public bool posted { get; set; }
