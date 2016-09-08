@@ -133,7 +133,7 @@
                 @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
                 @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
                 @Html.ValidationMessageFor(model => model.Zip, "", new { @class = "text-danger" })
-                <input type="hidden" name="Address" id="Address" value="generateAddress()">
+                <input type="hidden" name="Address" id="Address">
                 @*@Html.HiddenFor(model => model.Address)*@
                 @*<div class="form-group">
                     @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -259,22 +259,47 @@
             }
         });
         </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9QoDm5hkolKOKUlQpLDZFBUzg122vEVc&libraries=places&callback=initAutocomplete"
-                async defer></script>
-        <script src="~/Scripts/Auto.js" </script>
+    @*<script>
+        $(document).ready(function(){
+
+        $("#street_number").change(function(){
+        $("#Address").val($("#street_number").val() + $("#route").val());
+        })
+            $("#route").change(function(){
+            $("#Address").val($("#street_number").val() + $("#route").val());
+        })
+
+     })
+</script>*@
 <script type="text/javascript">
-    function generateAddress()
-    {
-        
+    function generateAddress() {
+
         document.getElementById('Address').innerText =
             document.getElementById('street_number').value + ' ' +
             document.getElementById('route').value;
-        $('Address').on('change', function () {
-            alert (document.getElementById('Address').innerText); // or $(this).val()
-        });
-    }
+
+
+    };
 </script>
-<script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9QoDm5hkolKOKUlQpLDZFBUzg122vEVc&libraries=places&callback=initAutocomplete"
+                async defer></script>
+        <script src="~/Scripts/Auto.js" </script>
+
+
+}
+
+
+
+@*<script type="text/javascript">
+    function nothing()
+    {
+        
+
+    }
+</script>*@
+        @*<script></script>*@
+       
+@*<script>
 $(document).ready(function(){
 
  $("#street_number").change(function(){
@@ -285,7 +310,14 @@ $(document).ready(function(){
  })
 
 })
-</script>
+</script>*@
+@*<script type="text/javascript">
+    function nothing()
+    {
+
+
+    }
+</script>*@
 @*<script>
     $(document).ready(function(){
         $('#a').change(function() {
@@ -294,4 +326,4 @@ $(document).ready(function(){
         })
     });
 </script>*@
-  }
+  @*}*@

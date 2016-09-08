@@ -37,7 +37,9 @@ function fillInAddress() {
             var val = place.address_components[i][componentForm[addressType]];
             document.getElementById(addressType).value = val;
         }
+       
     }
+
 }
 
 // Bias the autocomplete object to the user's geographical location,
