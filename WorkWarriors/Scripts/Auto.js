@@ -37,7 +37,9 @@ function fillInAddress() {
             var val = place.address_components[i][componentForm[addressType]];
             document.getElementById(addressType).value = val;
         }
-       
+        if(i == place.address_components.length - 1){
+                document.getElementById("Address").value = document.getElementById("street_number").value + " " + document.getElementById("route").value;
+        }
     }
 
 }

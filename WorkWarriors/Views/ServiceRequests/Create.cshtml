@@ -259,7 +259,7 @@
             }
         });
         </script>
-    @*<script>
+    <script>
         $(document).ready(function(){
 
         $("#street_number").change(function(){
@@ -270,16 +270,6 @@
         })
 
      })
-</script>*@
-<script type="text/javascript">
-    function generateAddress() {
-
-        document.getElementById('Address').innerText =
-            document.getElementById('street_number').value + ' ' +
-            document.getElementById('route').value;
-
-
-    };
 </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9QoDm5hkolKOKUlQpLDZFBUzg122vEVc&libraries=places&callback=initAutocomplete"
                 async defer></script>
