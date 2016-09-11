@@ -10,6 +10,9 @@ using WorkWarriors.Models;
 using Microsoft.AspNet.Identity;
 using System.Globalization;
 using System.IO;
+using EasyPost;
+using SharpShip.UPS;
+using SharpShip.Entities;
 
 namespace WorkWarriors.Controllers
 {
@@ -56,6 +59,7 @@ namespace WorkWarriors.Controllers
             //serviceRequest.Address = number + " " + street;
 
             string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            
             if (identity == null)
             {
                 return RedirectToAction("Must_be_logged_in", "ServiceRequests");
@@ -78,6 +82,7 @@ namespace WorkWarriors.Controllers
                 }
             }
 
+
             if(serviceRequest.PostedDate > serviceRequest.CompletionDeadline)
             {
                 return RedirectToAction("DateIssue", "ServiceRequests");
@@ -99,6 +104,21 @@ namespace WorkWarriors.Controllers
                         serviceRequest.ServiceRequestPaths.Add(photo);
                     }
 
+                }
+                AddValStatus addValStatus = getAddValStauts(serviceRequest);
+                if (addValStatus == null)
+                {
+                    return HttpNotFound();
+                }
+                if (addValStatus.status == "false")
+                {
+                    return RedirectToAction("NoAddress", "ServiceRequests");
+                }
+                if (addValStatus.status == "errors")
+                {
+                    TempData["addValStatus"] = addValStatus;
+                    TempData["serviceRequest"] = serviceRequest;
+                    return RedirectToAction("Errors", "ServiceRequests", new { addValStatus = TempData["addValStatus"], serviceRequest = TempData["serviceRequest"] });
                 }
                 db.ServiceRequests.Add(serviceRequest);
                 db.SaveChanges();
@@ -175,7 +195,10 @@ namespace WorkWarriors.Controllers
             }
             base.Dispose(disposing);
         }
-
+        public ActionResult NoAddress()
+        {
+            return View();
+        }
         public ActionResult ContractorAcceptance(int? id)
         {
             string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
@@ -213,7 +236,41 @@ namespace WorkWarriors.Controllers
                 return RedirectToAction("Unauthorized_Access", "Home");
             }
         }
+        public ActionResult Somemethod(bool isTrue)
+        {
+            if (isTrue)
+            {
+                //do something
+            }
+            else
+            {
+                //do something
+            }
+            return View();
+        }
+        public ActionResult Errors(AddValStatus addValStatus, ServiceRequest serviceRequest)
+        {
+            addValStatus = (AddValStatus)TempData["addValStatus"];
+            serviceRequest = (ServiceRequest)TempData["serviceRequest"];
+            if (addValStatus == null || serviceRequest == null)
+            {
+                return HttpNotFound();
+            }
+            ServiceRequestViewModel model = new ServiceRequestViewModel();
+            model.errorList = new List<string>();
+            model.Address = serviceRequest.Address;
+            model.City = serviceRequest.City;
+            model.State = serviceRequest.State;
+            model.Zip = serviceRequest.Zip;
+            foreach(var error in addValStatus.errorList)
+            {
+                model.errorList.Add(error);
+            }
+            TempData["addValStatus"] = addValStatus;
+            TempData["serviceRequest"] = serviceRequest;
 
+            return View(model);
+        }
         public ActionResult Post(int? id)
         {
             string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
@@ -292,9 +349,102 @@ namespace WorkWarriors.Controllers
 
             return View();
         }
+        public ActionResult Validate()
+        {
+            ViewBag.Message = "This service request has already been posted.";
+
+            return View();
+        }
+
+        public AddValStatus getAddValStauts(ServiceRequest serviceRequest)
+        {
+            AddValStatus addValStatus = new AddValStatus();
+            EasyPost.ClientManager.SetCurrent("wGW1bI8SYpamubvkDKNkFw");
+            EasyPost.Address address = new EasyPost.Address()
+            {
+                company = "",
+                street1 = serviceRequest.Address,
+                street2 = "",
+                city = serviceRequest.City,
+                state = serviceRequest.State,
+                country = "US",
+                zip = serviceRequest.Zip,
+                verify = new List<string>() { "delivery" }
+            };
+
+            address.Create();
+
+            if (address.verifications.delivery.success)
+            {
+
+                addValStatus.status = "true";
+                return addValStatus;
+            }
+
+            else if (address.verifications.delivery.errors.Count == 1 && address.verifications.delivery.errors[0].message == "Address not found")
+            {
+                string UPS = RunStreetLevelValidation(serviceRequest);
+                if (UPS == "false")
+                {
+                    addValStatus.status = "false";
+                    return addValStatus;
+                }
+                addValStatus.status = "true";
+                return addValStatus;
+            }
+
+            else if (address.verifications.delivery.errors.Count > 0) 
+            {
+                List<string> errorsList = new List<string>();
+                for (int i = 0; i < address.verifications.delivery.errors.Count; i++)
+                {
+                    errorsList.Add(address.verifications.delivery.errors[i].message);
+                }
+                addValStatus.status = "errors";
+                addValStatus.errorList = errorsList;
+                return addValStatus;
+                
+            }
+
+            else
+            {
+                addValStatus = null;
+                return addValStatus;
+            }
 
 
-        
+        }
+
+        public string RunStreetLevelValidation(ServiceRequest serviceRequest)
+        {
+            StreetLevelAddressValidator validator = new StreetLevelAddressValidator("7D15274E4E2A07DE", "Honeybump20!", "pennywise79");
+            SharpShip.Entities.Address myAddress = new SharpShip.Entities.Address()
+            {
+                AddressLine1 = serviceRequest.Address,
+                City = serviceRequest.City,
+                StateProvince = serviceRequest.State,
+                CountryCode = "US",
+                PostalCode = serviceRequest.Zip
+            };
+
+            List<SharpShip.Entities.Address> results = new List<SharpShip.Entities.Address>();
+            var isvalid = validator.Validate(myAddress, ref results);
+
+
+            if(isvalid == true && results.Count > 0)
+            {
+                return "true";
+            }
+
+            else
+            {
+                return "false";
+            }
+        }
+
+
+
+
 
         //public ActionResult HomeownerConfirmation(int? id)
         //{

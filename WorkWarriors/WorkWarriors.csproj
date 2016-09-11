@@ -52,6 +52,10 @@
       <HintPath>..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EasyPost, Version=1.0.0.0, Culture=neutral, PublicKeyToken=38ccf53c4710c80e, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyPost-Official.2.2.1\lib\net45\EasyPost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -89,8 +93,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyPost-Official.2.2.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PayPal, Version=1.7.3.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
@@ -109,6 +113,10 @@
       <HintPath>..\packages\Quartz.2.3.3\lib\net40\Quartz.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RestSharp, Version=100.0.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyPost-Official.2.2.1\lib\net45\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SendGrid, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
       <HintPath>..\packages\Sendgrid.6.3.4\lib\SendGrid.dll</HintPath>
       <Private>True</Private>
@@ -119,6 +127,10 @@
     </Reference>
     <Reference Include="SendGridMail, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
       <HintPath>..\packages\Sendgrid.6.3.4\lib\SendGridMail.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpShip, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpShip.1.0.0.2\lib\net40\SharpShip.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -300,8 +312,13 @@
     <Compile Include="Migrations\201609082033141_d3.Designer.cs">
       <DependentUpon>201609082033141_d3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609102246169_dd.cs" />
+    <Compile Include="Migrations\201609102246169_dd.Designer.cs">
+      <DependentUpon>201609102246169_dd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddValStatus.cs" />
     <Compile Include="Models\AfterPath.cs" />
     <Compile Include="Models\BidAcceptance.cs" />
     <Compile Include="Models\CompletedBids.cs" />
@@ -318,6 +335,7 @@
     <Compile Include="Models\Reviews.cs" />
     <Compile Include="Models\ServiceRequest.cs" />
     <Compile Include="Models\ServiceRequestPath.cs" />
+    <Compile Include="Models\ServiceRequestViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quartz.cs" />
     <Compile Include="Startup.cs" />
@@ -498,6 +516,9 @@
     <Content Include="Views\Distance.cshtml" />
     <Content Include="Views\Distance\getDistance.cshtml" />
     <Content Include="Views\Distance\Test.cshtml" />
+    <Content Include="Views\ServiceRequests\Validate.cshtml" />
+    <Content Include="Views\ServiceRequests\NoAddress.cshtml" />
+    <Content Include="Views\ServiceRequests\Errors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -546,6 +567,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609082033141_d3.resx">
       <DependentUpon>201609082033141_d3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609102246169_dd.resx">
+      <DependentUpon>201609102246169_dd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

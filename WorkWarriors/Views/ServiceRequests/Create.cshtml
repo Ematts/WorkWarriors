@@ -134,10 +134,10 @@
         $(document).ready(function(){
 
         $("#street_number").change(function(){
-        $("#Address").val($("#street_number").val() + $("#route").val());
+        $("#Address").val($("#street_number").val() + " " + $("#route").val());
         })
             $("#route").change(function(){
-            $("#Address").val($("#street_number").val() + $("#route").val());
+            $("#Address").val($("#street_number").val() + " " + $("#route").val());
         })
 
      })

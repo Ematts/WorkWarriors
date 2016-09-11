@@ -1,0 +1,43 @@
+﻿@model WorkWarriors.Models.ServiceRequestViewModel
+
+@{
+    ViewBag.Title = "Errors";
+}
+
+<h2>Errors</h2>
+
+<div>
+    <h4>ServiceRequestViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullAddress)
+        </dd>
+
+
+    </dl>
+    <dl class="dl-horizontal">
+        <tr>
+        <dt>
+            @Html.DisplayNameFor(model => model.errorList)
+        </dt>
+
+            @foreach (var item in Model.errorList)
+            {
+                <dd>
+                    @item
+                </dd>
+            }
+            </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<br><br />
+<a class="bottomNav" onclick="history.go(-1); return false;" href="#">Back</a>
