@@ -7,7 +7,7 @@
 <h2>Create</h2>
 
 
-    @using (Html.BeginForm("Create", "ServiceRequests", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Create", "ServiceRequests", null, FormMethod.Post, new { enctype = "multipart/form-data", id = "requestForm" }))
     {
         @Html.AntiForgeryToken()
         <head>
@@ -94,6 +94,13 @@
                         @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                     </div>
                 </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.vacant, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.vacant, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.vacant, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
                 <div id="multiple">
                     <input type="file" class="multiple" name="files" multiple />
@@ -107,9 +114,14 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
+                        <input type="submit" value="Create" id="submitRequest" class="btn btn-default" onclick="ShowAddress(event)" />
                     </div>
                 </div>
+            <div>
+
+                <input id="btnGetTime" type="button" value="Show Current Time"
+                       onclick="ShowAddress()" />
+            </div>
     </div>
     }
 
@@ -119,6 +131,101 @@
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
+        <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
+<script type="text/javascript">
+    function ShowAddress() {
+        event.preventDefault();
+        $.ajax({
+        type: "GET",
+        url: "http://localhost:14703/AddressValidator/getAddValStauts",
+        contentType: "application/json; charset=utf-8",
+        data: { street: '' + $('#Address').val() + '', City: '' + $('#locality').val() + '', state: '' + $('#administrative_area_level_1').val() + '', zip: '' + $('#postal_code').val() + '"' },
+        dataType: "json",
+        success: function (response, textStatus, jqXHR) {
+            if (response.validated == true) {
+                var outputMsg = response.street + ' has been validated = ' + response.validated;
+                var div = $('<div></div>');
+                var titleMsg = "Are you ready to sumbit your service request?";
+                div.html(outputMsg).dialog({
+                    title: titleMsg,
+                    height: 300,
+                    width: 600,
+                    autoOpen: true,
+                    resizable: true,
+                    modal: true,
+                    buttons: {
+                            "YES": 
+                            function () {
+                           
+                                
+                                $(this).dialog('close'); 
+                                $("#requestForm").submit();
+                                
+                                
+                                
+                            },
+                            "NO":
+                            function () {
+                                $(this).dialog("close");
+                            }
+                       }
+                });
+            } 
+            else {
+                var outputMsg = response.street + ' has NOT been validated = ' + response.validated;
+                var div = $('<div></div>');
+                var titleMsg = "A few questions while we validate your address";
+                div.html(outputMsg).dialog({
+                    title: titleMsg,
+                    height: 300,
+                    width: 600,
+                    resizable: true,
+                    modal: true,
+                    buttons: {
+                        "YES": function () {
+                            $("#vacant").prop("checked", true);
+                            $(this).dialog("close");
+                            $.ajax({
+                                type: "GET",
+                                url: "http://localhost:14703/AddressValidator/RunStreetLevelValidation",
+                                contentType: "application/json; charset=utf-8",
+                                data: { street: '' + $('#Address').val() + '', City: '' + $('#locality').val() + '', state: '' + $('#administrative_area_level_1').val() + '', zip: '' + $('#postal_code').val() + '' },
+                                dataType: "json",
+                                success: function (response, textStatus, jqXHR) {
+                                    if (response.validated == true) {
+                                        alert(response.street + ' has been validated = ' + response.validated)
+                                    }
+                                    else {
+                                        alert(response.street + ' has NOT been validated = ' + response.validated)
+                                    }
+                                },
+                                failure: function (jqXHR, textStatus, errorThrown) {
+                                    alert('Error - ' + errorThrown);
+                                }
+                            });
+                        },
+                        "NO": function () {
+                            $(this).dialog("close");
+                        },
+
+
+                    }
+                    
+                });
+
+            }
+        },
+            failure: function(jqXHR, textStatus, errorThrown) {
+                alert('Error - ' + errorThrown);
+        }
+    });
+}
+function OnSuccess(response) {
+    alert(response.d);
+}
+</script>
         <script type="text/javascript">
         $(function () {
             if(window.FileReader != null){
@@ -145,7 +252,23 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9QoDm5hkolKOKUlQpLDZFBUzg122vEVc&libraries=places&callback=initAutocomplete"
                 async defer></script>
         <script src="~/Scripts/Auto.js" </script>
-
+@*<script type="text/javascript">
+    function ShowAddress() {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:14703/AddressValidator/getAddValStatus",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: OnSuccess,
+        failure: function(response) {
+            alert(response.d);
+        }
+    });
+}
+function OnSuccess(response) {
+    alert(response.d);
+}
+</script>*@
 
 }
 

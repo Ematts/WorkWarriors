@@ -53,7 +53,7 @@ namespace WorkWarriors.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Username,FirstName,LastName,Address,City,State,Zip,email,PostedDate,Bid,CompletionDeadline,Description,posted,Contractor")] ServiceRequest serviceRequest, IEnumerable<HttpPostedFileBase> files, string street, string number)
+        public ActionResult Create([Bind(Include = "ID,Username,FirstName,LastName,Address,City,State,Zip,email,PostedDate,Bid,CompletionDeadline,Description,posted,Contractor,vacant")] ServiceRequest serviceRequest, IEnumerable<HttpPostedFileBase> files, string street, string number)
         {
 
             //serviceRequest.Address = number + " " + street;
@@ -359,6 +359,18 @@ namespace WorkWarriors.Controllers
         public AddValStatus getAddValStauts(ServiceRequest serviceRequest)
         {
             AddValStatus addValStatus = new AddValStatus();
+            if (serviceRequest.vacant == true)
+            {
+                string UPS = RunStreetLevelValidation(serviceRequest);
+                if (UPS == "false")
+                {
+                    addValStatus.status = "false";
+                    return addValStatus;
+                }
+                addValStatus.status = "true";
+                return addValStatus;
+            }
+            
             EasyPost.ClientManager.SetCurrent("wGW1bI8SYpamubvkDKNkFw");
             EasyPost.Address address = new EasyPost.Address()
             {

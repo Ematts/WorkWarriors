@@ -46,6 +46,7 @@ namespace WorkWarriors.Models
         [Required]
         public bool posted { get; set; }
         public bool expired { get; set; }
+        public bool vacant { get; set; }
 
         public bool Confirmed { get; set; }
         public int ServiceNumber { get; set; }

@@ -50,7 +50,7 @@ namespace WorkWarriors.Controllers
         // POST: ContractorAcceptedBids/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,ConUsername,HomeUsername,ConFirstName,HomeFirstname,ConLastName,HomeLastName,ConAddress,HomeAddress,ConCity,HomeCity,ConState,HomeState,ConZip,HomeZip,ConEmail,HomeEmail,PostedDate,Bid,CompletionDeadline,Description,Confirmed")] ContractorAcceptedBids contractorAcceptedBids)
         {
@@ -82,7 +82,7 @@ namespace WorkWarriors.Controllers
         // POST: ContractorAcceptedBids/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,ConUsername,HomeUsername,ConFirstName,HomeFirstname,ConLastName,HomeLastName,ConAddress,HomeAddress,ConCity,HomeCity,ConState,HomeState,ConZip,HomeZip,Conemail,Homeemail,PostedDate,Bid,CompletionDeadline,Description,confirmed,ServiceNumber")] ContractorAcceptedBids contractorAcceptedBids)
 
@@ -113,7 +113,7 @@ namespace WorkWarriors.Controllers
         }
 
         // POST: ContractorAcceptedBids/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [System.Web.Mvc.HttpPost, System.Web.Mvc.ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
