@@ -61,7 +61,7 @@ namespace WorkWarriors.Controllers
                JsonRequestBehavior.AllowGet); 
             }
 
-            else if (address.verifications.delivery.errors.Count == 1 && address.verifications.delivery.errors[0].message == "Address not found")
+            else //else if (address.verifications.delivery.errors.Count == 1 && address.verifications.delivery.errors[0].message == "Address not found")
             {
                 return Json(new { success = true, street = street, validated = address.verifications.delivery.success },
                JsonRequestBehavior.AllowGet); 
@@ -79,24 +79,24 @@ namespace WorkWarriors.Controllers
             //    return null;
             //}
 
-            else if (address.verifications.delivery.errors.Count > 0)
-            {
-                List<string> errorsList = new List<string>();
-                for (int i = 0; i < address.verifications.delivery.errors.Count; i++)
-                {
-                    errorsList.Add(address.verifications.delivery.errors[i].message);
-                }
-                addValStatus.status = "errors";
-                addValStatus.errorList = errorsList;
-                return null;
+            //else if (address.verifications.delivery.errors.Count > 0)
+            //{
+            //    List<string> errorsList = new List<string>();
+            //    for (int i = 0; i < address.verifications.delivery.errors.Count; i++)
+            //    {
+            //        errorsList.Add(address.verifications.delivery.errors[i].message);
+            //    }
+            //    addValStatus.status = "errors";
+            //    addValStatus.errorList = errorsList;
+            //    return null;
 
-            }
+            //}
 
-            else
-            {
-                addValStatus = null;
-                return null;
-            }
+            //else
+            //{
+            //    addValStatus = null;
+            //    return null;
+            //}
 
 
         }
@@ -121,7 +121,7 @@ namespace WorkWarriors.Controllers
 
             if (isvalid == true && results.Count > 0)
             {
-                return Json(new { success = true, street = street, validated = isvalid },
+                return Json(new { success = true, street = street, validated = isvalid, results = results },
                JsonRequestBehavior.AllowGet);
             }
 

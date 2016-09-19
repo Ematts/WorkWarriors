@@ -53,7 +53,7 @@ namespace WorkWarriors.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Username,FirstName,LastName,Address,City,State,Zip,email,PostedDate,Bid,CompletionDeadline,Description,posted,Contractor,vacant")] ServiceRequest serviceRequest, IEnumerable<HttpPostedFileBase> files, string street, string number)
+        public ActionResult Create([Bind(Include = "ID,Username,FirstName,LastName,Address,City,State,Zip,email,PostedDate,Bid,CompletionDeadline,Description,posted,Contractor,vacant,validated")] ServiceRequest serviceRequest, IEnumerable<HttpPostedFileBase> files, string street, string number)
         {
 
             //serviceRequest.Address = number + " " + street;
