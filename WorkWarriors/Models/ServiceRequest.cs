@@ -50,6 +50,7 @@ namespace WorkWarriors.Models
         public bool validated { get; set; }
 
         public bool Confirmed { get; set; }
+        public bool Inactive { get; set; }
         public int ServiceNumber { get; set; }
 
         public virtual ICollection<File> Files { get; set; }

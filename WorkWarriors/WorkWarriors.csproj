@@ -262,6 +262,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\BidAcceptancesController.cs" />
     <Compile Include="Controllers\CompletedBidsController.cs" />
     <Compile Include="Controllers\ContractorAcceptedBidsController.cs" />
@@ -333,9 +334,30 @@
     <Compile Include="Migrations\201609191422434_d4.Designer.cs">
       <DependentUpon>201609191422434_d4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609192043477_d5.cs" />
+    <Compile Include="Migrations\201609192043477_d5.Designer.cs">
+      <DependentUpon>201609192043477_d5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609192154374_d6.cs" />
+    <Compile Include="Migrations\201609192154374_d6.Designer.cs">
+      <DependentUpon>201609192154374_d6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609192235597_s1.cs" />
+    <Compile Include="Migrations\201609192235597_s1.Designer.cs">
+      <DependentUpon>201609192235597_s1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609192248186_s2.cs" />
+    <Compile Include="Migrations\201609192248186_s2.Designer.cs">
+      <DependentUpon>201609192248186_s2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609192302559_d7.cs" />
+    <Compile Include="Migrations\201609192302559_d7.Designer.cs">
+      <DependentUpon>201609192302559_d7.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Controllers\AddressValidatorController.cs" />
+    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AddressObject.cs" />
     <Compile Include="Models\AddValStatus.cs" />
     <Compile Include="Models\AfterPath.cs" />
@@ -538,6 +560,11 @@
     <Content Include="Views\ServiceRequests\Validate.cshtml" />
     <Content Include="Views\ServiceRequests\NoAddress.cshtml" />
     <Content Include="Views\ServiceRequests\Errors.cshtml" />
+    <Content Include="Views\Addresses\Create.cshtml" />
+    <Content Include="Views\Addresses\Delete.cshtml" />
+    <Content Include="Views\Addresses\Details.cshtml" />
+    <Content Include="Views\Addresses\Edit.cshtml" />
+    <Content Include="Views\Addresses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -595,6 +622,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609191422434_d4.resx">
       <DependentUpon>201609191422434_d4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609192043477_d5.resx">
+      <DependentUpon>201609192043477_d5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609192154374_d6.resx">
+      <DependentUpon>201609192154374_d6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609192235597_s1.resx">
+      <DependentUpon>201609192235597_s1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609192248186_s2.resx">
+      <DependentUpon>201609192248186_s2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609192302559_d7.resx">
+      <DependentUpon>201609192302559_d7.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

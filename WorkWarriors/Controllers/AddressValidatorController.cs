@@ -1,8 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using SharpShip.UPS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
@@ -37,7 +40,7 @@ namespace WorkWarriors.Controllers
             //    addValStatus.status = "true";
             //    return addValStatus;
             //}
-
+            string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
             EasyPost.ClientManager.SetCurrent("wGW1bI8SYpamubvkDKNkFw");
             EasyPost.Address address = new EasyPost.Address()
             {
@@ -130,6 +133,54 @@ namespace WorkWarriors.Controllers
                 return Json(new { success = true, street = street, validated = false },
                JsonRequestBehavior.AllowGet);
             }
+        }
+
+        public ActionResult sendContractorMail()
+        {
+
+            db = new ApplicationDbContext();
+            var myMessage = new SendGrid.SendGridMessage();
+            string name = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\name.txt");
+            string pass = System.IO.File.ReadAllText(@"C:\Users\erick\Desktop\Credentials\password.txt");
+
+            List<String> recipients = new List<String> { };
+
+            foreach (var i in db.Contractors)
+            {
+
+                recipients.Add(i.email);
+
+            };
+
+            myMessage.AddTo(recipients);
+            myMessage.From = new MailAddress("monsymonster@msn.com", "Joe Johnson");
+            myMessage.Subject = "New Service Request Posting!!";
+            myMessage.Text = "Service request:";
+            var credentials = new NetworkCredential(name, pass);
+            var transportWeb = new SendGrid.Web(credentials);
+            transportWeb.DeliverAsync(myMessage);
+
+            return RedirectToAction("About", "Home");
+
+        }
+        [HttpGet]
+        public ActionResult ManualValidation(string street, string city, string state, string zip, bool vacant, bool validated)
+        {
+            Address address = new Address() {Street = street, City = city, State = state, Zip = zip, vacant = vacant, validated = validated };
+            string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            var person = db.Homeowners.Where(x => x.UserId == identity).SingleOrDefault();
+            address.UserId = identity;
+            //foreach (var homeowner in db.Homeowners)
+            //{
+            //    if(homeowner.ApplicationUser.Id == identity)
+            //    {
+            //        address.HomeownerID = homeowner.ID;
+            //    }
+            //}
+            db.Addresses.Add(address);
+            db.SaveChanges();
+            return Json(new { success = true, street = street },
+              JsonRequestBehavior.AllowGet);
         }
         protected override void Dispose(bool disposing)
         {

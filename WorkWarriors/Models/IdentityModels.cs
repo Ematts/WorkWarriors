@@ -55,5 +55,7 @@ namespace WorkWarriors.Models
         public System.Data.Entity.DbSet<WorkWarriors.Models.CompletedBids> CompletedBids { get; set; }
 
         public System.Data.Entity.DbSet<WorkWarriors.Models.Reviews> Reviews { get; set; }
+
+        public System.Data.Entity.DbSet<WorkWarriors.Models.Address> Addresses { get; set; }
     }
 }
