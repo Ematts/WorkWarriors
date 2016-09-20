@@ -1,175 +1,13 @@
-﻿@model WorkWarriors.Models.ServiceRequest
-
-@{
-    ViewBag.Title = "Create";
-}
-
-<h2>Create</h2>
-
-
-    @using (Html.BeginForm("Create", "ServiceRequests", null, FormMethod.Post, new { enctype = "multipart/form-data", id = "requestForm" }))
-    {
-        @Html.AntiForgeryToken()
-        <head>
-            <link href="~/Content/Auto.css" media="all" rel="stylesheet" type="text/css" />
-        </head>
-        <div class="form-horizontal">
-            <h4>ServiceRequest</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-            
-                <div id="locationField">
-                    <input id="autocomplete" placeholder="Enter your address"
-                           onFocus="geolocate()" type="text"></input>
-                </div>
-            <br />
-
-                <table id="address">
-                    <tr>
-                        <td class="label">Street address</td>
-                        <td class="slimField">
-                            <input class="field" id="street_number" name="number" disabled="true"></input>
-                        </td>
-                        <td class="wideField" colspan="2">
-                            <input class="field" id="route" name="street" disabled="true"></input>
-                        </td>
-                        
-                       
-                    </tr>
-                    <tr>
-                        <td class="label">City</td>
-                        <td class="wideField" colspan="3">
-                            <input class="field" id="locality" name="City"
-                                   disabled="true"></input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label">State</td>
-                        <td class="slimField">
-                            <input class="field"
-                                   id="administrative_area_level_1" name="State" disabled="true"></input>
-                        </td>
-                        <td class="label">Zip code</td>
-                        <td class="wideField">
-                            <input class="field" id="postal_code" name="Zip"
-                                   disabled="true"></input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label">Country</td>
-                        <td class="wideField" colspan="3">
-                            <input class="field"
-                                   id="country" disabled="true"></input>
-                        </td>
-                    </tr>
-                </table>
-               
-                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
-                @Html.ValidationMessageFor(model => model.Zip, "", new { @class = "text-danger" })
-                <input type="hidden" name="Address" id="Address">
-            <br />
-            <div id="divProcessing">
-                <p>Processing, please wait . . . <img src="../../Content/ajax-loader.gif"></p>
-            </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Bid, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Bid, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Bid, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.CompletionDeadline, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.CompletionDeadline, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.CompletionDeadline, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            <div class="form-group" id="vac">
-                @Html.LabelFor(model => model.vacant, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.CheckBoxFor(model => model.vacant, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.vacant, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group" id="valid">
-                @Html.LabelFor(model => model.validated, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.CheckBoxFor(model => model.validated, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.validated, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group" id="inactive">
-                @Html.LabelFor(model => model.validated, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.CheckBoxFor(model => model.validated, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.validated, "", new { @class = "text-danger" })
-                </div>
-            </div>
-                <div id="multiple">
-                    <input type="file" class="multiple" name="files" multiple />
-                </div>
-                <div id="single">
-                    <input type="file" class="single" name="files" /><br />
-                    <input type="file" class="single" name="files" /><br />
-                    <input type="file" class="single" name="files" /><br />
-                </div>
-                @*<button class="btn btn-default">Upload</button>*@
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" id="submitRequest" class="btn btn-default" onclick="ShowAddress(event)" />
-                        @*<img id="ajax-loader" src="../../Content/ajax-loader.gif" style="display:none"/>*@
-                    </div>
-                </div>
-            <div>
-
-                <input id="btnGetTime" type="button" value="Show Current Time"
-                       onclick="ShowAddress()" />
-            </div>
-    </div>
-    }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-        <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
-        <script>
-            $(document).ready(function () {
-                $("#divProcessing").hide();
-                $("#vac").hide();
-                $("#valid").hide();
-                $("#inactive").hide();
-            })
-        </script>
-<script type="text/javascript">
-    function ShowAddress() {
-        $("#vac").hide();
-        $("#valid").hide();
-        $("#inactive").hide();
-        $("#vacant").prop("checked", false);
-        $("#validated").prop("checked", false);
-        $("#inactive").prop("checked", false);
-        event.preventDefault();
-        $("#divProcessing").show();
-        $.ajax({
+﻿function ShowAddress() {
+    $("#vac").hide();
+    $("#valid").hide();
+    $("#inactive").hide();
+    $("#vacant").prop("checked", false);
+    $("#validated").prop("checked", false);
+    $("#inactive").prop("checked", false);
+    event.preventDefault();
+    $("#divProcessing").show();
+    $.ajax({
         type: "GET",
         url: "http://localhost:14703/AddressValidator/getAddValStauts",
         contentType: "application/json; charset=utf-8",
@@ -191,25 +29,25 @@
                     resizable: true,
                     modal: true,
                     buttons: {
-                            "YES": 
-                            function () {
-                           
-                                
-                                $(this).dialog('close'); 
-                                $("#requestForm").submit();
-                                if ($("#requestForm").valid()) {
-                                    $("#divProcessing").show();
-                                }
-                                
-                                
-                            },
-                            "NO":
-                            function () {
-                                $(this).dialog("close");
+                        "YES":
+                        function () {
+
+
+                            $(this).dialog('close');
+                            $("#requestForm").submit();
+                            if ($("#requestForm").valid()) {
+                                $("#divProcessing").show();
                             }
-                       }
+
+
+                        },
+                        "NO":
+                        function () {
+                            $(this).dialog("close");
+                        }
+                    }
                 });
-            } 
+            }
             else {
                 var outputMsg = "Do any of the following apply? <br> <br> 1) This property is a vacant house. <br><br> 2) This property is a vacant lot. <br><br> 3) This property does not receive door mail delivery, i.e., PO Box service only."
                 var div = $('<div></div>');
@@ -236,7 +74,7 @@
                                     $("#divProcessing").hide();
                                     if (response.validated == true) {
                                         var listOfAddresses = [];
-                                        for(var i = 0; i < response.results.length; i++){
+                                        for (var i = 0; i < response.results.length; i++) {
                                             listOfAddresses.push([i + 1] + ")" + " " + response.results[i].AddressLine1 + "<br><br>")
                                         };
                                         var titleMsg = "Please confirm";
@@ -253,7 +91,7 @@
                                                 "YES":
                                                 function () {
 
-                                                    
+
                                                     $(this).dialog('close');
                                                     $("#validated").prop("checked", true);
                                                     var titleMsg = "Your address has been validated!"
@@ -361,7 +199,7 @@
                                                         success: function (response, textStatus, jqXHR) {
                                                             alert("Your request has been submitted,  We will get back to you shortly.");
                                                         },
-                                                        error: function(jqXHR, textStatus, errorThrown) {
+                                                        error: function (jqXHR, textStatus, errorThrown) {
                                                             alert('Error - ' + errorThrown);
                                                         },
                                                     })
@@ -376,7 +214,7 @@
                                                 }
                                             }
                                         });
-                                        
+
                                     }
                                 },
                                 failure: function (jqXHR, textStatus, errorThrown) {
@@ -389,10 +227,9 @@
                             var titleMsg = "We're sorry, but we were unable to validate your address.";
                             var div = $('<div></div>');
                             var listOfErrors = [];
-                            for (var i = 0; i < response.errors.length; i++)
-                            {
+                            for (var i = 0; i < response.errors.length; i++) {
                                 listOfErrors.push([i + 1] + ")" + " " + response.errors[i].message + "<br><br>")
-                               
+
                             }
                             var outputMsg = "Address validation failed for the following reason(s):" + "<br><br>" + (listOfErrors.join('\r\n')) + "<br><br>" + "Would you like to request manual validation?";
                             div.html(outputMsg).dialog({
@@ -436,7 +273,7 @@
 
 
                     }
-                    
+
                 });
 
             }
@@ -447,91 +284,5 @@
     });
 }
 function OnSuccess(response) {
-   alert(response.d);
-}
-</script>
-        <script type="text/javascript">
-        $(function () {
-            if(window.FileReader != null){
-                $('#single').hide();
-                $('.single').prop('disabled', true);
-            } else {
-                $('#multiple').hide();
-                $('.multiple').prop('disabled', true);
-            }
-        });
-        </script>
-    <script>
-        $(document).ready(function(){
-
-        $("#street_number").change(function(){
-        $("#Address").val($("#street_number").val() + " " + $("#route").val());
-        })
-            $("#route").change(function(){
-            $("#Address").val($("#street_number").val() + " " + $("#route").val());
-        })
-
-     })
-</script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9QoDm5hkolKOKUlQpLDZFBUzg122vEVc&libraries=places&callback=initAutocomplete"
-                async defer></script>
-        <script src="~/Scripts/Auto.js" </script>
-@*<script type="text/javascript">
-    function ShowAddress() {
-    $.ajax({
-        type: "GET",
-        url: "http://localhost:14703/AddressValidator/getAddValStatus",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: OnSuccess,
-        failure: function(response) {
-            alert(response.d);
-        }
-    });
-}
-function OnSuccess(response) {
     alert(response.d);
 }
-</script>*@
-
-}
-
-
-
-@*<script type="text/javascript">
-    function nothing()
-    {
-        
-
-    }
-</script>*@
-        @*<script></script>*@
-       
-@*<script>
-$(document).ready(function(){
-
- $("#street_number").change(function(){
-   $("#Address").val($("#street_number").val() + $("#route").val());
- })
- $("#route").change(function(){
-   $("#Address").val($("#street_number").val() + $("#route").val());
- })
-
-})
-</script>*@
-@*<script type="text/javascript">
-    function nothing()
-    {
-
-
-    }
-</script>*@
-@*<script>
-    $(document).ready(function(){
-        $('#a').change(function() {
-            alert('Something changed');
-            // Try validating form again (if valid, activate submit button)
-        })
-    });
-</script>*@
-  @*}*@

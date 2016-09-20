@@ -53,7 +53,10 @@ namespace WorkWarriors.Controllers
                 zip = zip,
                 verify = new List<string>() { "delivery" }
             };
-
+            if (address == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             address.Create();
 
             if (address.verifications.delivery.success)
@@ -66,7 +69,7 @@ namespace WorkWarriors.Controllers
 
             else //else if (address.verifications.delivery.errors.Count == 1 && address.verifications.delivery.errors[0].message == "Address not found")
             {
-                return Json(new { success = true, street = street, validated = address.verifications.delivery.success },
+                return Json(new { success = true, street = street, validated = address.verifications.delivery.success, errors = address.verifications.delivery.errors },
                JsonRequestBehavior.AllowGet); 
             }
 
@@ -168,15 +171,17 @@ namespace WorkWarriors.Controllers
         {
             Address address = new Address() {Street = street, City = city, State = state, Zip = zip, vacant = vacant, validated = validated };
             string identity = System.Web.HttpContext.Current.User.Identity.GetUserId();
-            var person = db.Homeowners.Where(x => x.UserId == identity).SingleOrDefault();
+            //var person = db.Homeowners.Where(x => x.UserId == identity).SingleOrDefault();
+            if (identity == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            if(TryValidateModel(address) == false)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             address.UserId = identity;
-            //foreach (var homeowner in db.Homeowners)
-            //{
-            //    if(homeowner.ApplicationUser.Id == identity)
-            //    {
-            //        address.HomeownerID = homeowner.ID;
-            //    }
-            //}
             db.Addresses.Add(address);
             db.SaveChanges();
             return Json(new { success = true, street = street },
