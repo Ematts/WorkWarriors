@@ -16,7 +16,7 @@
         success: function (response, textStatus, jqXHR) {
             $("#divProcessing").hide();
             if (response.validated == true) {
-                $("#valid").show();
+                //$("#valid").show();
                 $("#validated").prop("checked", true);
                 var titleMsg = "Your address has been validated!"
                 var div = $('<div></div>');
@@ -61,7 +61,7 @@
                     buttons: {
                         "YES": function () {
                             $("#divProcessing").show();
-                            $("#vac").show();
+                            //$("#vac").show();
                             $("#vacant").prop("checked", true);
                             $(this).dialog("close");
                             $.ajax({
@@ -142,7 +142,7 @@
                                                             "YES":
                                                             function () {
                                                                 $(this).dialog('close');
-                                                                $("#inactive").show();
+                                                                //$("#inactive").show();
                                                                 $("#inactive").prop("checked", true);
                                                                 $.ajax({
                                                                     type: "GET",
@@ -151,7 +151,23 @@
                                                                     data: { street: '' + $('#Address').val() + '', City: '' + $('#locality').val() + '', state: '' + $('#administrative_area_level_1').val() + '', zip: '' + $('#postal_code').val() + '', vacant: '' + $('#vacant').prop("checked") + '', validated: '' + $('#validated').prop("checked") + '' },
                                                                     dataType: "json",
                                                                     success: function (response, textStatus, jqXHR) {
-                                                                        alert("Your request has been submitted,  We will get back to you shortly.");
+                                                                        var titleMsg = "Request sent.";
+                                                                        var div = $('<div></div>');
+                                                                        var outputMsg = "Your request has been submitted. We will get back to you shortly.";
+                                                                        div.html(outputMsg).dialog({
+                                                                            title: titleMsg,
+                                                                            height: 300,
+                                                                            width: 600,
+                                                                            autoOpen: true,
+                                                                            resizable: true,
+                                                                            modal: true,
+                                                                            buttons: {
+                                                                                "CLOSE":
+                                                                            function () {
+                                                                                $(this).dialog('close');
+                                                                            }
+                                                                           }
+                                                                        })
                                                                     },
                                                                     error: function (jqXHR, textStatus, errorThrown) {
                                                                         alert('Error - ' + errorThrown);
@@ -188,7 +204,7 @@
                                                 "YES":
                                                 function () {
                                                     $(this).dialog('close');
-                                                    $("#inactive").show();
+                                                    //$("#inactive").show();
                                                     $("#inactive").prop("checked", true);
                                                     $.ajax({
                                                         type: "GET",
@@ -197,7 +213,23 @@
                                                         data: { street: '' + $('#Address').val() + '', City: '' + $('#locality').val() + '', state: '' + $('#administrative_area_level_1').val() + '', zip: '' + $('#postal_code').val() + '', vacant: '' + $('#vacant').prop("checked") + '', validated: '' + $('#validated').prop("checked") + '' },
                                                         dataType: "json",
                                                         success: function (response, textStatus, jqXHR) {
-                                                            alert("Your request has been submitted,  We will get back to you shortly.");
+                                                            var titleMsg = "Request sent.";
+                                                            var div = $('<div></div>');
+                                                            var outputMsg = "Your request has been submitted. We will get back to you shortly.";
+                                                            div.html(outputMsg).dialog({
+                                                                title: titleMsg,
+                                                                height: 300,
+                                                                width: 600,
+                                                                autoOpen: true,
+                                                                resizable: true,
+                                                                modal: true,
+                                                                buttons: {
+                                                                    "CLOSE":
+                                                                function () {
+                                                                    $(this).dialog('close');
+                                                                }
+                                                              }
+                                                            })
                                                         },
                                                         error: function (jqXHR, textStatus, errorThrown) {
                                                             alert('Error - ' + errorThrown);
@@ -243,7 +275,7 @@
                                     "YES":
                                     function () {
                                         $(this).dialog('close');
-                                        $("#inactive").show();
+                                        //$("#inactive").show();
                                         $("#inactive").prop("checked", true);
                                         $.ajax({
                                             type: "GET",
@@ -252,7 +284,24 @@
                                             data: { street: '' + $('#Address').val() + '', City: '' + $('#locality').val() + '', state: '' + $('#administrative_area_level_1').val() + '', zip: '' + $('#postal_code').val() + '', vacant: '' + $('#vacant').prop("checked") + '', validated: '' + $('#validated').prop("checked") + '' },
                                             dataType: "json",
                                             success: function (response, textStatus, jqXHR) {
-                                                alert("Your request has been submitted,  We will get back to you shortly.");
+                                                var titleMsg = "Request sent.";
+                                                var div = $('<div></div>');
+                                                var outputMsg = "Your request has been submitted. We will get back to you shortly.";
+                                                div.html(outputMsg).dialog({
+                                                    title: titleMsg,
+                                                    height: 300,
+                                                    width: 600,
+                                                    autoOpen: true,
+                                                    resizable: true,
+                                                    modal: true,
+                                                    buttons: {
+                                                        "CLOSE":
+                                                    function () {
+                                                        $(this).dialog('close');
+                                                    }
+                                                  }
+                                                })
+                                                
                                             },
                                             error: function (jqXHR, textStatus, errorThrown) {
                                                 alert('Error - ' + errorThrown);
@@ -278,11 +327,11 @@
 
             }
         },
-        //    failure: function(jqXHR, textStatus, errorThrown) {
-        //        alert('Error - ' + errorThrown);
-        //}
+            failure: function(jqXHR, textStatus, errorThrown) {
+                alert('Error - ' + errorThrown);
+        }
     });
 }
-function OnSuccess(response) {
-    alert(response.d);
-}
+//function OnSuccess(response) {
+//    alert(response.d);
+//}

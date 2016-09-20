@@ -59,6 +59,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Confirmed)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vacant)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.validated)
+        </th>
         <th></th>
     </tr>
 
@@ -112,6 +118,12 @@
 
         <td>
             @Html.DisplayFor(modelItem => item.Confirmed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vacant)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.validated)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
