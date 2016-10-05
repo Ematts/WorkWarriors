@@ -283,7 +283,7 @@ namespace WorkWarriors.Controllers
                 string cancelUrl = failureUrl;
                 string currencyCode = "USD";
                 PayRequest payRequest = new PayRequest(requestEnvelope, actionType, cancelUrl, currencyCode, receiverList, returnUrl);
-                payRequest.ipnNotificationUrl = "http://replaceIpnUrl.com";
+                payRequest.ipnNotificationUrl = "http://cf719b5f.ngrok.io";
                 string memo = completedBids.Description + " Invoice = " + completedBids.Invoice;
                 payRequest.memo = memo;
                 Dictionary<string, string> sdkConfig = new Dictionary<string, string>();
@@ -306,6 +306,21 @@ namespace WorkWarriors.Controllers
             {
                 return RedirectToAction("Unauthorized_Access", "Home");
             }
+        }
+
+        
+        public EmptyResult PayPalPaymentNotification(PayPalCheckoutInfo payPalCheckoutInfo)
+        {
+            PayPalListenerModel model = new PayPalListenerModel();
+            model._PayPalCheckoutInfo = payPalCheckoutInfo;
+            byte[] parameters = Request.BinaryRead(Request.ContentLength);
+
+            if (parameters != null)
+            {
+                model.GetStatus(parameters);
+            }
+
+            return new EmptyResult();
         }
 
         public ActionResult AdminPaymentsDue()

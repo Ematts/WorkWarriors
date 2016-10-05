@@ -19,9 +19,13 @@ namespace WorkWarriors.Controllers
     {
 
         private ApplicationDbContext db = new ApplicationDbContext();
-        [HttpGet]
-        public ActionResult getView(string Address)
+        [HttpPost]
+        public ActionResult getView()
         {
+            var files = Request.Files;
+            var form = Request.Form;
+            string town = (form[3]);
+            string city = form.AllKeys[3];
             return View();
         }
 

@@ -277,8 +277,10 @@
     <Compile Include="Controllers\MapsController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\PaypalController.cs" />
+    <Compile Include="Controllers\PayPalListenerModelsController.cs" />
     <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Controllers\ServiceRequestsController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -354,6 +356,14 @@
     <Compile Include="Migrations\201609192302559_d7.Designer.cs">
       <DependentUpon>201609192302559_d7.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610050152412_f2.cs" />
+    <Compile Include="Migrations\201610050152412_f2.Designer.cs">
+      <DependentUpon>201610050152412_f2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610050403048_s3.cs" />
+    <Compile Include="Migrations\201610050403048_s3.Designer.cs">
+      <DependentUpon>201610050403048_s3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Controllers\AddressValidatorController.cs" />
@@ -373,6 +383,8 @@
     <Compile Include="Models\HomeownerComfirmedBids.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PayPalCheckoutInfo.cs" />
+    <Compile Include="Models\PayPalListenerModel.cs" />
     <Compile Include="Models\Reviews.cs" />
     <Compile Include="Models\ServiceRequest.cs" />
     <Compile Include="Models\ServiceRequestPath.cs" />
@@ -566,12 +578,19 @@
     <Content Include="Views\Addresses\Details.cshtml" />
     <Content Include="Views\Addresses\Edit.cshtml" />
     <Content Include="Views\Addresses\Index.cshtml" />
+    <Content Include="Views\PayPalListenerModels\Create.cshtml" />
+    <Content Include="Views\PayPalListenerModels\Delete.cshtml" />
+    <Content Include="Views\PayPalListenerModels\Details.cshtml" />
+    <Content Include="Views\PayPalListenerModels\Edit.cshtml" />
+    <Content Include="Views\PayPalListenerModels\Index.cshtml" />
+    <Content Include="Views\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="images\" />
     <Folder Include="Views\File\" />
     <Folder Include="Views\Payment\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -638,6 +657,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609192302559_d7.resx">
       <DependentUpon>201609192302559_d7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610050152412_f2.resx">
+      <DependentUpon>201610050152412_f2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610050403048_s3.resx">
+      <DependentUpon>201610050403048_s3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

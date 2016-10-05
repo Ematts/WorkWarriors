@@ -120,7 +120,7 @@
                 </div>
             </div>
                 <div id="multiple">
-                    <input type="file" class="multiple" name="files" multiple />
+                    <input type="file" id="fileInput" class="multiple" name="files" multiple />
                 </div>
                 <div id="single">
                     <input type="file" class="single" name="files" /><br />
@@ -138,7 +138,7 @@
             <div>
 
                 <input id="btnGetTime" type="button" value="Show Current Time"
-                       onclick="ShowAddress()" />
+                       onclick="ShowList()" />
             </div>
     </div>
     }
@@ -159,6 +159,35 @@
                 $("#inactive").hide();
             })
         </script>
+        <script>
+            function ShowList() {
+                var formdata = new FormData();
+                var fileInput = document.getElementById('fileInput');
+                for (i = 0; i < fileInput.files.length; i++) {
+                    formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                }
+                var other_data = $('form').serializeArray();
+                $.each(other_data, function (key, input) {
+                    formdata.append(input.name, input.value);
+                });
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    cache: false,
+                    url: "http://localhost:14703/AddressValidator/getView",
+                    processData: false,
+                    contentType: false,
+                    data: formdata,
+                    success: function (response, textStatus, jqXHR) {
+                        alert(parseInt(response.oldval + ' changed to ' + newval));
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert('Error - ' + errorThrown);
+                    }
+                });
+            }
+        </script>
+
 <script src="~/Scripts/Validator.js" type="text/javascript"></script>
 @*<script type="text/javascript">
     function ShowAddress() {

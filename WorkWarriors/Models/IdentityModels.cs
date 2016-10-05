@@ -57,5 +57,7 @@ namespace WorkWarriors.Models
         public System.Data.Entity.DbSet<WorkWarriors.Models.Reviews> Reviews { get; set; }
 
         public System.Data.Entity.DbSet<WorkWarriors.Models.Address> Addresses { get; set; }
+
+        public System.Data.Entity.DbSet<WorkWarriors.Models.PayPalListenerModel> PayPalListenerModels { get; set; }
     }
 }
